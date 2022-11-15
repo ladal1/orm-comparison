@@ -1,0 +1,38 @@
+{
+  "name": "@ll/diplomka",
+  "version": "0.1.0",
+  "description": "",
+  "main": "src/index.js",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "cross-env NODE_PATH=dist node dist/index.js",
+    "start-lr": "tsc-watch --onSuccess \"npm run start\"",
+    "test": "./node_modules/.bin/mocha --require ts-node/register test/*.ts",
+    "cs:eslint:check": "eslint --ignore-path .gitignore '**/*.ts' -f codeframe",
+    "cs:eslint:fix": "npm run cs:eslint:check -- --fix",
+    "lint": "npm run cs:eslint:check",
+    "prepare": "husky install",
+    "cs:prettier:check": "prettier --ignore-path .gitignore --check '**/*.{ts,js,json,md}'",
+    "cs:prettier:fix": "npm run cs:prettier:check -- --write '**/*.{ts,js,json,md}'"
+  },
+  "author": "Ladislav Louka <ladislav.louka@gmail.com>",
+  "contributors": [
+    "Ladislav Louka <ladislav.louka@gmail.com>"
+  ],
+  "workspaces": [
+    "packages/*"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@ackee/styleguide-backend-config": "^0.3.1",
+    "@types/node": "^18.11.9",
+    "cross-env": "^7.0.3",
+    "husky": "^7.0.0",
+    "lint-staged": "^12.3.7",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.8.4"
+  }
+}
