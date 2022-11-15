@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  postgres:
+    image: bitnami/postgresql:15.1.0
+    container_name: postgres
+    environment:
+      POSTGRESQL_USER: cat_database
+      POSTGRESQL_PASSWORD: cat_database
+      POSTGRESQL_DATABASE: cat_database
+      POSTGRESQL_REPLICATION_USER: cat_database_replica
+      POSTGRESQL_REPLICATION_PASSWORD: cat_database_replica_pwd
+      POSTGRESQL_REPLICATION_MODE: master
+    ports:
+      - 5432:5432
+    volumes:
+      - ./docker-compose/testing-database.sql:/docker-entrypoint-initdb.d/testing-database.sql
+  postgres-replica:
+    container_name: postgres-replica
+    image: bitnami/postgresql:15.1.0
+    environment:
+      POSTGRESQL_USER: cat_database
+      POSTGRESQL_PASSWORD: cat_database
+      POSTGRESQL_DATABASE: cat_database
+      POSTGRESQL_REPLICATION_MODE: slave
+      POSTGRESQL_MASTER_HOST: postgres
+      POSTGRESQL_REPLICATION_PORT_NUMBER: 5432
+      POSTGRESQL_REPLICATION_USER: cat_database_replica
+      POSTGRESQL_REPLICATION_PASSWORD: cat_database_replica_pwd
+    depends_on:
+      - postgres
+    ports:
+      - 5433:5432
