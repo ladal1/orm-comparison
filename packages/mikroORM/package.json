@@ -12,6 +12,6 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
-        "mikro-orm": "^5.5.0"
+        "mikro-orm": "^5.5.3"
     }
 }

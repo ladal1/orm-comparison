@@ -1,5 +1,5 @@
 {
-    "name": "@ll/pgtyped",
+    "name": "@ll/bookshelf",
     "version": "1.0.0",
     "description": "",
     "main": "bin/index.js",
@@ -10,5 +10,8 @@
         "eslint:fix": "eslint src/**/**.{ts,tsx} --fix"
     },
     "author": "",
-    "license": "MIT"
+    "license": "MIT",
+    "dependencies": {
+        "bookshelf": "^1.2.0"
+    }
 }

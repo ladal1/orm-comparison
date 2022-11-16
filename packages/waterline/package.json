@@ -10,5 +10,8 @@
         "eslint:fix": "eslint src/**/**.{ts,tsx} --fix"
     },
     "author": "",
-    "license": "MIT"
+    "license": "MIT",
+    "dependencies": {
+        "waterline": "^0.15.1"
+    }
 }

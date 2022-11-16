@@ -12,6 +12,6 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
-        "bookshelf": "^1.2.0"
+        "knex": "^2.3.0"
     }
 }
