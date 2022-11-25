@@ -1,4 +1,4 @@
-import { BenchmarkSuite } from 'BenchmarkRunner/BenchmarkSuite'
+import { BenchmarkSuite } from '../Benchmark/BenchmarkRunner'
 
 const MvpBench = new BenchmarkSuite('MvpBench')
 

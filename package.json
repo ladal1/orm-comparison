@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "start": "cross-env NODE_PATH=dist node dist/index.js",
+    "start": "NODE_PATH=dist node dist/src/index.js",
     "start-lr": "tsc-watch --onSuccess \"npm run start\"",
     "test": "./node_modules/.bin/mocha --require ts-node/register test/*.ts",
     "cs:eslint:check": "eslint --ignore-path .gitignore '**/*.ts' -f codeframe",
@@ -23,14 +23,13 @@
     "Ladislav Louka <ladislav.louka@gmail.com>"
   ],
   "workspaces": [
-    "packages/*"
+    "src/packages/*"
   ],
   "license": "MIT",
   "devDependencies": {
     "@ackee/styleguide-backend-config": "^0.3.6",
     "@types/lodash": "^4.14.190",
     "@types/node": "^18.11.9",
-    "cross-env": "^7.0.3",
     "husky": "^7.0.0",
     "lint-staged": "^12.3.7",
     "prettier": "^2.7.1",
@@ -38,6 +37,7 @@
     "typescript": "^4.8.4"
   },
   "dependencies": {
+    "chalk": "^5.1.2",
     "knex": "^2.3.0",
     "lodash": "^4.17.21",
     "pg": "^8.8.0"
