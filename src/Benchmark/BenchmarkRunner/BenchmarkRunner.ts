@@ -1,5 +1,5 @@
 import { IORMPackage } from '../interfaces'
-import clearLine from '../utils/clearLine'
+import { deleteLine } from '../utils/clearLine'
 import { BenchmarkSuite } from './BenchmarkSuite'
 
 export class BenchmarkRunner {
@@ -8,10 +8,11 @@ export class BenchmarkRunner {
 
   async run() {
     for (const benchmark of this.testedPackages) {
+      performance.now()
       console.log('Testing package: ', benchmark.name)
       await benchmark.initialize()
       await benchmark.destroy()
-      clearLine(process.stdout)
+      deleteLine(process.stdout)
       console.log('Finished testing package: ', benchmark.name)
     }
   }
