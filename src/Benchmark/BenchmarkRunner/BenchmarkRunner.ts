@@ -1,4 +1,4 @@
-import { IORMPackage } from '../interfaces'
+import IORMPackage from 'Benchmark/interfaces/PackageUtils'
 import { deleteLine } from '../utils/clearLine'
 import { BenchmarkSuite } from './BenchmarkSuite'
 

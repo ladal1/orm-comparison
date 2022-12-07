@@ -1,5 +1,5 @@
 import { BenchmarkRunner } from './Benchmark/BenchmarkRunner'
-import MvpBench from './TestSuits/mvpBench'
+import MvpBench from './Databases/CatDatabase/testSuite'
 import { KnexPackage } from './packages/knex/src'
 
 const br = new BenchmarkRunner([KnexPackage])

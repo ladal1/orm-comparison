@@ -1,13 +1,4 @@
-import * as DataManipulation from './DataManipulation'
-import IORMPackage from './IORMPackage'
 import * as PackageUtils from './PackageUtils'
-import * as Querying from './Querying'
-import * as TransactionControl from './TransactionControl'
+import * as DatabaseUtils from './DatabaseUtils'
 
-export {
-  DataManipulation,
-  IORMPackage,
-  PackageUtils,
-  Querying,
-  TransactionControl,
-}
+export { PackageUtils, DatabaseUtils }
