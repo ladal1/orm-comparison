@@ -1,10 +1,22 @@
 import IORMPackage from 'Benchmark/interfaces/PackageUtils'
+import { Client } from 'pg'
 import { deleteLine } from '../utils/clearLine'
 import { BenchmarkSuite } from './BenchmarkSuite'
 
 export class BenchmarkRunner {
-  benchmarkSuites: BenchmarkSuite[] = []
-  constructor(private readonly testedPackages: IORMPackage[]) {}
+  private readonly utilConnection: Client
+
+  constructor(
+    private readonly testedPackages: IORMPackage[] = [],
+    private readonly benchmarkSuites: BenchmarkSuite[] = []
+  ) {
+    this.utilConnection = new Client({
+      user: 'benchmark',
+      host: 'localhost',
+      password: 'benchmark_pwd',
+      application_name: 'BenchmarkRunner',
+    })
+  }
 
   async run() {
     for (const benchmark of this.testedPackages) {
