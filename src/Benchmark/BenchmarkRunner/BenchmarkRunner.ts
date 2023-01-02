@@ -18,7 +18,11 @@ export class BenchmarkRunner {
     })
   }
 
-  async run() {
+  public registerSuit(benchmark: BenchmarkSuite) {
+    this.benchmarkSuites.push(benchmark)
+  }
+
+  async runSuite() {
     for (const benchmark of this.testedPackages) {
       performance.now()
       console.log('Testing package: ', benchmark.name)
@@ -29,7 +33,15 @@ export class BenchmarkRunner {
     }
   }
 
-  public registerSuit(benchmark: BenchmarkSuite) {
-    this.benchmarkSuites.push(benchmark)
+  async run() {
+    await this.utilConnection.connect()
+    for (const benchmark of this.benchmarkSuites) {
+      console.log('Running benchmark: ', benchmark.getName())
+      await benchmark.prepare(this.utilConnection)
+      await benchmark.run()
+      await benchmark.teardown(this.utilConnection)
+      console.log('Finished benchmark: ', benchmark.getName())
+    }
+    await this.utilConnection.end()
   }
 }

@@ -1,8 +1,8 @@
 import { BenchmarkRunner } from './Benchmark/BenchmarkRunner'
-import MvpBench from './Databases/CatDatabase/testSuite'
+import MvpBench from './Databases/CatDatabase/Benchmark'
 import { KnexPackage } from './packages/knex/src'
 
-const br = new BenchmarkRunner([KnexPackage])
+const br = new BenchmarkRunner([KnexPackage], [])
 
 br.registerSuit(MvpBench)
 
