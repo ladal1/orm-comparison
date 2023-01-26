@@ -18,8 +18,8 @@ ALTER TABLE cat_colors ADD CONSTRAINT pk_cat_colors PRIMARY KEY (id);
 CREATE TABLE cats (
     id SERIAL NOT NULL,
     cat_colors_id INTEGER,
-    cat_name VARCHAR(256) NOT NULL,
-    date_of_birth DATE NOT NULL
+    cat_name VARCHAR(256),
+    date_of_birth DATE
 );
 ALTER TABLE cats ADD CONSTRAINT pk_cats PRIMARY KEY (id);
 
@@ -31,8 +31,8 @@ ALTER TABLE color_hex ADD CONSTRAINT pk_color_hex PRIMARY KEY (id);
 
 CREATE TABLE house (
     id SERIAL NOT NULL,
-    house_address VARCHAR(256) NOT NULL,
-    has_dog BOOLEAN NULL,
+    house_address VARCHAR(256),
+    has_dog BOOLEAN NULL
 );
 ALTER TABLE house ADD CONSTRAINT pk_house PRIMARY KEY (id);
 
@@ -42,10 +42,10 @@ CREATE TABLE toys (
     toy_name VARCHAR(256) NOT NULL,
     barcode VARCHAR(256) NOT NULL,
     price NUMERIC NOT NULL,
-    currency VARCHAR NOT NULL CHECK (LENGTH(currency) < 6)
-    naugthy VARCHAR(256) NULL
+    currency VARCHAR NOT NULL CHECK (LENGTH(currency) < 6),
+    naughty VARCHAR(256) NULL
 );
-ALTER TABLE toys ADD CONSTRAINT pk_toys PRIMARY KEY (id, toys_producer_id);
+ALTER TABLE toys ADD CONSTRAINT pk_toys PRIMARY KEY (id);
 ALTER TABLE toys ADD CONSTRAINT uc_toys_barcode UNIQUE (barcode);
 
 CREATE TABLE toys_producer (
@@ -57,16 +57,15 @@ ALTER TABLE toys_producer ADD CONSTRAINT pk_toys_producer PRIMARY KEY (id);
 
 CREATE TABLE house_cats (
     house_id INTEGER NOT NULL,
-    cats_id INTEGER NOT NULL
+    cat_id INTEGER NOT NULL
 );
-ALTER TABLE house_cats ADD CONSTRAINT pk_house_cats PRIMARY KEY (house_id, cats_id);
+ALTER TABLE house_cats ADD CONSTRAINT pk_house_cats PRIMARY KEY (house_id, cat_id);
 
 CREATE TABLE toys_house (
     toys_id INTEGER NOT NULL,
-    toys_producer_id INTEGER NOT NULL,
     house_id INTEGER NOT NULL
 );
-ALTER TABLE toys_house ADD CONSTRAINT pk_toys_house PRIMARY KEY (toys_id, toys_producer_id, house_id);
+ALTER TABLE toys_house ADD CONSTRAINT pk_toys_house PRIMARY KEY (toys_id, house_id);
 
 ALTER TABLE cats ADD CONSTRAINT fk_cats_cat_colors FOREIGN KEY (cat_colors_id) REFERENCES cat_colors (id) ON DELETE CASCADE;
 
@@ -75,8 +74,8 @@ ALTER TABLE color_hex ADD CONSTRAINT fk_color_hex_cat_colors FOREIGN KEY (id) RE
 ALTER TABLE toys ADD CONSTRAINT fk_toys_toys_producer FOREIGN KEY (toys_producer_id) REFERENCES toys_producer (id) ON DELETE CASCADE;
 
 ALTER TABLE house_cats ADD CONSTRAINT fk_house_cats_house FOREIGN KEY (house_id) REFERENCES house (id) ON DELETE CASCADE;
-ALTER TABLE house_cats ADD CONSTRAINT fk_house_cats_cats FOREIGN KEY (cats_id) REFERENCES cats (id) ON DELETE CASCADE;
+ALTER TABLE house_cats ADD CONSTRAINT fk_house_cats_cats FOREIGN KEY (cat_id) REFERENCES cats (id) ON DELETE CASCADE;
 
-ALTER TABLE toys_house ADD CONSTRAINT fk_toys_house_toys FOREIGN KEY (toys_id, toys_producer_id) REFERENCES toys (id, toys_producer_id) ON DELETE CASCADE;
+ALTER TABLE toys_house ADD CONSTRAINT fk_toys_house_toys FOREIGN KEY (toys_id) REFERENCES toys (id) ON DELETE CASCADE;
 ALTER TABLE toys_house ADD CONSTRAINT fk_toys_house_house FOREIGN KEY (house_id) REFERENCES house (id) ON DELETE CASCADE;
 

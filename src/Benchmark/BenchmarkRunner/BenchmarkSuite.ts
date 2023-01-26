@@ -1,26 +1,39 @@
 import { AssertionError } from 'assert'
 import Database from 'Benchmark/interfaces/DatabaseUtils'
-import { clearLine } from 'Benchmark/utils/clearLine'
-import chalk from 'chalk'
 import { omit } from 'lodash'
-import { Client } from 'pg'
+import { Skipped } from '.'
+import { TestResultSerializer } from 'Benchmark/ResultSerializers/BaseSerializer'
 
-interface TestOptions {
+type TestOptions = {
   testName: string
-  testLatency?: boolean
-  testThroughput?: boolean
   referenceCheck: (data?: any) => Promise<void>
+} & ThroughputTest &
+  TestLatency
+
+interface ThroughputTest {
+  testThroughput: true
+  throughputIterations: number
+}
+
+interface TestLatency {
+  testLatency: true
 }
 
 export interface TestTemplate {
   [key: symbol | string | number]: () => Promise<any>
 }
 
-enum TestResult {
+export enum TestResult {
   PASS = 'PASS',
   FAIL = 'FAIL',
   ERROR = 'ERROR',
   SKIPPED = 'SKIPPED',
+}
+
+export interface TestValidationResult {
+  result: TestResult
+  time?: number
+  error?: Error
 }
 
 export class BenchmarkSuite<T extends TestTemplate> {
@@ -42,70 +55,66 @@ export class BenchmarkSuite<T extends TestTemplate> {
     tests.forEach(test => this.addTest(test))
   }
 
-  public async prepare(client: Client) {
-    await this.database.setupDatabase(client)
-    await this.database.seedDatabase(client)
-  }
-
-  public async teardown(client: Client) {
-    await this.database.destroyDatabase(client)
-  }
-
-  static resolveTestResult(result: TestResult): string {
-    switch (result) {
-      case TestResult.PASS:
-        return '✅'
-      case TestResult.FAIL:
-        return '❌'
-      case TestResult.ERROR:
-        return '❗'
-      case TestResult.SKIPPED:
-        return '⏭️'
-    }
-  }
-
-  public logTestResult(
-    testName: string,
-    frameworkName: string,
-    result: TestResult,
-    time: number,
-    error?: string
-  ) {
-    clearLine(process.stdout)
-    console.log(
-      `    ${BenchmarkSuite.resolveTestResult(
-        result
-      )} - ${testName} - ${frameworkName.padEnd(20, ' ')} - ${time}ms`
-    )
-    if (error) {
-      console.log(chalk.red(`      ${error}`))
-    }
-  }
-
-  public async validateTest(
-    validationFn: (data?: any) => Promise<boolean>,
-    data?: any
-  ): Promise<TestResult> {
+  public async runLatencyImplementation(
+    implementationFn: (data?: any) => Promise<any>,
+    validationFn: (data?: any) => Promise<void>
+  ): Promise<TestValidationResult> {
     try {
+      const startTime = performance.now()
+      const data = await implementationFn()
+      const finishTime = performance.now()
       await validationFn(data)
-      return TestResult.PASS
+      return { result: TestResult.PASS, time: finishTime - startTime }
     } catch (e) {
       if (e instanceof AssertionError) {
-        return TestResult.FAIL
+        return { result: TestResult.FAIL, error: e }
       }
-      return TestResult.ERROR
+      if (e instanceof Skipped) {
+        return { result: TestResult.SKIPPED }
+      }
+      return { result: TestResult.ERROR, error: e }
     }
   }
 
-  public async runTestLatency() {
+  public async runTestLatency(
+    implementation: T,
+    implementationName: string,
+    reporters: TestResultSerializer[]
+  ) {
+    for (const [testName, test] of Object.entries(this.tests)) {
+      if (!test.testLatency || !implementation?.[testName]) {
+        continue
+      }
+      const result = await this.runLatencyImplementation(
+        implementation[testName],
+        test.referenceCheck
+      )
+      for (const reporter of reporters) {
+        reporter(
+          this.database.name,
+          testName,
+          implementationName,
+          'Latency',
+          result
+        )
+      }
+    }
+  }
+
+  public async runTestThroughput(
+    implementation: T,
+    implementationName: string,
+    reporters: TestResultSerializer[]
+  ) {
     throw new Error('Not implemented')
   }
 
-  public async runTestThroughput() {
-    throw new Error('Not implemented')
-  }
-
-  public async runSuite(implementation: T) {
-    throw new Error('Not implemented')
+  public async runSuite(
+    implementation: T,
+    implementationName: string,
+    reporters: TestResultSerializer[]
+  ) {
+    await this.runTestLatency(implementation, implementationName, reporters)
+    // await this.runTestThroughput(implementation, implementationName, reporters)
   }
 }

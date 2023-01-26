@@ -9,6 +9,7 @@ services:
       POSTGRESQL_REPLICATION_USER: benchmark_replica
       POSTGRESQL_REPLICATION_PASSWORD: benchmark_replica_pwd
       POSTGRESQL_REPLICATION_MODE: master
+      POSTGRESQL_DATABASE: benchmark
     ports:
       - 5432:5432
   postgres-replica:
@@ -22,6 +23,7 @@ services:
       POSTGRESQL_REPLICATION_PORT_NUMBER: 5432
       POSTGRESQL_REPLICATION_USER: benchmark_replica
       POSTGRESQL_REPLICATION_PASSWORD: benchmark_replica_pwd
+      POSTGRESQL_DATABASE: benchmark
     depends_on:
       - postgres
     ports:

@@ -1,3 +1,5 @@
+import { TestTemplate } from 'Benchmark/BenchmarkRunner/BenchmarkSuite'
+
 // Initialize the benchmark, setup connection to the database
 export type InitializeBenchmark = () => Promise<void>
 
@@ -8,4 +10,5 @@ export default interface IORMPackage {
   name: string
   initialize: InitializeBenchmark
   destroy: DestroyBenchmark
+  implementations: Record<string, TestTemplate>
 }

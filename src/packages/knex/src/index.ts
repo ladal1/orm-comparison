@@ -18,6 +18,13 @@ export const KnexPackage = {
   name: 'Knex',
   initialize,
   destroy,
+  implementations: {
+    MvpBench: {
+      MvpBench: async () => {
+        return 1
+      },
+    },
+  },
 }
 
 export { _knex as knexInstance }

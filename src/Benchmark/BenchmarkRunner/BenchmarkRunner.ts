@@ -1,14 +1,23 @@
 import IORMPackage from 'Benchmark/interfaces/PackageUtils'
 import { Client } from 'pg'
-import { deleteLine } from '../utils/clearLine'
+import { clearConsole, deleteLine } from '../utils/clearLine'
 import { BenchmarkSuite } from './BenchmarkSuite'
+import { TestResultSerializer } from 'Benchmark/ResultSerializers/BaseSerializer'
+import Database from 'Benchmark/interfaces/DatabaseUtils'
+
+interface DatabaseSuites {
+  database: Database
+  suites: Array<BenchmarkSuite<any>>
+}
 
 export class BenchmarkRunner {
+  benchmarkSuites: Record<Database['name'], DatabaseSuites> = {}
   private readonly utilConnection: Client
 
   constructor(
     private readonly testedPackages: IORMPackage[] = [],
-    private readonly benchmarkSuites: BenchmarkSuite[] = []
+    benchmarkSuites: Array<BenchmarkSuite<any>> = [],
+    private readonly reporters: TestResultSerializer[] = []
   ) {
     this.utilConnection = new Client({
       user: 'benchmark',
@@ -16,10 +25,28 @@ export class BenchmarkRunner {
       password: 'benchmark_pwd',
       application_name: 'BenchmarkRunner',
     })
+    for (const benchmark of benchmarkSuites) {
+      this.registerSuit(benchmark)
+    }
   }
 
-  public registerSuit(benchmark: BenchmarkSuite) {
-    this.benchmarkSuites.push(benchmark)
+  public registerSuit(benchmark: BenchmarkSuite<any>) {
+    if (!(benchmark.database.name in this.benchmarkSuites)) {
+      this.benchmarkSuites[benchmark.database.name] = {
+        database: benchmark.database,
+        suites: [],
+      }
+    }
+    this.benchmarkSuites[benchmark.database.name].suites.push(benchmark)
+  }
+
+  public async prepareDatabase(database: Database, client: Client) {
+    await database.setupDatabase(client)
+    await database.seedDatabase(client)
+  }
+
+  public async teardownDatabase(database: Database, client: Client) {
+    await database.destroyDatabase(client)
   }
 
   async runSuite() {
@@ -33,15 +60,25 @@ export class BenchmarkRunner {
     }
   }
 
-  async run() {
-    await this.utilConnection.connect()
-    for (const benchmark of this.benchmarkSuites) {
-      console.log('Running benchmark: ', benchmark.getName())
-      await benchmark.prepare(this.utilConnection)
-      await benchmark.run()
-      await benchmark.teardown(this.utilConnection)
-      console.log('Finished benchmark: ', benchmark.getName())
+  async run(reporters?: TestResultSerializer[]) {
+    clearConsole(process.stdout)
+    const mergedReporters = [...this.reporters, ...(reporters ?? [])]
+    for (const [, { database, suites }] of Object.entries(
+      this.benchmarkSuites
+    )) {
+      await this.utilConnection.connect()
+      await this.prepareDatabase(database, this.utilConnection)
+      for (const testedPackage of this.testedPackages) {
+        await testedPackage.initialize()
+        for (const suite of suites) {
+          await suite.runSuite(
+            testedPackage.implementations[suite.getName()],
+            testedPackage.name,
+            mergedReporters
+          )
+        }
+        await testedPackage.destroy()
+      }
     }
-    await this.utilConnection.end()
   }
 }
