@@ -2,7 +2,7 @@ import IORMPackage from 'Benchmark/interfaces/PackageUtils'
 import { Client } from 'pg'
 import { clearConsole, deleteLine } from '../utils/clearLine'
 import { BenchmarkSuite } from './BenchmarkSuite'
-import { TestResultSerializer } from 'Benchmark/ResultSerializers/BaseSerializer'
+import { BaseSerializer } from 'Benchmark/ResultSerializers/BaseSerializer'
 import Database from 'Benchmark/interfaces/DatabaseUtils'
 
 interface DatabaseSuites {
@@ -17,7 +17,7 @@ export class BenchmarkRunner {
   constructor(
     private readonly testedPackages: IORMPackage[] = [],
     benchmarkSuites: Array<BenchmarkSuite<any>> = [],
-    private readonly reporters: TestResultSerializer[] = []
+    private readonly reporters: BaseSerializer[] = []
   ) {
     this.utilConnection = new Client({
       user: 'benchmark',
@@ -60,7 +60,7 @@ export class BenchmarkRunner {
     }
   }
 
-  async run(reporters?: TestResultSerializer[]) {
+  async run(reporters?: BaseSerializer[]) {
     clearConsole(process.stdout)
     const mergedReporters = [...this.reporters, ...(reporters ?? [])]
     for (const [, { database, suites }] of Object.entries(
@@ -71,11 +71,17 @@ export class BenchmarkRunner {
       for (const testedPackage of this.testedPackages) {
         await testedPackage.initialize()
         for (const suite of suites) {
+          for (const reporter of mergedReporters) {
+            reporter.serializeSuite(suite.database.name, suite.getName())
+          }
           await suite.runSuite(
             testedPackage.implementations[suite.getName()],
             testedPackage.name,
             mergedReporters
           )
+          for (const reporter of mergedReporters) {
+            reporter.closeSuite()
+          }
         }
         await testedPackage.destroy()
       }

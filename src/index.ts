@@ -3,7 +3,7 @@ import { BenchmarkRunner } from './Benchmark/BenchmarkRunner'
 import MvpBench from './Benchmarks/SampleBenchmark'
 import { KnexPackage } from './packages/knex/src'
 
-const br = new BenchmarkRunner([KnexPackage], [], [ConsoleSerializer])
+const br = new BenchmarkRunner([KnexPackage], [], [new ConsoleSerializer()])
 
 br.registerSuit(MvpBench)
 

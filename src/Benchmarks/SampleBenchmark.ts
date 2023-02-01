@@ -7,9 +7,7 @@ interface sampleTest extends TestTemplate {
   sampleTest: () => Promise<boolean>
 }
 
-const MvpBench = new BenchmarkSuite<sampleTest>('MvpBench', CatDatabase)
-
-MvpBench.addTests([
+const MvpBench = new BenchmarkSuite<sampleTest>('MvpBench', CatDatabase, [
   {
     testName: 'MvpBench',
     referenceCheck: async data => {
@@ -17,6 +15,7 @@ MvpBench.addTests([
     },
     testLatency: true,
     testThroughput: true,
+    throughputIterations: 1000,
   },
 ])
 

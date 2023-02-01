@@ -27,9 +27,9 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "@ackee/styleguide-backend-config": "^0.3.6",
-    "@types/lodash": "^4.14.190",
-    "@types/node": "^18.11.9",
+    "@ackee/styleguide-backend-config": "^0.3.13",
+    "@types/lodash": "^4.14.191",
+    "@types/node": "^18.11.18",
     "husky": "^7.0.0",
     "lint-staged": "^12.3.7",
     "prettier": "^2.7.1",
@@ -39,6 +39,6 @@
   "dependencies": {
     "chalk": "^4.1.2",
     "lodash": "^4.17.21",
-    "pg": "^8.8.0"
+    "pg": "^8.9.0"
   }
 }
