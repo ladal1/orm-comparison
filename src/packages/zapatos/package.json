@@ -12,6 +12,6 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
-        "zapatos": "^6.1.1"
+        "zapatos": "^6.1.4"
     }
 }

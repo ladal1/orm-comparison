@@ -12,6 +12,6 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
-        "sequelize": "^6.25.6"
+        "sequelize": "^6.28.0"
     }
 }

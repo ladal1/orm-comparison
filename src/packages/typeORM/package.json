@@ -12,6 +12,6 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
-        "typeorm": "^0.3.10"
+        "typeorm": "^0.3.11"
     }
 }

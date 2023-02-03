@@ -12,6 +12,6 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
-        "waterline": "^0.15.1"
+        "waterline": "^0.15.2"
     }
 }

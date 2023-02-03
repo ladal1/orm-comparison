@@ -12,6 +12,8 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
-        "pgtyped": "^0.0.1"
+        "@pgtyped/cli": "^2.0.0",
+        "@pgtyped/runtime": "^2.0.0",
+        "typescript": "^4.9.5"
     }
 }
