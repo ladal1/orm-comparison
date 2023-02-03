@@ -1,6 +1,7 @@
 import { PackageUtils } from 'Benchmark/interfaces'
 import knex, { Knex } from 'knex'
 import config from './knexfile'
+import MvpBench from './Benchmarks/SampleBenchmark'
 
 let _knex: Knex
 
@@ -19,11 +20,7 @@ export const KnexPackage = {
   initialize,
   destroy,
   implementations: {
-    MvpBench: {
-      MvpBench: async () => {
-        return 1
-      },
-    },
+    MvpBench,
   },
 }
 

@@ -21,12 +21,18 @@ const resolveTestResult = (result: TestResult): string => {
 
 class ConsoleSerializer extends BaseSerializer {
   columnWidth = [10, 20, 20, 10, 15]
+  errorBuffer: Array<
+    Pick<TestValidationResult, 'error' | 'testType'> & {
+      message: string
+      testName: string
+    }
+  > = []
 
   public override serializeTest(
     databaseName: string,
     testName: string,
     implementationName: string,
-    testType: 'Latency' | 'Throughput',
+    testType: Exclude<TestValidationResult['testType'], undefined>,
     testResult: TestValidationResult
   ): void {
     clearLine(process.stdout)
@@ -41,10 +47,12 @@ class ConsoleSerializer extends BaseSerializer {
       `   | ${data[0]} | ${data[1]} | ${data[2]} | ${data[3]} | ${data[4]} |`
     )
     if (testResult.error) {
-      console.log(chalk.red(`      ${testResult.error.message}`))
-      if (testResult.error.stack) {
-        console.log(chalk.red(`      ${testResult.error.stack}`))
-      }
+      this.errorBuffer.push({
+        testName,
+        message: testResult.error.message,
+        error: testResult.error,
+        testType,
+      })
     }
   }
 
@@ -77,6 +85,7 @@ class ConsoleSerializer extends BaseSerializer {
   }
 
   public serializeSuite(suiteName: string, databaseName: string): void {
+    console.log('\n')
     console.log(`  ${databaseName} - ${suiteName}`)
     this.tableBorder()
     this.tableHeader()
@@ -85,6 +94,17 @@ class ConsoleSerializer extends BaseSerializer {
 
   public closeSuite(): void {
     this.tableBorder()
+    console.log('\n')
+    for (const { testName, message, error, testType } of this.errorBuffer) {
+      console.log(
+        chalk.red(
+          `   ${testName} ${testType ? '(' + testType + ') ' : ''}- ${
+            (error?.name ?? '') + ': '
+          } ${message.replace(/\n/g, '')}`
+        )
+      )
+    }
+    this.errorBuffer.length = 0
     console.log('\n')
   }
 }

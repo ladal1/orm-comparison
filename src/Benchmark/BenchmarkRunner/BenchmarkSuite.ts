@@ -1,14 +1,14 @@
 import { AssertionError } from 'assert'
 import Database from 'Benchmark/interfaces/DatabaseUtils'
-import { omit, sum } from 'lodash'
+import { sum } from 'lodash'
 import { Skipped } from '.'
 import { BaseSerializer } from 'Benchmark/ResultSerializers/BaseSerializer'
 
 type TestOptions = {
   testName: string
+  call: (implementation: ImplementationFn) => () => Promise<any>
   referenceCheck: (data?: any) => Promise<void>
-} & ThroughputTest &
-  TestLatency
+} & (ThroughputTest | TestLatency)
 
 interface ThroughputTest {
   testThroughput: true
@@ -19,8 +19,9 @@ interface TestLatency {
   testLatency: true
 }
 
+type ImplementationFn = (...args: any[]) => Promise<any>
 export interface TestTemplate {
-  [key: symbol | string | number]: () => Promise<any>
+  [key: symbol | string | number]: ImplementationFn
 }
 
 export enum TestResult {
@@ -32,17 +33,18 @@ export enum TestResult {
 
 export interface TestValidationResult {
   result: TestResult
+  testType?: 'Latency' | 'Throughput'
   time?: number
   error?: Error
   runtimes?: number[]
 }
 
 export class BenchmarkSuite<T extends TestTemplate> {
-  tests: Record<string, Omit<TestOptions, 'testName'>> = {}
+  tests: Record<string | symbol | number, TestOptions> = {}
   constructor(
     private readonly name: string,
     public readonly database: Database,
-    tests: TestOptions[] = []
+    tests: Partial<{ [k in keyof T]: TestOptions }> = {}
   ) {
     this.addTests(tests)
   }
@@ -51,12 +53,31 @@ export class BenchmarkSuite<T extends TestTemplate> {
     return this.name
   }
 
-  public addTest(TestOptions: TestOptions) {
-    this.tests[TestOptions.testName] = omit(TestOptions, 'testName')
+  public addTest(testId: keyof T, TestOptions: TestOptions) {
+    this.tests[testId] = TestOptions
   }
 
-  public addTests(tests: TestOptions[]) {
-    tests.forEach(test => this.addTest(test))
+  public addTests(tests: Partial<{ [k in keyof T]: TestOptions }>) {
+    for (const [testId, test] of Object.entries(tests)) {
+      if (test === undefined) continue
+      this.addTest(testId, test)
+    }
+  }
+
+  private errorHandler(
+    error: Error,
+    testType: TestValidationResult['testType']
+  ): TestValidationResult {
+    if (error instanceof AssertionError) {
+      return { result: TestResult.FAIL, error, testType }
+    }
+    if (error instanceof Skipped) {
+      return { result: TestResult.SKIPPED, testType }
+    }
+    if (error instanceof Error) {
+      return { result: TestResult.ERROR, error, testType }
+    }
+    return { result: TestResult.ERROR, testType }
   }
 
   public async runLatencyImplementation(
@@ -70,13 +91,7 @@ export class BenchmarkSuite<T extends TestTemplate> {
       await validationFn(data)
       return { result: TestResult.PASS, time: finishTime - startTime }
     } catch (e) {
-      if (e instanceof AssertionError) {
-        return { result: TestResult.FAIL, error: e }
-      }
-      if (e instanceof Skipped) {
-        return { result: TestResult.SKIPPED }
-      }
-      return { result: TestResult.ERROR, error: e }
+      return this.errorHandler(e, 'Latency')
     }
   }
 
@@ -92,9 +107,7 @@ export class BenchmarkSuite<T extends TestTemplate> {
         const data = await implementationFn()
         await validationFn(data)
       } catch (e) {
-        if (e instanceof AssertionError) {
-          return { result: TestResult.FAIL, error: e }
-        }
+        return this.errorHandler(e, 'Throughput')
       }
     }
     for (let i = 0; i < iterations; i++) {
@@ -103,10 +116,7 @@ export class BenchmarkSuite<T extends TestTemplate> {
         await implementationFn()
         runtimes.push(performance.now() - startTime)
       } catch (e) {
-        if (e instanceof Skipped) {
-          return { result: TestResult.SKIPPED }
-        }
-        return { result: TestResult.ERROR, error: e }
+        return this.errorHandler(e, 'Throughput')
       }
     }
     return { result: TestResult.PASS, time: sum(runtimes), runtimes }
@@ -118,11 +128,11 @@ export class BenchmarkSuite<T extends TestTemplate> {
     reporters: BaseSerializer[]
   ) {
     for (const [testName, test] of Object.entries(this.tests)) {
-      if (!test.testLatency || !implementation?.[testName]) {
+      if (!('testLatency' in test) || !implementation?.[testName]) {
         continue
       }
       const result = await this.runLatencyImplementation(
-        implementation[testName],
+        test.call(implementation[testName]),
         test.referenceCheck
       )
       for (const reporter of reporters) {
@@ -143,11 +153,11 @@ export class BenchmarkSuite<T extends TestTemplate> {
     reporters: BaseSerializer[]
   ) {
     for (const [testName, test] of Object.entries(this.tests)) {
-      if (!test.testThroughput || !implementation?.[testName]) {
+      if (!('testThroughput' in test) || !implementation?.[testName]) {
         continue
       }
       const result = await this.runThroughputImplementation(
-        implementation[testName],
+        test.call(implementation[testName]),
         test.referenceCheck,
         test.throughputIterations
       )
