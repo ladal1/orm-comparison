@@ -16,6 +16,7 @@ const MvpBench = new BenchmarkSuite<sampleTest>('MvpBench', CatDatabase, {
     referenceCheck: async data => {
       assert.deepEqual(data, true)
     },
+    call: implementationFn => () => implementationFn(),
     testLatency: true,
     testThroughput: true,
     throughputIterations: 1000,
@@ -25,6 +26,7 @@ const MvpBench = new BenchmarkSuite<sampleTest>('MvpBench', CatDatabase, {
     referenceCheck: async data => {
       assert.deepEqual(data, true)
     },
+    call: implementationFn => () => implementationFn(),
     testLatency: true,
     testThroughput: true,
     throughputIterations: 1000,
@@ -34,6 +36,7 @@ const MvpBench = new BenchmarkSuite<sampleTest>('MvpBench', CatDatabase, {
     referenceCheck: async data => {
       assert.deepEqual(data, true)
     },
+    call: implementationFn => () => implementationFn(),
     testLatency: true,
     testThroughput: true,
     throughputIterations: 1000,
@@ -43,6 +46,7 @@ const MvpBench = new BenchmarkSuite<sampleTest>('MvpBench', CatDatabase, {
     referenceCheck: async data => {
       assert.deepEqual(data, false)
     },
+    call: implementationFn => () => implementationFn(),
     testLatency: true,
   },
 })

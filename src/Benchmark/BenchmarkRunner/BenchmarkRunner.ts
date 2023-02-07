@@ -1,6 +1,5 @@
 import IORMPackage from 'Benchmark/interfaces/PackageUtils'
 import { Client } from 'pg'
-import { clearConsole, deleteLine } from '../utils/clearLine'
 import { BenchmarkSuite } from './BenchmarkSuite'
 import { BaseSerializer } from 'Benchmark/ResultSerializers/BaseSerializer'
 import Database from 'Benchmark/interfaces/DatabaseUtils'
@@ -30,7 +29,7 @@ export class BenchmarkRunner {
     }
   }
 
-  public registerSuit(benchmark: BenchmarkSuite<any>) {
+  private registerSuit(benchmark: BenchmarkSuite<any>) {
     if (!(benchmark.database.name in this.benchmarkSuites)) {
       this.benchmarkSuites[benchmark.database.name] = {
         database: benchmark.database,
@@ -55,18 +54,16 @@ export class BenchmarkRunner {
       console.log('Testing package: ', benchmark.name)
       await benchmark.initialize()
       await benchmark.destroy()
-      deleteLine(process.stdout)
       console.log('Finished testing package: ', benchmark.name)
     }
   }
 
   async run(reporters?: BaseSerializer[]) {
-    clearConsole(process.stdout)
+    await this.utilConnection.connect()
     const mergedReporters = [...this.reporters, ...(reporters ?? [])]
     for (const [, { database, suites }] of Object.entries(
       this.benchmarkSuites
     )) {
-      await this.utilConnection.connect()
       await this.prepareDatabase(database, this.utilConnection)
       for (const testedPackage of this.testedPackages) {
         await testedPackage.initialize()
@@ -85,6 +82,8 @@ export class BenchmarkRunner {
         }
         await testedPackage.destroy()
       }
+      await this.teardownDatabase(database, this.utilConnection)
     }
+    await this.utilConnection.end()
   }
 }

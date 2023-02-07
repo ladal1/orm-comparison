@@ -20,7 +20,7 @@ const resolveTestResult = (result: TestResult): string => {
 }
 
 class ConsoleSerializer extends BaseSerializer {
-  columnWidth = [10, 20, 20, 10, 15]
+  columnWidth = [5, 40, 20, 10, 15]
   errorBuffer: Array<
     Pick<TestValidationResult, 'error' | 'testType'> & {
       message: string
@@ -37,7 +37,7 @@ class ConsoleSerializer extends BaseSerializer {
   ): void {
     clearLine(process.stdout)
     const data = [
-      resolveTestResult(testResult.result),
+      '  ' + resolveTestResult(testResult.result),
       testName,
       implementationName,
       testType,
@@ -68,7 +68,7 @@ class ConsoleSerializer extends BaseSerializer {
 
   private tableHeader(): void {
     console.log(
-      `   | ${'Result'.padEnd(this.columnWidth[0])}  | ${'Test'.padEnd(
+      `   | ${'Result'.padEnd(this.columnWidth[0])} | ${'Test'.padEnd(
         this.columnWidth[1]
       )} | ${'Implementation'.padEnd(this.columnWidth[2])} | ${'Type'.padEnd(
         this.columnWidth[3]

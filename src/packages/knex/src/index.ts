@@ -2,6 +2,7 @@ import { PackageUtils } from 'Benchmark/interfaces'
 import knex, { Knex } from 'knex'
 import config from './knexfile'
 import MvpBench from './Benchmarks/SampleBenchmark'
+import EntityTraversal from './Benchmarks/EntityTraversal'
 
 let _knex: Knex
 
@@ -21,6 +22,7 @@ export const KnexPackage = {
   destroy,
   implementations: {
     MvpBench,
+    EntityTraversal,
   },
 }
 

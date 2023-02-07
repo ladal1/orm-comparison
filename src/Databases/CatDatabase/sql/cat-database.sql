@@ -17,7 +17,7 @@ ALTER TABLE cat_colors ADD CONSTRAINT pk_cat_colors PRIMARY KEY (id);
 
 CREATE TABLE cats (
     id SERIAL NOT NULL,
-    cat_colors_id INTEGER,
+    cat_color_id INTEGER,
     cat_name VARCHAR(256),
     date_of_birth DATE
 );
@@ -62,12 +62,13 @@ CREATE TABLE house_cats (
 ALTER TABLE house_cats ADD CONSTRAINT pk_house_cats PRIMARY KEY (house_id, cat_id);
 
 CREATE TABLE toys_house (
-    toys_id INTEGER NOT NULL,
+    id SERIAL NOT NULL,
+    toy_id INTEGER NOT NULL,
     house_id INTEGER NOT NULL
 );
-ALTER TABLE toys_house ADD CONSTRAINT pk_toys_house PRIMARY KEY (toys_id, house_id);
+ALTER TABLE toys_house ADD CONSTRAINT pk_toys_house PRIMARY KEY (id);
 
-ALTER TABLE cats ADD CONSTRAINT fk_cats_cat_colors FOREIGN KEY (cat_colors_id) REFERENCES cat_colors (id) ON DELETE CASCADE;
+ALTER TABLE cats ADD CONSTRAINT fk_cats_cat_color FOREIGN KEY (cat_color_id) REFERENCES cat_colors (id) ON DELETE CASCADE;
 
 ALTER TABLE color_hex ADD CONSTRAINT fk_color_hex_cat_colors FOREIGN KEY (id) REFERENCES cat_colors (id) ON DELETE CASCADE;
 
@@ -76,6 +77,6 @@ ALTER TABLE toys ADD CONSTRAINT fk_toys_toys_producer FOREIGN KEY (toys_producer
 ALTER TABLE house_cats ADD CONSTRAINT fk_house_cats_house FOREIGN KEY (house_id) REFERENCES house (id) ON DELETE CASCADE;
 ALTER TABLE house_cats ADD CONSTRAINT fk_house_cats_cats FOREIGN KEY (cat_id) REFERENCES cats (id) ON DELETE CASCADE;
 
-ALTER TABLE toys_house ADD CONSTRAINT fk_toys_house_toys FOREIGN KEY (toys_id) REFERENCES toys (id) ON DELETE CASCADE;
+ALTER TABLE toys_house ADD CONSTRAINT fk_toys_house_toys FOREIGN KEY (toy_id) REFERENCES toys (id) ON DELETE CASCADE;
 ALTER TABLE toys_house ADD CONSTRAINT fk_toys_house_house FOREIGN KEY (house_id) REFERENCES house (id) ON DELETE CASCADE;
 

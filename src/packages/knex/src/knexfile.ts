@@ -4,9 +4,9 @@ const config: Knex.Config = {
   client: 'pg',
   connection: {
     host: 'localhost',
-    user: 'cat_database',
-    password: 'cat_database',
-    database: 'cat_database',
+    user: 'benchmark',
+    password: 'benchmark_pwd',
+    database: 'benchmark',
   },
   migrations: {
     directory: './migrations',
