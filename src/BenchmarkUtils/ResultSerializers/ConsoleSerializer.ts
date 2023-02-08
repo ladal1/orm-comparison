@@ -16,6 +16,8 @@ const resolveTestResult = (result: TestResult): string => {
       return '❗'
     case TestResult.SKIPPED:
       return '⏭️   '
+    case TestResult.NOT_IMPLEMENTED:
+      return '❔'
   }
 }
 

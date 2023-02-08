@@ -29,6 +29,7 @@ export enum TestResult {
   FAIL = 'FAIL',
   ERROR = 'ERROR',
   SKIPPED = 'SKIPPED',
+  NOT_IMPLEMENTED = 'NOT_IMPLEMENTED',
 }
 
 export interface TestValidationResult {
@@ -128,7 +129,19 @@ export class BenchmarkSuite<T extends TestTemplate> {
     reporters: BaseSerializer[]
   ) {
     for (const [testName, test] of Object.entries(this.tests)) {
-      if (!('testLatency' in test) || !implementation?.[testName]) {
+      if (!('testLatency' in test)) {
+        continue
+      }
+      if (!implementation?.[testName]) {
+        for (const reporter of reporters) {
+          reporter.serializeTest(
+            this.database.name,
+            testName,
+            implementationName,
+            'Latency',
+            { result: TestResult.NOT_IMPLEMENTED }
+          )
+        }
         continue
       }
       const result = await this.runLatencyImplementation(
@@ -153,7 +166,19 @@ export class BenchmarkSuite<T extends TestTemplate> {
     reporters: BaseSerializer[]
   ) {
     for (const [testName, test] of Object.entries(this.tests)) {
-      if (!('testThroughput' in test) || !implementation?.[testName]) {
+      if (!('testThroughput' in test)) {
+        continue
+      }
+      if (!implementation?.[testName]) {
+        for (const reporter of reporters) {
+          reporter.serializeTest(
+            this.database.name,
+            testName,
+            implementationName,
+            'Throughput',
+            { result: TestResult.NOT_IMPLEMENTED }
+          )
+        }
         continue
       }
       const result = await this.runThroughputImplementation(
