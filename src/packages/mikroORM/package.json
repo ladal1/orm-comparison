@@ -13,6 +13,7 @@
     "license": "MIT",
     "dependencies": {
         "@mikro-orm/core": "^5.6.8",
+        "@mikro-orm/entity-generator": "^5.6.8",
         "@mikro-orm/postgresql": "^5.6.8"
     }
 }

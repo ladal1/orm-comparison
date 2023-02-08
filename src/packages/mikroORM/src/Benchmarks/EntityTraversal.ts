@@ -1,15 +1,23 @@
 import { EntityTraversalTest } from 'Benchmarks/EntityTraversal'
-import { Skipped } from 'BenchmarkUtils/BenchmarkRunner'
+import { getEntityManager } from '..'
+import { Cats } from '../Databases/CatDatabase/Cats'
+import { Toys } from '../Databases/CatDatabase/Toys'
 
 const EntityTraversal: EntityTraversalTest = {
   getCatColor: async id => {
-    throw new Skipped()
+    return getEntityManager('EntityTraversal')
+      .findOneOrFail(Cats, id, { populate: ['catColor.colorHex'] })
+      .then(cat => cat.catColor?.colorHex?.hexCode ?? '')
   },
   countCatsByColor: async (hexColor: string) => {
-    throw new Skipped()
+    return getEntityManager('EntityTraversal').count(Cats, {
+      catColor: { colorHex: { hexCode: hexColor } },
+    })
   },
   getToysAvailableToCat: async (id: number) => {
-    throw new Skipped()
+    return getEntityManager('EntityTraversal')
+      .find(Toys, { houseToys: { house: { cats: { id } } } })
+      .then(toys => toys.map(toy => toy.toyName))
   },
 }
 
