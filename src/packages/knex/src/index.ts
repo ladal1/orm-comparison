@@ -1,8 +1,9 @@
-import { PackageUtils } from 'Benchmark/interfaces'
+import { PackageUtils } from 'BenchmarkUtils/interfaces'
 import knex, { Knex } from 'knex'
 import config from './knexfile'
 import MvpBench from './Benchmarks/SampleBenchmark'
 import EntityTraversal from './Benchmarks/EntityTraversal'
+import IORMPackage from 'BenchmarkUtils/interfaces/PackageUtils'
 
 let _knex: Knex
 
@@ -16,7 +17,7 @@ export const destroy: PackageUtils.DestroyBenchmark = async () => {
   }
 }
 
-export const KnexPackage = {
+export const KnexPackage: IORMPackage = {
   name: 'Knex',
   initialize,
   destroy,

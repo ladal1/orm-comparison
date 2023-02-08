@@ -1,4 +1,4 @@
-import { TestTemplate } from 'Benchmark/BenchmarkRunner/BenchmarkSuite'
+import { TestTemplate } from 'BenchmarkUtils/BenchmarkRunner/BenchmarkSuite'
 
 // Initialize the benchmark, setup connection to the database
 export type InitializeBenchmark = () => Promise<void>

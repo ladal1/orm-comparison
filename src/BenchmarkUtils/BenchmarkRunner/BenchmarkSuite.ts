@@ -1,8 +1,8 @@
 import { AssertionError } from 'assert'
-import Database from 'Benchmark/interfaces/DatabaseUtils'
+import Database from 'BenchmarkUtils/interfaces/DatabaseUtils'
 import { sum } from 'lodash'
 import { Skipped } from '.'
-import { BaseSerializer } from 'Benchmark/ResultSerializers/BaseSerializer'
+import { BaseSerializer } from 'BenchmarkUtils/ResultSerializers/BaseSerializer'
 
 type TestOptions = {
   testName: string

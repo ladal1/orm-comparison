@@ -1,8 +1,8 @@
-import IORMPackage from 'Benchmark/interfaces/PackageUtils'
+import IORMPackage from 'BenchmarkUtils/interfaces/PackageUtils'
 import { Client } from 'pg'
 import { BenchmarkSuite } from './BenchmarkSuite'
-import { BaseSerializer } from 'Benchmark/ResultSerializers/BaseSerializer'
-import Database from 'Benchmark/interfaces/DatabaseUtils'
+import { BaseSerializer } from 'BenchmarkUtils/ResultSerializers/BaseSerializer'
+import Database from 'BenchmarkUtils/interfaces/DatabaseUtils'
 
 interface DatabaseSuites {
   database: Database

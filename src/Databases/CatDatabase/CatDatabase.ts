@@ -1,4 +1,4 @@
-import Database from 'Benchmark/interfaces/DatabaseUtils'
+import Database from 'BenchmarkUtils/interfaces/DatabaseUtils'
 import { Client } from 'pg'
 import { redirectedFileRead } from 'Databases/utils'
 

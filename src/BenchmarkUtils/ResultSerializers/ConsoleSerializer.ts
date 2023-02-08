@@ -1,8 +1,8 @@
 import {
   TestResult,
   TestValidationResult,
-} from 'Benchmark/BenchmarkRunner/BenchmarkSuite'
-import { clearLine } from 'Benchmark/utils/clearLine'
+} from 'BenchmarkUtils/BenchmarkRunner/BenchmarkSuite'
+import { clearLine } from 'BenchmarkUtils/utils/clearLine'
 import chalk from 'chalk'
 import { BaseSerializer } from './BaseSerializer'
 
@@ -15,7 +15,7 @@ const resolveTestResult = (result: TestResult): string => {
     case TestResult.ERROR:
       return '❗'
     case TestResult.SKIPPED:
-      return '⏭️'
+      return '⏭️   '
   }
 }
 

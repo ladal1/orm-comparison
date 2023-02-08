@@ -12,6 +12,7 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
-        "mikro-orm": "^5.5.3"
+        "@mikro-orm/core": "^5.6.8",
+        "@mikro-orm/postgresql": "^5.6.8"
     }
 }

@@ -1,7 +1,7 @@
 import {
   BenchmarkSuite,
   TestTemplate,
-} from 'Benchmark/BenchmarkRunner/BenchmarkSuite'
+} from 'BenchmarkUtils/BenchmarkRunner/BenchmarkSuite'
 import { CatDatabase } from 'Databases/CatDatabase/CatDatabase'
 import assert from 'assert/strict'
 

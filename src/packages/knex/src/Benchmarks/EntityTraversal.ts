@@ -23,13 +23,13 @@ const EntityTraversal: EntityTraversalTest = {
       .then(data => Number(data?.count ?? -1))
   },
   getToysAvailableToCat: async (id: number) => {
-    const query = knexInstance
+    return knexInstance
       .select('toys.toy_name')
       .from('toys')
       .join('toys_house', 'toys_house.toy_id', 'toys.id')
       .join('house_cats', 'house_cats.house_id', 'toys_house.house_id')
       .where('house_cats.cat_id', '=', id)
-    return query.then(data => data.map(d => d.toy_name))
+      .then(data => data.map(d => d.toy_name))
   },
 }
 

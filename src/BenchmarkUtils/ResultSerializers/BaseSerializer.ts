@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { TestValidationResult } from 'Benchmark/BenchmarkRunner/BenchmarkSuite'
+import { TestValidationResult } from 'BenchmarkUtils/BenchmarkRunner/BenchmarkSuite'
 
 export abstract class BaseSerializer {
   public abstract serializeTest(

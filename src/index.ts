@@ -1,11 +1,12 @@
-import ConsoleSerializer from 'Benchmark/ResultSerializers/ConsoleSerializer'
-import { BenchmarkRunner } from './Benchmark/BenchmarkRunner'
-import MvpBench from './Benchmarks/SampleBenchmark'
-import { KnexPackage } from './packages/knex/src'
+import ConsoleSerializer from 'BenchmarkUtils/ResultSerializers/ConsoleSerializer'
+import { BenchmarkRunner } from './BenchmarkUtils/BenchmarkRunner'
+import { MvpBench } from './Benchmarks/SampleBenchmark'
 import { EntityTraversal } from 'Benchmarks/EntityTraversal'
+import { KnexPackage } from './packages/knex/src'
+import { MikroORMPackage } from './packages/mikroORM/src'
 
 const br = new BenchmarkRunner(
-  [KnexPackage],
+  [KnexPackage, MikroORMPackage],
   [MvpBench, EntityTraversal],
   [new ConsoleSerializer()]
 )

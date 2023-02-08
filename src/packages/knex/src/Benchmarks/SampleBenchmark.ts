@@ -1,3 +1,4 @@
+import { Skipped } from 'BenchmarkUtils/BenchmarkRunner'
 import { sampleTest } from 'Benchmarks/SampleBenchmark'
 
 const MvpBench: sampleTest = {
@@ -12,6 +13,9 @@ const MvpBench: sampleTest = {
   },
   assertionFailTest: async () => {
     return true
+  },
+  skippedTest: async () => {
+    throw new Skipped()
   },
 }
 
