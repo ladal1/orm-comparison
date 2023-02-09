@@ -16,7 +16,7 @@
     "sourceMap": true /* Generates corresponding '.map' file. */,
     // "outFile": "./",                       /* Concatenate and emit output to single file. */
     "outDir": "dist" /* Redirect output structure to the directory. */,
-    "rootDirs": ["src", "src/benchmark", "src/packages"],
+    "rootDirs": ["src", "src/benchmark", "src/Packages"],
     // "removeComments": true,                /* Do not emit comments to output. */
     "noEmit": false /* Do not emit outputs. */,
     // "importHelpers": true,                 /* Import emit helpers from 'tslib'. */

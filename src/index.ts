@@ -2,8 +2,8 @@ import ConsoleSerializer from 'BenchmarkUtils/ResultSerializers/ConsoleSerialize
 import { BenchmarkRunner } from './BenchmarkUtils/BenchmarkRunner'
 import { MvpBench } from './Benchmarks/SampleBenchmark'
 import { EntityTraversal } from 'Benchmarks/EntityTraversal'
-import { KnexPackage } from './packages/knex/src'
-import { MikroORMPackage } from './packages/mikroORM/src'
+import { KnexPackage } from './Packages/knex/src'
+import { MikroORMPackage } from './Packages/mikroORM/src'
 import { HtmlSerializer } from 'BenchmarkUtils/ResultSerializers/HtmlSerializer'
 
 const br = new BenchmarkRunner(
