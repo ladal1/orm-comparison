@@ -32,6 +32,7 @@ class ConsoleSerializer extends BaseSerializer {
 
   public override serializeTest(
     databaseName: string,
+    suiteName: string,
     testName: string,
     implementationName: string,
     testType: Exclude<TestValidationResult['testType'], undefined>,
@@ -86,7 +87,11 @@ class ConsoleSerializer extends BaseSerializer {
     this.tableBorder()
   }
 
-  public serializeSuite(suiteName: string, databaseName: string): void {
+  public serializeSuite(
+    suiteName: string,
+    databaseName: string,
+    packageName: string
+  ): void {
     console.log('\n')
     console.log(`  ${databaseName} - ${suiteName}`)
     this.tableBorder()
@@ -94,7 +99,7 @@ class ConsoleSerializer extends BaseSerializer {
     this.tableBorder()
   }
 
-  public closeSuite(): void {
+  public async closeSuite(): Promise<void> {
     this.tableBorder()
     console.log('\n')
     for (const { testName, message, error, testType } of this.errorBuffer) {

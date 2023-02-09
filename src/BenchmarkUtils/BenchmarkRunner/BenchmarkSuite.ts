@@ -136,6 +136,7 @@ export class BenchmarkSuite<T extends TestTemplate> {
         for (const reporter of reporters) {
           reporter.serializeTest(
             this.database.name,
+            this.name,
             testName,
             implementationName,
             'Latency',
@@ -151,6 +152,7 @@ export class BenchmarkSuite<T extends TestTemplate> {
       for (const reporter of reporters) {
         reporter.serializeTest(
           this.database.name,
+          this.name,
           testName,
           implementationName,
           'Latency',
@@ -173,6 +175,7 @@ export class BenchmarkSuite<T extends TestTemplate> {
         for (const reporter of reporters) {
           reporter.serializeTest(
             this.database.name,
+            this.name,
             testName,
             implementationName,
             'Throughput',
@@ -189,6 +192,7 @@ export class BenchmarkSuite<T extends TestTemplate> {
       for (const reporter of reporters) {
         reporter.serializeTest(
           this.database.name,
+          this.name,
           testName,
           implementationName,
           'Throughput',

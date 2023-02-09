@@ -61,6 +61,9 @@ export class BenchmarkRunner {
   async run(reporters?: BaseSerializer[]) {
     await this.utilConnection.connect()
     const mergedReporters = [...this.reporters, ...(reporters ?? [])]
+    await Promise.all(
+      mergedReporters.map(reporter => reporter.openSerializer())
+    )
     for (const [, { database, suites }] of Object.entries(
       this.benchmarkSuites
     )) {
@@ -69,7 +72,11 @@ export class BenchmarkRunner {
         await testedPackage.initialize()
         for (const suite of suites) {
           for (const reporter of mergedReporters) {
-            reporter.serializeSuite(suite.database.name, suite.getName())
+            reporter.serializeSuite(
+              suite.database.name,
+              suite.getName(),
+              testedPackage.name
+            )
           }
           await suite.runSuite(
             testedPackage.implementations[suite.getName()],
@@ -84,6 +91,9 @@ export class BenchmarkRunner {
       }
       await this.teardownDatabase(database, this.utilConnection)
     }
+    await Promise.all(
+      mergedReporters.map(reporter => reporter.closeSerializer())
+    )
     await this.utilConnection.end()
   }
 }
