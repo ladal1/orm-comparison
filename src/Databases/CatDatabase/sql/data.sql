@@ -139,7 +139,7 @@ insert into color_hex (id, hex_code) values (34, '#7e634e');
 insert into color_hex (id, hex_code) values (35, '#4e3f1c');
 insert into color_hex (id, hex_code) values (36, '#e3ad9a');
 insert into color_hex (id, hex_code) values (37, '#38ff9b');
-insert into color_hex (id, hex_code) values (38, '#3a378c');
+insert into color_hex (id, hex_code) values (38, '#ff8b28');
 insert into color_hex (id, hex_code) values (39, '#7ac8bb');
 insert into color_hex (id, hex_code) values (40, '#cb48c0');
 insert into color_hex (id, hex_code) values (41, '#b5312b');

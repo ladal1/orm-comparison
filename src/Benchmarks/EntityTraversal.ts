@@ -18,7 +18,7 @@ export const EntityTraversal = new BenchmarkSuite<EntityTraversalTest>(
     getCatColor: {
       testName: 'Get Color hex from cat id',
       referenceCheck: async (data: string) => {
-        assert.equal(data, '#3a378c')
+        assert.equal(data, '#ff8b28')
       },
       call: (implementation: EntityTraversalTest['getCatColor']) => () =>
         implementation(1),
@@ -29,7 +29,7 @@ export const EntityTraversal = new BenchmarkSuite<EntityTraversalTest>(
     countCatsByColor: {
       testName: 'Count all cats by color hex',
       referenceCheck: async (data: number) => {
-        assert.equal(data, 23)
+        assert.equal(data, 22)
       },
       call: (implementation: EntityTraversalTest['countCatsByColor']) => () =>
         implementation('#3a378c'),
