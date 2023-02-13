@@ -17,6 +17,9 @@ const initialize = async () => {
     user: 'benchmark',
     password: 'benchmark_pwd',
     host: 'localhost',
+    entityGenerator: {
+      bidirectionalRelations: true,
+    },
   })
 }
 

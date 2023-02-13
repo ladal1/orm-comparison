@@ -19,5 +19,5 @@ export class ToysProducer {
   hqLocation!: any
 
   @OneToMany({ entity: () => Toys, mappedBy: 'toysProducer' })
-  toys = new Collection<Toys>(this)
+  toysProduced = new Collection<Toys>(this)
 }

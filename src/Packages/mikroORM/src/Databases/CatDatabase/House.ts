@@ -28,5 +28,5 @@ export class House {
   cats = new Collection<Cats>(this)
 
   @OneToMany({ entity: () => ToysHouse, mappedBy: 'house' })
-  toys = new Collection<ToysHouse>(this)
+  toysHouse = new Collection<ToysHouse>(this)
 }

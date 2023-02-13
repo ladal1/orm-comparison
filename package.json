@@ -23,7 +23,7 @@
     "Ladislav Louka <ladislav.louka@gmail.com>"
   ],
   "workspaces": [
-    "src/packages/*"
+    "src/Packages/*"
   ],
   "license": "MIT",
   "devDependencies": {

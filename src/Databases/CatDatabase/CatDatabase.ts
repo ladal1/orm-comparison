@@ -19,11 +19,11 @@ export const CatDatabase: Database = {
     await client.query('COMMIT')
   },
   destroyDatabase: async (client: Client) => {
-    const query = redirectedFileRead(
-      'src/Databases/CatDatabase/sql/teardown.sql'
-    )
-    await client.query('BEGIN')
-    await client.query(query)
-    await client.query('COMMIT')
+    // const query = redirectedFileRead(
+    //   'src/Databases/CatDatabase/sql/teardown.sql'
+    // )
+    // await client.query('BEGIN')
+    // await client.query(query)
+    // await client.query('COMMIT')
   },
 }

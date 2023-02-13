@@ -62,11 +62,11 @@ CREATE TABLE house_cats (
 ALTER TABLE house_cats ADD CONSTRAINT pk_house_cats PRIMARY KEY (house_id, cat_id);
 
 CREATE TABLE toys_house (
-    id SERIAL NOT NULL,
     toy_id INTEGER NOT NULL,
-    house_id INTEGER NOT NULL
+    house_id INTEGER NOT NULL,
+    amount INTEGER NOT NULL DEFAULT 1
 );
-ALTER TABLE toys_house ADD CONSTRAINT pk_toys_house PRIMARY KEY (id);
+ALTER TABLE toys_house ADD CONSTRAINT pk_toys_house PRIMARY KEY (toy_id, house_id);
 
 ALTER TABLE cats ADD CONSTRAINT fk_cats_cat_color FOREIGN KEY (cat_color_id) REFERENCES cat_colors (id) ON DELETE CASCADE;
 

@@ -24,5 +24,5 @@ export class Cats {
   dateOfBirth?: string
 
   @ManyToMany({ entity: () => House, mappedBy: 'cats' })
-  house = new Collection<House>(this)
+  houses = new Collection<House>(this)
 }
