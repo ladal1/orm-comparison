@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { Model } from 'objection'
 
-export class CatColor extends Model {
+export class CatColors extends Model {
   static get tableName() {
     return 'cat_colors'
   }
@@ -24,12 +24,12 @@ export class CatColor extends Model {
 
   static get relationMappings() {
     const { ColorHex } = require('./ColorHex')
-    const { CatsModel } = require('./Cats')
+    const { Cats } = require('./Cats')
 
     return {
       cats: {
         relation: Model.HasManyRelation,
-        modelClass: CatsModel,
+        modelClass: Cats,
         join: {
           from: 'cat_colors.id',
           to: 'cats.cat_color_id',

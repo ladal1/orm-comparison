@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { Model } from 'objection'
 
-export class CatModel extends Model {
+export class Cats extends Model {
   static get tableName() {
     return 'cats'
   }
@@ -32,8 +32,8 @@ export class CatModel extends Model {
         relation: Model.BelongsToOneRelation,
         modelClass: CatColors,
         join: {
-          from: 'cats.catColorId',
-          to: 'catColors.id',
+          from: 'cats.cat_color_id',
+          to: 'cat_colors.id',
         },
       },
       houses: {
@@ -42,8 +42,8 @@ export class CatModel extends Model {
         join: {
           from: 'cats.id',
           through: {
-            from: 'houseCats.catId',
-            to: 'houseCats.houseId',
+            from: 'house_cats.cat_id',
+            to: 'house_cats.house_id',
           },
           to: 'houses.id',
         },

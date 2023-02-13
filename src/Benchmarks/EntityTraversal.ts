@@ -29,10 +29,10 @@ export const EntityTraversal = new BenchmarkSuite<EntityTraversalTest>(
     countCatsByColor: {
       testName: 'Count all cats by color hex',
       referenceCheck: async (data: number) => {
-        assert.equal(data, 22)
+        assert.equal(data, 23)
       },
       call: (implementation: EntityTraversalTest['countCatsByColor']) => () =>
-        implementation('#3a378c'),
+        implementation('#ff8b28'),
       testLatency: true,
       testThroughput: true,
       throughputIterations: 1000,

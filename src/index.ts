@@ -5,9 +5,10 @@ import { EntityTraversal } from 'Benchmarks/EntityTraversal'
 import { KnexPackage } from './Packages/knex/src'
 import { MikroORMPackage } from './Packages/mikroORM/src'
 import { HtmlSerializer } from 'BenchmarkUtils/ResultSerializers/HtmlSerializer'
+import { ObjectionPackage } from './Packages/objection/src'
 
 const br = new BenchmarkRunner(
-  [KnexPackage, MikroORMPackage],
+  [KnexPackage, MikroORMPackage, ObjectionPackage],
   [MvpBench, EntityTraversal],
   [new ConsoleSerializer(), new HtmlSerializer()]
 )
