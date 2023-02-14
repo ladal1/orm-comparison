@@ -6,8 +6,8 @@ import {
   PrimaryKey,
   Property,
 } from '@mikro-orm/core'
-import { Cats } from './Cats'
-import { ToysHouse } from './ToysHouse'
+import { Cat } from './Cat'
+import { ToyHouse } from './ToyHouse'
 
 @Entity()
 export class House {
@@ -21,12 +21,13 @@ export class House {
   hasDog?: boolean
 
   @ManyToMany({
-    entity: () => Cats,
+    entity: () => Cat,
     joinColumn: 'house_id',
     inverseJoinColumn: 'cat_id',
+    pivotTable: 'house_cat',
   })
-  cats = new Collection<Cats>(this)
+  cats = new Collection<Cat>(this)
 
-  @OneToMany({ entity: () => ToysHouse, mappedBy: 'house' })
-  toysHouse = new Collection<ToysHouse>(this)
+  @OneToMany({ entity: () => ToyHouse, mappedBy: 'house' })
+  toysHouse = new Collection<ToyHouse>(this)
 }

@@ -1,15 +1,15 @@
 import { Entity, OneToOne, Property } from '@mikro-orm/core'
-import { CatColors } from './CatColors'
+import { CatColor } from './CatColor'
 
 @Entity()
 export class ColorHex {
   @OneToOne({
-    entity: () => CatColors,
+    entity: () => CatColor,
     fieldName: 'id',
     onDelete: 'cascade',
     primary: true,
   })
-  id!: CatColors
+  id!: CatColor
 
   @Property({ length: 256 })
   hexCode!: string

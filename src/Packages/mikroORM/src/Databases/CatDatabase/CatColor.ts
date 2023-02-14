@@ -6,19 +6,19 @@ import {
   PrimaryKey,
   Property,
 } from '@mikro-orm/core'
-import { Cats } from './Cats'
+import { Cat } from './Cat'
 import { ColorHex } from './ColorHex'
 
 @Entity()
-export class CatColors {
+export class CatColor {
   @PrimaryKey()
   id!: number
 
   @Property({ length: 256 })
   colorName!: string
 
-  @OneToMany({ entity: () => Cats, mappedBy: 'catColor' })
-  cats = new Collection<Cats>(this)
+  @OneToMany({ entity: () => Cat, mappedBy: 'catColor' })
+  cats = new Collection<Cat>(this)
 
   @OneToOne({ entity: () => ColorHex, mappedBy: 'id' })
   colorHex?: ColorHex

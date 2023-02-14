@@ -6,16 +6,16 @@ import {
   PrimaryKey,
   Property,
 } from '@mikro-orm/core'
-import { CatColors } from './CatColors'
+import { CatColor } from './CatColor'
 import { House } from './House'
 
 @Entity()
-export class Cats {
+export class Cat {
   @PrimaryKey()
   id!: number
 
-  @ManyToOne({ entity: () => CatColors, onDelete: 'cascade', nullable: true })
-  catColor?: CatColors
+  @ManyToOne({ entity: () => CatColor, onDelete: 'cascade', nullable: true })
+  catColor?: CatColor
 
   @Property({ length: 256, nullable: true })
   catName?: string
@@ -23,6 +23,10 @@ export class Cats {
   @Property({ columnType: 'date', nullable: true })
   dateOfBirth?: string
 
-  @ManyToMany({ entity: () => House, mappedBy: 'cats' })
+  @ManyToMany({
+    entity: () => House,
+    mappedBy: 'cats',
+    pivotTable: 'house_cat',
+  })
   houses = new Collection<House>(this)
 }

@@ -1,13 +1,13 @@
 import { Entity, ManyToOne, OptionalProps, Property } from '@mikro-orm/core'
 import { House } from './House'
-import { Toys } from './Toys'
+import { Toy } from './Toy'
 
 @Entity()
-export class ToysHouse {
+export class ToyHouse {
   [OptionalProps]?: 'amount'
 
-  @ManyToOne({ entity: () => Toys, onDelete: 'cascade', primary: true })
-  toy!: Toys
+  @ManyToOne({ entity: () => Toy, onDelete: 'cascade', primary: true })
+  toy!: Toy
 
   @ManyToOne({ entity: () => House, onDelete: 'cascade', primary: true })
   house!: House

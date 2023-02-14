@@ -5,7 +5,7 @@ import {
   PrimaryKey,
   Property,
 } from '@mikro-orm/core'
-import { Toys } from './Toys'
+import { Toy } from './Toy'
 
 @Entity()
 export class ToysProducer {
@@ -18,6 +18,6 @@ export class ToysProducer {
   @Property({ columnType: 'json' })
   hqLocation!: any
 
-  @OneToMany({ entity: () => Toys, mappedBy: 'toysProducer' })
-  toysProduced = new Collection<Toys>(this)
+  @OneToMany({ entity: () => Toy, mappedBy: 'toysProducer' })
+  toysProduced = new Collection<Toy>(this)
 }

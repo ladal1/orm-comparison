@@ -7,11 +7,11 @@ import {
   Property,
   Unique,
 } from '@mikro-orm/core'
-import { ToysHouse } from './ToysHouse'
+import { ToyHouse } from './ToyHouse'
 import { ToysProducer } from './ToysProducer'
 
 @Entity()
-export class Toys {
+export class Toy {
   @PrimaryKey()
   id!: number
 
@@ -38,6 +38,6 @@ export class Toys {
   @Property({ length: 256, nullable: true })
   naughty?: string
 
-  @OneToMany({ entity: () => ToysHouse, mappedBy: 'toy' })
-  houseToys = new Collection<ToysHouse>(this)
+  @OneToMany({ entity: () => ToyHouse, mappedBy: 'toy' })
+  houseToys = new Collection<ToyHouse>(this)
 }
