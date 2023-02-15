@@ -2,8 +2,12 @@
 import { Model } from 'objection'
 
 export class House extends Model {
+  id: number
+  houseAddress: string
+  hasDog: boolean
+
   static get tableName() {
-    return 'houses'
+    return 'house'
   }
 
   static get idColumn() {
@@ -23,28 +27,28 @@ export class House extends Model {
   }
 
   static get relationMappings() {
-    const { CatsModel } = require('./Cats')
-    const { ToysHouse } = require('./ToysHouse')
+    const { Cat } = require('./Cat')
+    const { ToyHouse } = require('./ToyHouse')
 
     return {
       cats: {
         relation: Model.ManyToManyRelation,
-        modelClass: CatsModel,
+        modelClass: Cat,
         join: {
-          from: 'houses.id',
+          from: 'house.id',
           through: {
-            from: 'houseCats.houseId',
-            to: 'houseCats.catId',
+            from: 'houseCat.houseId',
+            to: 'houseCat.catId',
           },
-          to: 'cats.id',
+          to: 'cat.id',
         },
       },
       toysHouse: {
         relation: Model.HasManyRelation,
-        modelClass: ToysHouse,
+        modelClass: ToyHouse,
         join: {
-          from: 'houses.id',
-          to: 'toysHouse.house_id',
+          from: 'house.id',
+          to: 'toyHouse.houseId',
         },
       },
     }

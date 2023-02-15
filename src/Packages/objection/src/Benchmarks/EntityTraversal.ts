@@ -1,19 +1,30 @@
-import { Skipped } from 'BenchmarkUtils/BenchmarkRunner'
 import { EntityTraversalTest } from 'Benchmarks/EntityTraversal'
-import { Cats } from '../Databases/CatDatabase/Cats'
+import { Cat } from '../Databases/CatDatabase/Cat'
+import { Toy } from '../Databases/CatDatabase/Toy'
 
 const EntityTraversal: EntityTraversalTest = {
   getCatColor: async id => {
-    return Cats.query()
+    return Cat.query()
       .findById(id)
       .withGraphFetched('catColor.colorHex')
-      .then(cat => (cat as any)?.catColor?.colorHex?.hexCode ?? '')
+      .then(cat => {
+        return cat?.catColor?.colorHex?.hexCode ?? ''
+      })
   },
   countCatsByColor: async (hexColor: string) => {
-    throw new Skipped()
+    return Cat.query()
+      .count()
+      .joinRelated('catColor.colorHex')
+      .where('hex_code', hexColor)
+      .first()
+      .then((result: any) => Number(result.count))
   },
   getToysAvailableToCat: async (id: number) => {
-    throw new Skipped()
+    return Toy.query()
+      .joinRelated('houses')
+      .joinRelated('houses.cats')
+      .where('houses:cats.id', id)
+      .then(toys => toys.map(toy => toy.toyName))
   },
 }
 

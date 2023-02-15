@@ -1,13 +1,17 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { Model } from 'objection'
 
-export class ToysHouse extends Model {
+export class ToyHouse extends Model {
+  toyId: number
+  houseId: number
+  amount: number
+
   static get tableName() {
-    return 'toysHouse'
+    return 'toyHouse'
   }
 
   static get idColumn() {
-    return ['toys_id', 'house_id']
+    return ['toy_id', 'house_id']
   }
 
   static get jsonSchema() {
@@ -16,31 +20,31 @@ export class ToysHouse extends Model {
       required: ['name'],
 
       properties: {
-        toys_id: { type: 'integer' },
-        house_id: { type: 'integer' },
+        toyId: { type: 'integer' },
+        houseId: { type: 'integer' },
         amount: { type: 'integer' },
       },
     }
   }
 
   static get relationMappings() {
-    const { Toys } = require('./Toys')
+    const { Toy } = require('./Toy')
     const { House } = require('./House')
 
     return {
       toys: {
         relation: Model.BelongsToOneRelation,
-        modelClass: Toys,
+        modelClass: Toy,
         join: {
-          from: 'toysHouse.toys_id',
-          to: 'toys.id',
+          from: 'toyHouse.toyId',
+          to: 'toy.id',
         },
       },
       house: {
         relation: Model.BelongsToOneRelation,
         modelClass: House,
         join: {
-          from: 'toysHouse.house_id',
+          from: 'toyHouse.houseId',
           to: 'house.id',
         },
       },

@@ -1,9 +1,16 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { Model } from 'objection'
+import { ColorHex } from './ColorHex'
+import { Cat } from './Cat'
 
-export class CatColors extends Model {
+export class CatColor extends Model {
+  id: number
+  name: string
+  colorHex?: ColorHex
+  cats?: Cat[]
+
   static get tableName() {
-    return 'cat_colors'
+    return 'catColor'
   }
 
   static get idColumn() {
@@ -24,23 +31,23 @@ export class CatColors extends Model {
 
   static get relationMappings() {
     const { ColorHex } = require('./ColorHex')
-    const { Cats } = require('./Cats')
+    const { Cat } = require('./Cat')
 
     return {
       cats: {
         relation: Model.HasManyRelation,
-        modelClass: Cats,
+        modelClass: Cat,
         join: {
-          from: 'cat_colors.id',
-          to: 'cats.cat_color_id',
+          from: 'catColor.id',
+          to: 'cat.catColorId',
         },
       },
       colorHex: {
         relation: Model.HasOneRelation,
         modelClass: ColorHex,
         join: {
-          from: 'cat_colors.id',
-          to: 'color_hex.id',
+          from: 'catColor.id',
+          to: 'colorHex.id',
         },
       },
     }

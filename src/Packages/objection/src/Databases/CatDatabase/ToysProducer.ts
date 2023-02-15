@@ -2,6 +2,10 @@
 import { Model } from 'objection'
 
 export class ToysProducer extends Model {
+  id: number
+  stockInfo: Record<string, any>
+  hqLocation: Record<string, any>
+
   static get tableName() {
     return 'toysProducer'
   }
@@ -31,7 +35,7 @@ export class ToysProducer extends Model {
         modelClass: Toys,
         join: {
           from: 'toysProducer.id',
-          to: 'toys.producer_id',
+          to: 'toy.producerId',
         },
       },
     }

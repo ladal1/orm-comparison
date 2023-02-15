@@ -1,4 +1,4 @@
-import { Model } from 'objection'
+import { Model, knexSnakeCaseMappers } from 'objection'
 import knex from 'knex'
 import IORMPackage from 'BenchmarkUtils/interfaces/PackageUtils'
 import EntityTraversal from './Benchmarks/EntityTraversal'
@@ -12,6 +12,7 @@ const initialize = async () => {
       password: 'benchmark_pwd',
       database: 'benchmark',
     },
+    ...knexSnakeCaseMappers(),
   })
 
   Model.knex(_knex)

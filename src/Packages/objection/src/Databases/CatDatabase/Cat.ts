@@ -1,9 +1,16 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { Model } from 'objection'
+import { CatColor } from './CatColor'
 
-export class Cats extends Model {
+export class Cat extends Model {
+  id!: number
+  catColorId!: number
+  catName!: string
+  dateOfBirth!: Date
+  catColor?: CatColor
+
   static get tableName() {
-    return 'cats'
+    return 'cat'
   }
 
   static get idColumn() {
@@ -24,28 +31,28 @@ export class Cats extends Model {
   }
 
   static get relationMappings() {
-    const { CatColors } = require('./CatColors')
+    const { CatColor } = require('./CatColor')
     const { House } = require('./House')
 
     return {
       catColor: {
         relation: Model.BelongsToOneRelation,
-        modelClass: CatColors,
+        modelClass: CatColor,
         join: {
-          from: 'cats.cat_color_id',
-          to: 'cat_colors.id',
+          from: 'cat.catColorId',
+          to: 'catColor.id',
         },
       },
       houses: {
         relation: Model.ManyToManyRelation,
         modelClass: House,
         join: {
-          from: 'cats.id',
+          from: 'cat.id',
           through: {
-            from: 'house_cats.cat_id',
-            to: 'house_cats.house_id',
+            from: 'houseCat.catId',
+            to: 'houseCat.houseId',
           },
-          to: 'houses.id',
+          to: 'house.id',
         },
       },
     }

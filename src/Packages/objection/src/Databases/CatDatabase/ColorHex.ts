@@ -2,8 +2,11 @@
 import { Model } from 'objection'
 
 export class ColorHex extends Model {
+  id!: number
+  hexCode!: string
+
   static get tableName() {
-    return 'color_hex'
+    return 'colorHex'
   }
 
   static get idColumn() {
@@ -30,8 +33,8 @@ export class ColorHex extends Model {
         relation: Model.HasOneRelation,
         modelClass: CatColor,
         join: {
-          from: 'color_hex.id',
-          to: 'cat_colors.id',
+          from: 'colorHex.id',
+          to: 'catColor.id',
         },
       },
     }

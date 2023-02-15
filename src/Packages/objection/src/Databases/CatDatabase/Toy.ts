@@ -1,9 +1,21 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { Model } from 'objection'
+import { ToysProducer } from './ToysProducer'
+import { House } from './House'
 
-export class Toys extends Model {
+export class Toy extends Model {
+  id!: number
+  currency!: string
+  toyName!: string
+  price!: number
+  naugthy!: string
+  barcode!: string
+  toysProducerId!: number
+  toysProducer?: ToysProducer
+  houses?: House[]
+
   static get tableName() {
-    return 'toys'
+    return 'toy'
   }
 
   static get idColumn() {
@@ -27,24 +39,37 @@ export class Toys extends Model {
   }
 
   static get relationMappings() {
-    const { ToysHouse } = require('./ToysHouse')
+    const { ToyHouse } = require('./ToyHouse')
     const { ToysProducer } = require('./ToysProducer')
+    const { House } = require('./House')
 
     return {
       toysHouse: {
         relation: Model.HasManyRelation,
-        modelClass: ToysHouse,
+        modelClass: ToyHouse,
         join: {
-          from: 'toys.id',
-          to: 'toysHouse.toys_id',
+          from: 'toy.id',
+          to: 'toyHouse.toyId',
         },
       },
       toysProducer: {
         relation: Model.BelongsToOneRelation,
         modelClass: ToysProducer,
         join: {
-          from: 'toys.producer_id',
+          from: 'toy.producerId',
           to: 'toysProducer.id',
+        },
+      },
+      houses: {
+        relation: Model.ManyToManyRelation,
+        modelClass: House,
+        join: {
+          from: 'toy.id',
+          through: {
+            from: 'toyHouse.toyId',
+            to: 'toyHouse.houseId',
+          },
+          to: 'house.id',
         },
       },
     }
