@@ -1,5 +1,5 @@
 {
   "extends": "./tsconfig.json",
   "include": ["./src/**/*", "./src/*", "./benchmark/**/*", "./benchmark/*", "./packages/**/src"],
-  "exclude": []
+  "exclude": ["./src/pgtyped/src/Benchmarks/**/*.queries.ts"]
 }

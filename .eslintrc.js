@@ -1,6 +1,6 @@
 module.exports = {
   ...require('@ackee/styleguide-backend-config/eslint'),
-  ignorePatterns: ['dist', '.eslintrc.js'],
+  ignorePatterns: ['dist', '.eslintrc.js', '*.queries.ts'],
   parserOptions: {
     project: '.eslint.tsconfig.json',
   },

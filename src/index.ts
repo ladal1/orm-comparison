@@ -6,9 +6,10 @@ import { KnexPackage } from './Packages/knex/src'
 import { MikroORMPackage } from './Packages/mikroORM/src'
 import { HtmlSerializer } from 'BenchmarkUtils/ResultSerializers/HtmlSerializer'
 import { ObjectionPackage } from './Packages/objection/src'
+import { PgTypedPackage } from './Packages/pgtyped/src'
 
 const br = new BenchmarkRunner(
-  [KnexPackage, MikroORMPackage, ObjectionPackage],
+  [KnexPackage, MikroORMPackage, ObjectionPackage, PgTypedPackage],
   [MvpBench, EntityTraversal],
   [new ConsoleSerializer(), new HtmlSerializer()]
 )
