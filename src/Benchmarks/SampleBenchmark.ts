@@ -41,8 +41,6 @@ export const MvpBench = new BenchmarkSuite<sampleTest>(
       },
       call: implementationFn => () => implementationFn(),
       testLatency: true,
-      testThroughput: true,
-      throughputIterations: 1000,
     },
     assertionFailTest: {
       testName: 'MvpBench 4 - assertion fail',
@@ -59,8 +57,6 @@ export const MvpBench = new BenchmarkSuite<sampleTest>(
       },
       call: implementationFn => () => implementationFn(),
       testLatency: true,
-      testThroughput: true,
-      throughputIterations: 1000,
     },
   }
 )

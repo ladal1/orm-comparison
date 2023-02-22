@@ -1,12 +1,12 @@
 import ConsoleSerializer from 'BenchmarkUtils/ResultSerializers/ConsoleSerializer'
+import { HtmlSerializer } from 'BenchmarkUtils/ResultSerializers/HtmlSerializer'
 import { BenchmarkRunner } from './BenchmarkUtils/BenchmarkRunner'
 import { MvpBench } from './Benchmarks/SampleBenchmark'
 import { EntityTraversal } from 'Benchmarks/EntityTraversal'
-import { KnexPackage } from './Packages/knex/src'
-import { MikroORMPackage } from './Packages/mikroORM/src'
-import { HtmlSerializer } from 'BenchmarkUtils/ResultSerializers/HtmlSerializer'
-import { ObjectionPackage } from './Packages/objection/src'
-import { PgTypedPackage } from './Packages/pgtyped/src'
+import { KnexPackage } from './Packages/knex'
+import { MikroORMPackage } from './Packages/mikroORM'
+import { ObjectionPackage } from './Packages/objection'
+import { PgTypedPackage } from './Packages/pgtyped'
 
 const br = new BenchmarkRunner(
   [KnexPackage, MikroORMPackage, ObjectionPackage, PgTypedPackage],

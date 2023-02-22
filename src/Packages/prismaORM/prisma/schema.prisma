@@ -6,6 +6,6 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = "postgresql://benchmark:benchmark_pwd@localhost:5432/mydb?schema=public"
 }
