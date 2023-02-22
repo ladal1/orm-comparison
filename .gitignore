@@ -2,6 +2,9 @@
 dist
 tsconfig.tsbuildinfo
 
+# Prisma generated files
+**/prismaORM/Databases/**/generated
+
 # Created by https://www.gitignore.io/api/node,webstorm
 
 checkstyle-result.xml
