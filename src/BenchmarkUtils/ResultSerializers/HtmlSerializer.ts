@@ -5,21 +5,28 @@ import { redirectedFileRead } from 'utils'
 import path from 'node:path'
 import { writeFile } from 'node:fs/promises'
 import { existsSync, mkdirSync } from 'node:fs'
+import sass from 'sass'
 
 export class HtmlSerializer extends BaseSerializer {
   private template: HandlebarsTemplateDelegate<any> | null = null
-  private readonly dataMap = new Map<
-    string,
-    Record<string, Record<string, TestValidationResult>>
-  >()
+
+  private data: {
+    [databaseName: string]: {
+      [suiteName: string]: {
+        [testName: string]: {
+          [testType: string]: {
+            [packageName: string]: TestValidationResult
+          }
+        }
+      }
+    }
+  } = {}
 
   constructor(
     private readonly outputPath: string = path.join('out', 'results.html')
   ) {
     super()
   }
-
-  private readonly suiteMap = new Map<string, string>()
 
   public override async openSerializer(): Promise<void> {
     const readTemplate = redirectedFileRead(
@@ -37,13 +44,15 @@ export class HtmlSerializer extends BaseSerializer {
     testResult: TestValidationResult
     // eslint-disable-next-line @typescript-eslint/no-empty-function
   ): void {
-    const data = this.dataMap.get(suiteName)
+    const data = this.data[databaseName][suiteName]
     if (data) {
-      if (data[packageName]) {
-        data[packageName][testName] = testResult
-      } else {
-        data[packageName] = { [testName]: testResult }
+      if (!data[testName]) {
+        data[testName] = {}
       }
+      if (!data[testName][testType]) {
+        data[testName][testType] = {}
+      }
+      data[testName][testType][packageName] = testResult
     }
   }
 
@@ -52,12 +61,22 @@ export class HtmlSerializer extends BaseSerializer {
     suiteName: string,
     packageName: string
   ): void {
-    this.suiteMap.set(suiteName, databaseName)
-    this.dataMap.set(suiteName, { [packageName]: {} })
+    if (!this.data[databaseName]) {
+      this.data[databaseName] = {}
+    }
+    if (!this.data[databaseName][suiteName]) {
+      this.data[databaseName][suiteName] = {}
+    }
   }
 
   public override async closeSerializer(): Promise<void> {
     if (this.template) {
+      const styleFile = sass.compileString(
+        redirectedFileRead(
+          'src/BenchmarkUtils/ResultSerializers/HtmlSerializer/style.scss'
+        ),
+        { style: 'compressed' }
+      )
       const dirname = path.dirname(this.outputPath)
       if (!existsSync(dirname)) {
         mkdirSync(dirname, { recursive: true })
@@ -65,10 +84,11 @@ export class HtmlSerializer extends BaseSerializer {
       await writeFile(
         this.outputPath,
         this.template({
-          data: JSON.stringify(Object.fromEntries(this.dataMap)),
+          data: JSON.stringify(this.data),
+          css: styleFile.css,
         })
       )
     }
-    this.dataMap.clear()
+    this.data = {}
   }
 }

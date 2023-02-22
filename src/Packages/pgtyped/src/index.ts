@@ -23,7 +23,7 @@ const destroy = async () => {
 }
 
 const PgTypedPackage: IORMPackage = {
-  name: 'pgtyped',
+  name: 'PgTyped',
   initialize,
   destroy,
   implementations: {
