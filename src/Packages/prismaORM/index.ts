@@ -1,20 +1,27 @@
-// import IORMPackage from 'BenchmarkUtils/interfaces/PackageUtils'
+import IORMPackage from 'BenchmarkUtils/interfaces/PackageUtils'
+import { PrismaClient as PrismaCatDatabase } from './Databases/CatDatabase/generated/client'
+import EntityTraversal from './Benchmarks/EntityTraversal'
+import { DatabaseName } from 'BenchmarkUtils/interfaces/DatabaseUtils'
 
-// const ClientMap = new Map()
+export const clients = {
+  CatDatabase: new PrismaCatDatabase(),
+}
 
-// const initialize = async () => {
-// }
+const initialize = async (databaseName: DatabaseName) => {
+  await clients[databaseName].$connect()
+}
 
-// const destroy = async () => {
-// }
+const destroy = async (databaseName: DatabaseName) => {
+  await clients[databaseName].$disconnect()
+}
 
-// const PgTypedPackage: IORMPackage = {
-//   name: 'PgTyped',
-//   initialize,
-//   destroy,
-//   implementations: {
-//     EntityTraversal,
-//   },
-// }
+const PrismaPackage: IORMPackage = {
+  name: 'PrismaORM',
+  initialize,
+  destroy,
+  implementations: {
+    EntityTraversal,
+  },
+}
 
-// export { PgTypedPackage }
+export { PrismaPackage }

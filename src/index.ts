@@ -7,9 +7,16 @@ import { KnexPackage } from './Packages/knex'
 import { MikroORMPackage } from './Packages/mikroORM'
 import { ObjectionPackage } from './Packages/objection'
 import { PgTypedPackage } from './Packages/pgtyped'
+import { PrismaPackage } from './Packages/prismaORM'
 
 const br = new BenchmarkRunner(
-  [KnexPackage, MikroORMPackage, ObjectionPackage, PgTypedPackage],
+  [
+    KnexPackage,
+    MikroORMPackage,
+    ObjectionPackage,
+    PgTypedPackage,
+    PrismaPackage,
+  ],
   [MvpBench, EntityTraversal],
   [new ConsoleSerializer(), new HtmlSerializer()]
 )

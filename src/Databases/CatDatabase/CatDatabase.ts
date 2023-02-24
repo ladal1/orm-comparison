@@ -1,9 +1,9 @@
-import Database from 'BenchmarkUtils/interfaces/DatabaseUtils'
+import Database, { DatabaseName } from 'BenchmarkUtils/interfaces/DatabaseUtils'
 import { Client } from 'pg'
 import { redirectedFileRead } from 'utils'
 
 export const CatDatabase: Database = {
-  name: 'CatDatabase',
+  name: DatabaseName.CatDatabase,
   setupDatabase: async (client: Client) => {
     const query = redirectedFileRead(
       'src/Databases/CatDatabase/sql/cat-database.sql'

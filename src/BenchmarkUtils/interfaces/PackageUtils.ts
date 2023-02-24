@@ -1,14 +1,15 @@
 import { TestTemplate } from 'BenchmarkUtils/BenchmarkRunner/BenchmarkSuite'
+import { DatabaseName } from './DatabaseUtils'
 
 // Initialize the benchmark, setup connection to the database
-export type InitializeBenchmark = () => Promise<void>
+export type InitializePackage = (databaseName: DatabaseName) => Promise<void>
 
 // Clean workplace, close connection to the database
-export type DestroyBenchmark = () => Promise<void>
+export type DestroyPackage = (databaseName: DatabaseName) => Promise<void>
 
 export default interface IORMPackage {
   name: string
-  initialize: InitializeBenchmark
-  destroy: DestroyBenchmark
+  initialize: InitializePackage
+  destroy: DestroyPackage
   implementations: Record<string, TestTemplate>
 }

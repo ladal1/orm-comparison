@@ -10,7 +10,7 @@ interface DatabaseSuites {
 }
 
 export class BenchmarkRunner {
-  benchmarkSuites: Record<Database['name'], DatabaseSuites> = {}
+  benchmarkSuites: Partial<Record<Database['name'], DatabaseSuites>> = {}
   private readonly utilConnection: Client
 
   constructor(
@@ -48,16 +48,6 @@ export class BenchmarkRunner {
     await database.destroyDatabase(client)
   }
 
-  async runSuite() {
-    for (const benchmark of this.testedPackages) {
-      performance.now()
-      console.log('Testing package: ', benchmark.name)
-      await benchmark.initialize()
-      await benchmark.destroy()
-      console.log('Finished testing package: ', benchmark.name)
-    }
-  }
-
   async run(reporters?: BaseSerializer[]) {
     await this.utilConnection.connect()
     const mergedReporters = [...this.reporters, ...(reporters ?? [])]
@@ -69,7 +59,7 @@ export class BenchmarkRunner {
     )) {
       await this.prepareDatabase(database, this.utilConnection)
       for (const testedPackage of this.testedPackages) {
-        await testedPackage.initialize()
+        await testedPackage.initialize(database.name)
         for (const suite of suites) {
           for (const reporter of mergedReporters) {
             reporter.serializeSuite(
@@ -87,7 +77,7 @@ export class BenchmarkRunner {
             reporter.closeSuite()
           }
         }
-        await testedPackage.destroy()
+        await testedPackage.destroy(database.name)
       }
       await this.teardownDatabase(database, this.utilConnection)
     }
