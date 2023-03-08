@@ -12,6 +12,13 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
-        "sequelize": "^6.28.0"
+        "pg": "^8.9.0",
+        "pg-hstore": "^2.3.4",
+        "reflect-metadata": "^0.1.13",
+        "sequelize": "^6.28.1",
+        "sequelize-typescript": "^2.1.5"
+    },
+    "devDependencies": {
+        "@types/validator": "^13.7.12"
     }
 }
