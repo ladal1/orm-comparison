@@ -1,0 +1,19 @@
+{
+    "name": "@ll/type-orm",
+    "version": "1.0.0",
+    "description": "",
+    "main": "bin/index.js",
+    "scripts": {
+        "compile": "tsc -b",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "eslint": "eslint src/**/**.{ts,tsx}",
+        "eslint:fix": "eslint src/**/**.{ts,tsx} --fix"
+    },
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+        "pg": "^8.9.0",
+        "typeorm": "^0.3.12",
+        "typeorm-naming-strategies": "^4.1.0"
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "name": "@ll/rdb",
+    "version": "1.0.0",
+    "description": "",
+    "main": "bin/index.js",
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+        "zapatos": "^6.1.4"
+    }
+}

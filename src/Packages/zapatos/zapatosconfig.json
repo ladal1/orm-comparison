@@ -1,0 +1,6 @@
+{
+    "db": {
+      "connectionString": "postgresql://benchmark:benchmark_pwd@localhost:5432/benchmark"
+    },
+    "outDir": "./Databases"
+  }
