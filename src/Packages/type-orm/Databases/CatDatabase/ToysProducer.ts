@@ -4,14 +4,14 @@ import { Toy } from './Toy'
 @Entity()
 export class ToysProducer {
   @PrimaryGeneratedColumn()
-  id: number
+  declare id: number
 
   @Column({ type: 'jsonb' })
-  stockInfo: Record<string, any>
+  declare stockInfo: Record<string, any>
 
   @Column({ type: 'json' })
-  hqLocation: Record<string, any>
+  declare hqLocation: Record<string, any>
 
   @OneToMany(() => Toy, toy => toy.toysProducer)
-  toys: Toy[]
+  declare toys: Toy[]
 }

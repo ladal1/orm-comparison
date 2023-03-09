@@ -4,11 +4,11 @@ import { CatColor } from './CatColor'
 @Entity()
 export class ColorHex {
   @PrimaryGeneratedColumn()
-  id: number
+  declare id: number
 
   @Column()
-  hexCode: string
+  declare hexCode: string
 
   @OneToMany(() => CatColor, catColor => catColor.colorHex)
-  catColors: CatColor[]
+  declare catColors: CatColor[]
 }

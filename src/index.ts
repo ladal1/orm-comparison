@@ -8,9 +8,10 @@ import { KnexPackage } from './Packages/knex'
 import { MikroORMPackage } from './Packages/mikro-orm'
 import { ObjectionPackage } from './Packages/objection'
 import { PgTypedPackage } from './Packages/pgtyped'
-import { PrismaPackage } from './prisma-orm'
-import { TypeORMPackage } from './type-orm'
+import { PrismaPackage } from './Packages/prisma-orm'
+import { TypeORMPackage } from './Packages/type-orm'
 import { SequelizePackage } from './Packages/sequelize'
+import { ZapatosPackage } from './Packages/zapatos'
 
 const br = new BenchmarkRunner(
   [
@@ -19,8 +20,9 @@ const br = new BenchmarkRunner(
     // ObjectionPackage,
     // PgTypedPackage,
     // PrismaPackage,
-    SequelizePackage,
+    // SequelizePackage,
     // TypeORMPackage,
+    ZapatosPackage,
   ],
   [EntityTraversal],
   [new ConsoleSerializer(), new HtmlSerializer()]

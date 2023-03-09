@@ -11,26 +11,26 @@ import { ToysProducer } from './ToysProducer'
 @Entity()
 export class Toy {
   @PrimaryGeneratedColumn()
-  id: number
+  declare id: number
 
   @Column()
-  toyName: string
+  declare toyName: string
 
   @Column()
-  barcode: string
+  declare barcode: string
 
   @Column()
-  price: number
+  declare price: number
 
   @Column()
-  currency: string
+  declare currency: string
 
   @Column()
-  naughty: string
+  declare naughty: string
 
   @OneToMany(() => ToyHouse, toyHouse => toyHouse.toy)
-  toyHouses: ToyHouse[]
+  declare toyHouses: ToyHouse[]
 
   @ManyToOne(() => ToysProducer, toysProducer => toysProducer.toys)
-  toysProducer: ToysProducer
+  declare toysProducer: ToysProducer
 }

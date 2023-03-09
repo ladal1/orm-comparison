@@ -5,14 +5,14 @@ import { House } from './House'
 @Entity()
 export class ToyHouse {
   @PrimaryGeneratedColumn()
-  id: number
+  declare id: number
 
   @Column()
-  amount: number
+  declare amount: number
 
   @ManyToOne(() => Toy, toy => toy.toyHouses)
-  toy: Toy
+  declare toy: Toy
 
   @ManyToOne(() => House, house => house.toyHouses)
-  house: House
+  declare house: House
 }

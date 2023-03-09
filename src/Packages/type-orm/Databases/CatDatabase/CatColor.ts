@@ -12,15 +12,15 @@ import { ColorHex } from './ColorHex'
 @Entity()
 export class CatColor {
   @PrimaryGeneratedColumn()
-  id: number
+  declare id: number
 
   @Column()
-  colorName: string
+  declare colorName: string
 
   @OneToMany(() => Cat, cat => cat.catColor)
-  cats: Cat[]
+  declare cats: Cat[]
 
   @ManyToOne(() => ColorHex)
   @JoinColumn({ name: 'id' })
-  colorHex: ColorHex
+  declare colorHex: ColorHex
 }

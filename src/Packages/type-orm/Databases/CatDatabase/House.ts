@@ -12,13 +12,13 @@ import { ToyHouse } from './ToyHouse'
 @Entity()
 export class House {
   @PrimaryGeneratedColumn()
-  id: number
+  declare id: number
 
   @Column()
-  houseAddress: string
+  declare houseAddress: string
 
   @Column()
-  hasDog: boolean
+  declare hasDog: boolean
 
   @ManyToMany(() => Cat, cat => cat.houses)
   @JoinTable({
@@ -26,8 +26,8 @@ export class House {
     //  joinColumn: 'house_id',
     //  inverseJoinColumn: 'cat_id',
   })
-  cats: Cat[]
+  declare cats: Cat[]
 
   @OneToMany(() => ToyHouse, toyHouse => toyHouse.house)
-  toyHouses: ToyHouse[]
+  declare toyHouses: ToyHouse[]
 }

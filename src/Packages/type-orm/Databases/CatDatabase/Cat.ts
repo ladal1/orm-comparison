@@ -11,17 +11,17 @@ import { House } from './House'
 @Entity()
 export class Cat {
   @PrimaryGeneratedColumn()
-  id: number
+  declare id: number
 
   @Column()
-  catName: string
+  declare catName: string
 
   @Column()
-  dateOfBirth: Date
+  declare dateOfBirth: Date
 
   @ManyToOne(() => CatColor, catColor => catColor.cats)
-  catColor: CatColor
+  declare catColor: CatColor
 
   @ManyToMany(() => House, house => house.cats)
-  houses: House[]
+  declare houses: House[]
 }

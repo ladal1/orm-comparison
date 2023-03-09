@@ -1,29 +1,31 @@
 {
-  "include": ["./src/**/*", "./src/*"],
-  "compilerOptions": {
-    /* Basic Options */
-    "target": "ES2022" /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', or 'ESNEXT'. */,
-    "module": "NodeNext" /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */,
-    "lib": [
-      "ES2020",
-      "dom"
-    ] /* Specify library files to be included in the compilation:  */,
-    "allowJs": true /* Allow javascript files to be compiled. */,
-    "incremental": false /* Enable incremental compilation */,
-    "sourceMap": true /* Generates corresponding '.map' file. */,
-    "outDir": "dist" /* Redirect output structure to the directory. */,
-    "rootDirs": ["src", "src/benchmark", "src/Packages"],
-    "noEmit": false /* Do not emit outputs. */,
-    /* Strict Type-Checking Options */
-    "strict": true /* Enable all strict type-checking options. */,
-    /* Module Resolution Options */
-    "moduleResolution": "node" /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */,
-    "baseUrl": "src" /* Base directory to resolve non-absolute module names. */,
-    "resolveJsonModule": true,
-    "useUnknownInCatchVariables": false,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "esModuleInterop": true,
-    "strictNullChecks": false // Needed to be disabled for Objection.js due to change in TS 4.8
+    "include": ["./src/**/*", "./src/*"],
+    "exclude": ["./src/Packages/objection/", "./src/Packages/objection/**/*"],
+    "compilerOptions": {
+      /* Basic Options */
+      "target": "ES2022" /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', or 'ESNEXT'. */,
+      "module": "NodeNext" /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */,
+      "lib": [
+        "ES2020",
+        "dom"
+      ] /* Specify library files to be included in the compilation:  */,
+      "allowJs": true /* Allow javascript files to be compiled. */,
+      "incremental": false /* Enable incremental compilation */,
+      "sourceMap": true /* Generates corresponding '.map' file. */,
+      "outDir": "dist" /* Redirect output structure to the directory. */,
+      "rootDirs": ["src", "src/benchmark", "src/Packages"],
+      "noEmit": false /* Do not emit outputs. */,
+      /* Strict Type-Checking Options */
+      "strict": true /* Enable all strict type-checking options. */,
+      /* Module Resolution Options */
+      "moduleResolution": "node" /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */,
+      "baseUrl": "src" /* Base directory to resolve non-absolute module names. */,
+      "resolveJsonModule": true,
+      "useUnknownInCatchVariables": false,
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "esModuleInterop": true,
+      "strictNullChecks": false // Needed to be disabled for Objection.js due to change in TS 4.8
+    }
   }
-}
+  

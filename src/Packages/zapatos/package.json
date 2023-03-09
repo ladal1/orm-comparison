@@ -12,6 +12,7 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
+        "pg": "^8.10.0",
         "zapatos": "^6.1.4"
     }
 }
