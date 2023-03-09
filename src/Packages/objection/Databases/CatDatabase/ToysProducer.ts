@@ -2,9 +2,9 @@
 import { Model } from 'objection'
 
 export class ToysProducer extends Model {
-  id: number
-  stockInfo: Record<string, any>
-  hqLocation: Record<string, any>
+  declare id: number
+  declare stockInfo: Record<string, any>
+  declare hqLocation: Record<string, any>
 
   static get tableName() {
     return 'toysProducer'

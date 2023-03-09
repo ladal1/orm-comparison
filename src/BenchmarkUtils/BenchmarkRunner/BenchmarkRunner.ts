@@ -36,7 +36,7 @@ export class BenchmarkRunner {
         suites: [],
       }
     }
-    this.benchmarkSuites[benchmark.database.name].suites.push(benchmark)
+    this.benchmarkSuites[benchmark.database.name]?.suites.push(benchmark)
   }
 
   public async prepareDatabase(database: Database, client: Client) {

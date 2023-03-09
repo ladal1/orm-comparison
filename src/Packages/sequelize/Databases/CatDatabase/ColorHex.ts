@@ -16,7 +16,7 @@ export class ColorHex extends Model {
   declare id: number
 
   @BelongsTo(() => CatColor)
-  catColor: CatColor
+  declare catColor: CatColor
 
   @Column
   declare hexCode: string

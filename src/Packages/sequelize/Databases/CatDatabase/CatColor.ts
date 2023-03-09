@@ -8,8 +8,8 @@ export class CatColor extends Model {
   declare colorName: string
 
   @HasMany(() => Cat)
-  cats: Cat[]
+  declare cats: Cat[]
 
   @HasOne(() => ColorHex)
-  colorHex: ColorHex
+  declare colorHex: ColorHex
 }

@@ -27,12 +27,12 @@ export class Toy extends Model {
   declare naughty: string
 
   @HasMany(() => ToyHouse)
-  toyHouses: ToyHouse[]
+  declare toyHouses: ToyHouse[]
 
   @ForeignKey(() => ToysProducer)
   @Column
   declare toysProducerId: number
 
   @BelongsTo(() => ToysProducer)
-  toysProducer: ToysProducer
+  declare toysProducer: ToysProducer
 }

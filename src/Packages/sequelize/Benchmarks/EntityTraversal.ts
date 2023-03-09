@@ -13,7 +13,7 @@ const EntityTraversal: EntityTraversalTest = {
       include: [{ model: CatColor, include: [ColorHex] }],
     }).then(cat =>
       cat
-        .getDataValue('catColor')
+        ?.getDataValue('catColor')
         .getDataValue('colorHex')
         .getDataValue('hexCode')
     )

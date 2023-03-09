@@ -25,8 +25,8 @@ export class ToyHouse extends Model {
   declare houseId: number
 
   @BelongsTo(() => Toy)
-  toy: Toy
+  declare toy: Toy
 
   @BelongsTo(() => House)
-  house: House
+  declare house: House
 }

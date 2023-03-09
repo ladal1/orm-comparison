@@ -14,7 +14,7 @@ const EntityTraversal: EntityTraversalTest = {
           },
         },
       })
-      .then(cat => cat.catColor.colorHex.hexCode)
+      .then(cat => cat?.catColor.colorHex.hexCode ?? '')
   },
   countCatsByColor: async hexColor => {
     return BenchDataSource.getRepository(Cat).count({

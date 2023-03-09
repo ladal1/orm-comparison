@@ -12,6 +12,7 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
+        "@types/objection": "file:objection-types-fix",
         "objection": "^3.0.1"
     }
 }

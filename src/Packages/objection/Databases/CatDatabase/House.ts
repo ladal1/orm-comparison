@@ -2,9 +2,9 @@
 import { Model } from 'objection'
 
 export class House extends Model {
-  id: number
-  houseAddress: string
-  hasDog: boolean
+  declare id: number
+  declare houseAddress: string
+  declare hasDog: boolean
 
   static get tableName() {
     return 'house'

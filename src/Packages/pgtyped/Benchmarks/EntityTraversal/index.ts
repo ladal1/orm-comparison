@@ -15,7 +15,7 @@ const EntityTraversal: EntityTraversalTest = {
   countCatsByColor: async hexCode => {
     return countCatsByColor
       .run({ hexCode }, getClient())
-      .then(result => +result[0].count)
+      .then(result => Number(result[0].count))
   },
   getToysAvailableToCat: async catId => {
     return getToysAvailableToCat

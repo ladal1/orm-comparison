@@ -19,12 +19,12 @@ export class Cat extends Model {
   declare dateOfBirth: Date
 
   @BelongsTo(() => CatColor)
-  catColor: CatColor
+  declare catColor: CatColor
 
   @ForeignKey(() => CatColor)
   @Column
   declare catColorId: number
 
   @BelongsToMany(() => House, () => HouseCat)
-  houses: Array<House & { HouseCat: HouseCat }>
+  declare houses: Array<House & { HouseCat: HouseCat }>
 }

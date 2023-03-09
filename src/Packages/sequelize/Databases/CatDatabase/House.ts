@@ -18,8 +18,8 @@ export class House extends Model {
   declare hasDog: boolean
 
   @BelongsToMany(() => Cat, () => HouseCat)
-  cats: Array<Cat & { HouseCat: HouseCat }>
+  declare cats: Array<Cat & { HouseCat: HouseCat }>
 
   @HasMany(() => ToyHouse)
-  toyHouses: ToyHouse[]
+  declare toyHouses: ToyHouse[]
 }

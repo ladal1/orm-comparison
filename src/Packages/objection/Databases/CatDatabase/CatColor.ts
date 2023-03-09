@@ -4,8 +4,8 @@ import { ColorHex } from './ColorHex'
 import { Cat } from './Cat'
 
 export class CatColor extends Model {
-  id: number
-  name: string
+  declare id: number
+  declare name: string
   colorHex?: ColorHex
   cats?: Cat[]
 
