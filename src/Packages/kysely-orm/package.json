@@ -6,6 +6,6 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
-        "zapatos": "^6.1.4"
+        "kysely-orm": "^0.7.41"
     }
 }

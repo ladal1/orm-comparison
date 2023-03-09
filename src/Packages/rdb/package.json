@@ -6,6 +6,6 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
-        "zapatos": "^6.1.4"
+        "rdb": "^3.1.5"
     }
 }
