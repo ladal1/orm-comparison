@@ -13,6 +13,8 @@
 // * Karl Blomster <https://github.com/kblomster>
 // * And many others: See <https://github.com/Vincit/objection.js/blob/master/typings/objection/index.d.ts>
 
+// * Minimally changed by: Ladislav Louka <https://github.com/ladal1>
+
 import { Options as AjvOptions, Ajv } from 'ajv';
 import * as dbErrors from 'db-errors';
 import { Knex } from 'knex';
