@@ -1,13 +1,9 @@
 import type { Knex } from 'knex'
+import defaultConfig from 'config'
 
 const config: Knex.Config = {
   client: 'pg',
-  connection: {
-    host: 'localhost',
-    user: 'benchmark',
-    password: 'benchmark_pwd',
-    database: 'benchmark',
-  },
+  connection: defaultConfig.database.url,
   migrations: {
     directory: './migrations',
   },

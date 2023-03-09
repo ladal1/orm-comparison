@@ -1,6 +1,7 @@
 import { Client } from 'pg'
 import EntityTraversal from './Benchmarks/EntityTraversal'
 import IORMPackage from 'BenchmarkUtils/interfaces/PackageUtils'
+import config from 'config'
 
 let _client: Client
 
@@ -9,12 +10,7 @@ export const getClient = () => {
 }
 
 const initialize = async () => {
-  _client = new Client({
-    host: 'localhost',
-    user: 'benchmark',
-    password: 'benchmark_pwd',
-    database: 'benchmark',
-  })
+  _client = new Client(config.database)
   await _client.connect()
 }
 

@@ -3,6 +3,7 @@ import type { PostgreSqlDriver, SqlEntityManager } from '@mikro-orm/postgresql'
 import EntityTraversal from './Benchmarks/EntityTraversal'
 import IORMPackage from 'BenchmarkUtils/interfaces/PackageUtils'
 import 'reflect-metadata'
+import config from 'config'
 
 let mikroORM: MikroORM<PostgreSqlDriver>
 const contextMap = new Map()
@@ -12,11 +13,12 @@ const initialize = async () => {
     metadataProvider: ReflectMetadataProvider,
     entitiesTs: ['./src/Packages/mikroORM/Databases/CatDatabase'], // path to our TS entities (src), relative to `baseDir`
     entities: ['./dist/Packages/mikroORM/Databases/CatDatabase'], // path to our JS entities (dist), relative to `baseDir`
-    dbName: 'benchmark',
+    dbName: config.database.name,
     type: 'postgresql',
-    user: 'benchmark',
-    password: 'benchmark_pwd',
-    host: 'localhost',
+    user: config.database.username,
+    password: config.database.password,
+    host: config.database.host,
+    port: config.database.port,
     entityGenerator: {
       bidirectionalRelations: true,
     },

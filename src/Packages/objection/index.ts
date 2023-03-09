@@ -2,16 +2,12 @@ import { Model, knexSnakeCaseMappers } from 'objection'
 import knex from 'knex'
 import IORMPackage from 'BenchmarkUtils/interfaces/PackageUtils'
 import EntityTraversal from './Benchmarks/EntityTraversal'
+import config from 'config'
 
 const initialize = async () => {
   const _knex = knex({
     client: 'pg',
-    connection: {
-      host: 'localhost',
-      user: 'benchmark',
-      password: 'benchmark_pwd',
-      database: 'benchmark',
-    },
+    connection: config.database,
     ...knexSnakeCaseMappers(),
   })
 

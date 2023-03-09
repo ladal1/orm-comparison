@@ -2,16 +2,14 @@ import IORMPackage from 'BenchmarkUtils/interfaces/PackageUtils'
 import path from 'path'
 import { Sequelize } from 'sequelize-typescript'
 import EntityTraversal from './Benchmarks/EntityTraversal'
+import config from 'config'
 
 let _sequelize: Sequelize | null = null
 
 const initialize = async (database: string) => {
   _sequelize = new Sequelize({
     dialect: 'postgres',
-    host: 'localhost',
-    username: 'benchmark',
-    password: 'benchmark_pwd',
-    database: 'benchmark',
+    ...config.database,
     models: [path.join(__dirname, 'Databases', database)],
     logging: false,
   })

@@ -1,0 +1,13 @@
+{
+    "name": "@ll/databases-pg",
+    "version": "1.0.0",
+    "description": "",
+    "main": "bin/index.js",
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+        "@databases/pg": "^5.4.1",
+        "@databases/pg-schema-cli": "^4.3.1",
+        "@databases/pg-typed": "^4.4.0"
+    }
+}
