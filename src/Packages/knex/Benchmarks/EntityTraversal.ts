@@ -1,7 +1,7 @@
-import { EntityTraversalTest } from 'Benchmarks/EntityTraversal'
+import { EntityTraversalBenchmark } from 'Benchmarks/EntityTraversal'
 import { knexInstance } from '..'
 
-const EntityTraversal: EntityTraversalTest = {
+const EntityTraversal: EntityTraversalBenchmark = {
   getCatColor: async id => {
     return knexInstance
       .select<{ hex_code: string }>('hex_code')

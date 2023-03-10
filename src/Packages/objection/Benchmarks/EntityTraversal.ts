@@ -1,8 +1,8 @@
-import { EntityTraversalTest } from 'Benchmarks/EntityTraversal'
+import { EntityTraversalBenchmark } from 'Benchmarks/EntityTraversal'
 import { Cat } from '../Databases/CatDatabase/Cat'
 import { Toy } from '../Databases/CatDatabase/Toy'
 
-const EntityTraversal: EntityTraversalTest = {
+const EntityTraversal: EntityTraversalBenchmark = {
   getCatColor: async id => {
     return Cat.query()
       .findById(id)

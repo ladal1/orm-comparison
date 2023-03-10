@@ -1,7 +1,7 @@
-import { EntityTraversalTest } from 'Benchmarks/EntityTraversal'
+import { EntityTraversalBenchmark } from 'Benchmarks/EntityTraversal'
 import { clients } from '..'
 
-const EntityTraversal: EntityTraversalTest = {
+const EntityTraversal: EntityTraversalBenchmark = {
   getCatColor: async id => {
     return clients.CatDatabase.cat
       .findUnique({

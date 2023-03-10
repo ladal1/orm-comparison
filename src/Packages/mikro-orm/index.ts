@@ -15,7 +15,7 @@ const initialize = async () => {
     entities: ['./dist/Packages/mikroORM/Databases/CatDatabase'], // path to our JS entities (dist), relative to `baseDir`
     dbName: config.database.name,
     type: 'postgresql',
-    user: config.database.username,
+    user: config.database.user,
     password: config.database.password,
     host: config.database.host,
     port: config.database.port,

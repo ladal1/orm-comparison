@@ -1,4 +1,4 @@
-import { EntityTraversalTest } from 'Benchmarks/EntityTraversal'
+import { EntityTraversalBenchmark } from 'Benchmarks/EntityTraversal'
 import { getClient } from '../..'
 import {
   countCatsByColor,
@@ -6,7 +6,7 @@ import {
   getToysAvailableToCat,
 } from './EntityTraversal.queries'
 
-const EntityTraversal: EntityTraversalTest = {
+const EntityTraversal: EntityTraversalBenchmark = {
   getCatColor: async catId => {
     return getCatColorById
       .run({ catId }, getClient())

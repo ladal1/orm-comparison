@@ -1,9 +1,9 @@
 import * as db from 'zapatos/db'
 import type * as schema from 'zapatos/schema'
 import { pgPool } from '..'
-import { EntityTraversalTest } from 'Benchmarks/EntityTraversal'
+import { EntityTraversalBenchmark } from 'Benchmarks/EntityTraversal'
 
-const EntityTraversal: EntityTraversalTest = {
+const EntityTraversal: EntityTraversalBenchmark = {
   getCatColor: async id => {
     return db
       .selectOne('cat', db.all, {

@@ -5,13 +5,13 @@ import {
 import { CatDatabase } from 'Databases/CatDatabase/CatDatabase'
 import assert from 'assert/strict'
 
-export interface EntityTraversalTest extends TestTemplate {
+export interface EntityTraversalBenchmark extends TestTemplate {
   getCatColor: (id: number) => Promise<string>
   countCatsByColor: (hex_color: string) => Promise<number>
   getToysAvailableToCat: (id: number) => Promise<string[]>
 }
 
-export const EntityTraversal = new BenchmarkSuite<EntityTraversalTest>(
+export const EntityTraversal = new BenchmarkSuite<EntityTraversalBenchmark>(
   'EntityTraversal',
   CatDatabase,
   {
@@ -20,7 +20,7 @@ export const EntityTraversal = new BenchmarkSuite<EntityTraversalTest>(
       referenceCheck: async (data: string) => {
         assert.equal(data, '#ff8b28')
       },
-      call: (implementation: EntityTraversalTest['getCatColor']) => () =>
+      call: (implementation: EntityTraversalBenchmark['getCatColor']) => () =>
         implementation(1),
       testLatency: true,
       testThroughput: true,
@@ -31,8 +31,9 @@ export const EntityTraversal = new BenchmarkSuite<EntityTraversalTest>(
       referenceCheck: async (data: number) => {
         assert.equal(data, 23)
       },
-      call: (implementation: EntityTraversalTest['countCatsByColor']) => () =>
-        implementation('#ff8b28'),
+      call:
+        (implementation: EntityTraversalBenchmark['countCatsByColor']) => () =>
+          implementation('#ff8b28'),
       testLatency: true,
       testThroughput: true,
       throughputIterations: 1000,
@@ -43,7 +44,8 @@ export const EntityTraversal = new BenchmarkSuite<EntityTraversalTest>(
         assert.deepEqual(data, ['Ball', 'Mouse'])
       },
       call:
-        (implementation: EntityTraversalTest['getToysAvailableToCat']) => () =>
+        (implementation: EntityTraversalBenchmark['getToysAvailableToCat']) =>
+        () =>
           implementation(1),
       testLatency: true,
       testThroughput: true,
