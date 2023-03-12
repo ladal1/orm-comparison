@@ -1,0 +1,17 @@
+{
+    "name": "@ll/rdb",
+    "version": "1.0.0",
+    "description": "",
+    "main": "bin/index.js",
+    "scripts": {
+        "compile": "tsc -b",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "eslint": "eslint src/**/**.{ts,tsx}",
+        "eslint:fix": "eslint src/**/**.{ts,tsx} --fix"
+    },
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+        "rdb": "^3.1.5"
+    }
+}
