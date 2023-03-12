@@ -2,9 +2,9 @@
 import { Model } from 'objection'
 
 export class ToyHouse extends Model {
-  toyId: number
-  houseId: number
-  amount: number
+  declare toyId: number
+  declare houseId: number
+  declare amount: number
 
   static get tableName() {
     return 'toyHouse'

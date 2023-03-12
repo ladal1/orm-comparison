@@ -13,18 +13,20 @@ import { PrismaPackage } from './Packages/prisma-orm'
 import { TypeORMPackage } from './Packages/type-orm'
 import { SequelizePackage } from './Packages/sequelize'
 import { ZapatosPackage } from './Packages/zapatos'
+import { DatabasesPackage } from './Packages/databases-pg'
 
 const br = new BenchmarkRunner(
   [
+    DatabasesPackage,
     KnexPackage,
-    // MikroORMPackage,
-    // ObjectionPackage,
-    // PgTypedPackage,
-    // PrismaPackage,
-    // SequelizePackage,
-    // TypeORMPackage,
-    // ZapatosPackage,
-    // KyselyPackage,
+    KyselyPackage,
+    MikroORMPackage,
+    ObjectionPackage,
+    PgTypedPackage,
+    PrismaPackage,
+    SequelizePackage,
+    TypeORMPackage,
+    ZapatosPackage,
   ],
   [EntityTraversal],
   [new ConsoleSerializer(), new HtmlSerializer()]

@@ -9,9 +9,13 @@ let _sequelize: Sequelize | null = null
 const initialize = async (database: string) => {
   _sequelize = new Sequelize({
     dialect: 'postgres',
-    ...config.database,
     models: [path.join(__dirname, 'Databases', database)],
     logging: false,
+    host: config.database.host,
+    port: config.database.port,
+    username: config.database.user,
+    password: config.database.password,
+    database: config.database.name,
   })
   await _sequelize.authenticate()
 }

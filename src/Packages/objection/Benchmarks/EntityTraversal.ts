@@ -17,7 +17,6 @@ const EntityTraversal: EntityTraversalBenchmark = {
       .joinRelated('catColor.colorHex')
       .where('hex_code', hexColor)
       .first()
-      .toKnexQuery()
       .then((result: any) => Number(result.count))
   },
   getToysAvailableToCat: async (id: number) => {

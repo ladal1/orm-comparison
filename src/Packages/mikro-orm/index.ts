@@ -11,8 +11,8 @@ const contextMap = new Map()
 const initialize = async () => {
   mikroORM = await MikroORM.init<PostgreSqlDriver>({
     metadataProvider: ReflectMetadataProvider,
-    entitiesTs: ['./src/Packages/mikroORM/Databases/CatDatabase'], // path to our TS entities (src), relative to `baseDir`
-    entities: ['./dist/Packages/mikroORM/Databases/CatDatabase'], // path to our JS entities (dist), relative to `baseDir`
+    entitiesTs: ['./src/Packages/mikro-orm/Databases/CatDatabase'], // path to our TS entities (src), relative to `baseDir`
+    entities: ['./dist/Packages/mikro-orm/Databases/CatDatabase'], // path to our JS entities (dist), relative to `baseDir`
     dbName: config.database.name,
     type: 'postgresql',
     user: config.database.user,

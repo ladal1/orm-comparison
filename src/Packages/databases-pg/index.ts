@@ -1,11 +1,22 @@
 import createConnectionPool, { ConnectionPool } from '@databases/pg'
 import IORMPackage from 'BenchmarkUtils/interfaces/PackageUtils'
 import config from 'config'
+import tables from '@databases/pg-typed'
+import DatabaseSchema from './Databases/CatDatabase'
+import EntityTraversal from './Benchmarks/EntityTraversal'
+import DatabaseSchemaJson from './Databases/CatDatabase/schema.json'
 
 let dbPool: ConnectionPool
+let dbTables: ReturnType<typeof tables<DatabaseSchema>>
 
 const initialize = async (database: string) => {
-  dbPool = createConnectionPool(config.database.url)
+  dbPool = createConnectionPool({
+    connectionString: config.database.url,
+    bigIntMode: 'string',
+  })
+  dbTables = tables<DatabaseSchema>({
+    databaseSchema: DatabaseSchemaJson,
+  })
 }
 
 const destroy = async () => {
@@ -16,7 +27,9 @@ export const DatabasesPackage: IORMPackage = {
   name: '@Databases/Pg',
   initialize,
   destroy,
-  implementations: {},
+  implementations: {
+    EntityTraversal,
+  },
 }
 
-export { dbPool as pgPoolInstance }
+export { dbPool as db, dbTables }

@@ -1,6 +1,5 @@
 {
-    "include": ["./src/**/*", "./src/*", "src/Packages/objection/types-fix/index.d.ts"],
-    "exclude": ["./src/Packages/objection/*", "./src/Packages/objection/**/*"],
+    "include": ["./src/**/*", "./src/*"],
     "compilerOptions": {
       /* Basic Options */
       "target": "ES2022" /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', or 'ESNEXT'. */,
