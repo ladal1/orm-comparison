@@ -38,6 +38,9 @@ export class Toy {
   @Property({ length: 256, nullable: true })
   naughty?: string
 
+  @Property({ columnType: 'timestamptz', nullable: true })
+  declare date_introduced: Date
+
   @OneToMany({ entity: () => ToyHouse, mappedBy: 'toy' })
   houseToys = new Collection<ToyHouse>(this)
 }

@@ -31,10 +31,10 @@ declare module 'zapatos/schema' {
     export interface Selectable {
       /**
        * **cat.id**
-       * - `int4` in database
+       * - `int8` in database
        * - `NOT NULL`, default: `nextval('cat_id_seq'::regclass)`
        */
-      id: number
+      id: db.Int8String
       /**
        * **cat.cat_color_id**
        * - `int4` in database
@@ -57,7 +57,7 @@ declare module 'zapatos/schema' {
     export interface JSONSelectable {
       /**
        * **cat.id**
-       * - `int4` in database
+       * - `int8` in database
        * - `NOT NULL`, default: `nextval('cat_id_seq'::regclass)`
        */
       id: number
@@ -83,17 +83,20 @@ declare module 'zapatos/schema' {
     export interface Whereable {
       /**
        * **cat.id**
-       * - `int4` in database
+       * - `int8` in database
        * - `NOT NULL`, default: `nextval('cat_id_seq'::regclass)`
        */
       id?:
-        | number
-        | db.Parameter<number>
+        | (number | db.Int8String)
+        | db.Parameter<number | db.Int8String>
         | db.SQLFragment
         | db.ParentColumn
         | db.SQLFragment<
             any,
-            number | db.Parameter<number> | db.SQLFragment | db.ParentColumn
+            | (number | db.Int8String)
+            | db.Parameter<number | db.Int8String>
+            | db.SQLFragment
+            | db.ParentColumn
           >
       /**
        * **cat.cat_color_id**
@@ -144,10 +147,14 @@ declare module 'zapatos/schema' {
     export interface Insertable {
       /**
        * **cat.id**
-       * - `int4` in database
+       * - `int8` in database
        * - `NOT NULL`, default: `nextval('cat_id_seq'::regclass)`
        */
-      id?: number | db.Parameter<number> | db.DefaultType | db.SQLFragment
+      id?:
+        | (number | db.Int8String)
+        | db.Parameter<number | db.Int8String>
+        | db.DefaultType
+        | db.SQLFragment
       /**
        * **cat.cat_color_id**
        * - `int4` in database
@@ -185,17 +192,20 @@ declare module 'zapatos/schema' {
     export interface Updatable {
       /**
        * **cat.id**
-       * - `int4` in database
+       * - `int8` in database
        * - `NOT NULL`, default: `nextval('cat_id_seq'::regclass)`
        */
       id?:
-        | number
-        | db.Parameter<number>
+        | (number | db.Int8String)
+        | db.Parameter<number | db.Int8String>
         | db.DefaultType
         | db.SQLFragment
         | db.SQLFragment<
             any,
-            number | db.Parameter<number> | db.DefaultType | db.SQLFragment
+            | (number | db.Int8String)
+            | db.Parameter<number | db.Int8String>
+            | db.DefaultType
+            | db.SQLFragment
           >
       /**
        * **cat.cat_color_id**
@@ -862,6 +872,12 @@ declare module 'zapatos/schema' {
        */
       currency: string
       /**
+       * **toy.date_introduced**
+       * - `timestamptz` in database
+       * - `NOT NULL`, default: `now()`
+       */
+      date_introduced: Date
+      /**
        * **toy.naughty**
        * - `varchar` in database
        * - Nullable, no default
@@ -905,6 +921,12 @@ declare module 'zapatos/schema' {
        * - `NOT NULL`, no default
        */
       currency: string
+      /**
+       * **toy.date_introduced**
+       * - `timestamptz` in database
+       * - `NOT NULL`, default: `now()`
+       */
+      date_introduced: db.TimestampTzString
       /**
        * **toy.naughty**
        * - `varchar` in database
@@ -998,6 +1020,23 @@ declare module 'zapatos/schema' {
             string | db.Parameter<string> | db.SQLFragment | db.ParentColumn
           >
       /**
+       * **toy.date_introduced**
+       * - `timestamptz` in database
+       * - `NOT NULL`, default: `now()`
+       */
+      date_introduced?:
+        | (db.TimestampTzString | Date)
+        | db.Parameter<db.TimestampTzString | Date>
+        | db.SQLFragment
+        | db.ParentColumn
+        | db.SQLFragment<
+            any,
+            | (db.TimestampTzString | Date)
+            | db.Parameter<db.TimestampTzString | Date>
+            | db.SQLFragment
+            | db.ParentColumn
+          >
+      /**
        * **toy.naughty**
        * - `varchar` in database
        * - Nullable, no default
@@ -1054,6 +1093,16 @@ declare module 'zapatos/schema' {
        * - `NOT NULL`, no default
        */
       currency: string | db.Parameter<string> | db.SQLFragment
+      /**
+       * **toy.date_introduced**
+       * - `timestamptz` in database
+       * - `NOT NULL`, default: `now()`
+       */
+      date_introduced?:
+        | (db.TimestampTzString | Date)
+        | db.Parameter<db.TimestampTzString | Date>
+        | db.DefaultType
+        | db.SQLFragment
       /**
        * **toy.naughty**
        * - `varchar` in database
@@ -1140,6 +1189,23 @@ declare module 'zapatos/schema' {
         | db.Parameter<string>
         | db.SQLFragment
         | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment>
+      /**
+       * **toy.date_introduced**
+       * - `timestamptz` in database
+       * - `NOT NULL`, default: `now()`
+       */
+      date_introduced?:
+        | (db.TimestampTzString | Date)
+        | db.Parameter<db.TimestampTzString | Date>
+        | db.DefaultType
+        | db.SQLFragment
+        | db.SQLFragment<
+            any,
+            | (db.TimestampTzString | Date)
+            | db.Parameter<db.TimestampTzString | Date>
+            | db.DefaultType
+            | db.SQLFragment
+          >
       /**
        * **toy.naughty**
        * - `varchar` in database

@@ -1,7 +1,7 @@
 import { Generated } from 'kysely'
 
 interface CatTable {
-  id: Generated<number>
+  id: Generated<bigint>
   cat_name: string
   cat_color_id: number
   date_of_birth: Date

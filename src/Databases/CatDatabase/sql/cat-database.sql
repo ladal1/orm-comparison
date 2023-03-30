@@ -58,7 +58,7 @@ ALTER TABLE toys_producer ADD CONSTRAINT pk_toys_producer PRIMARY KEY (id);
 
 CREATE TABLE house_cat (
     house_id INTEGER NOT NULL,
-    cat_id INTEGER NOT NULL
+    cat_id BIGINT NOT NULL
 );
 ALTER TABLE house_cat ADD CONSTRAINT pk_house_cat PRIMARY KEY (house_id, cat_id);
 

@@ -26,6 +26,9 @@ export class Toy extends Model {
   @Column
   declare naughty: string
 
+  @Column
+  declare date_introduced: Date
+
   @HasMany(() => ToyHouse)
   declare toyHouses: ToyHouse[]
 

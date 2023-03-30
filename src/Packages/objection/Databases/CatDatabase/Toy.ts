@@ -13,6 +13,7 @@ export class Toy extends Model {
   toysProducerId!: number
   toysProducer?: ToysProducer
   houses?: House[]
+  date_introduced!: Date
 
   static get tableName() {
     return 'toy'
@@ -34,6 +35,7 @@ export class Toy extends Model {
         price: { type: 'integer' },
         naugthy: { type: 'string' },
         barcode: { type: 'string' },
+        date_introduced: { type: 'date' },
       },
     }
   }

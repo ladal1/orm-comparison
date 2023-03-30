@@ -28,6 +28,9 @@ export class Toy {
   @Column()
   declare naughty: string
 
+  @Column()
+  declare date_introduced: Date
+
   @OneToMany(() => ToyHouse, toyHouse => toyHouse.toy)
   declare toyHouses: ToyHouse[]
 
