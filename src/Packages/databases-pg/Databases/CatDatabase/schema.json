@@ -27,8 +27,8 @@
         "name": "id",
         "isNullable": false,
         "hasDefault": true,
-        "typeId": 23,
-        "typeName": "INTEGER"
+        "typeId": 20,
+        "typeName": "BIGINT"
       }
     ]
   },
@@ -131,6 +131,13 @@
         "hasDefault": false,
         "typeId": 1043,
         "typeName": "VARCHAR"
+      },
+      {
+        "name": "date_introduced",
+        "isNullable": false,
+        "hasDefault": true,
+        "typeId": 1184,
+        "typeName": "TIMESTAMPTZ"
       },
       {
         "name": "id",

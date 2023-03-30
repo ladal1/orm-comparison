@@ -3206,7 +3206,7 @@ insert into cat (id, cat_color_id, cat_name, date_of_birth) values (2997, 91, 'F
 insert into cat (id, cat_color_id, cat_name, date_of_birth) values (2998, 8, 'Crééz', '8/1/2006');
 insert into cat (id, cat_color_id, cat_name, date_of_birth) values (2999, 13, 'Kallisté', '11/4/2013');
 insert into cat (id, cat_color_id, cat_name, date_of_birth) values (3000, 89, 'Marie-noël', '1/9/2015');
-
+insert into cat (id, cat_color_id, cat_name, date_of_birth) values (9223372036854775800, 10, 'Johnny Bignumber', '0001-12-24');
 
 -- insert houses
 

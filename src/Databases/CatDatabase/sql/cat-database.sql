@@ -16,7 +16,7 @@ CREATE TABLE cat_color (
 ALTER TABLE cat_color ADD CONSTRAINT pk_cat_color PRIMARY KEY (id);
 
 CREATE TABLE cat (
-    id SERIAL NOT NULL,
+    id BIGSERIAL NOT NULL,
     cat_color_id INTEGER,
     cat_name VARCHAR(256),
     date_of_birth DATE
@@ -43,6 +43,7 @@ CREATE TABLE toy (
     barcode VARCHAR(256) NOT NULL,
     price NUMERIC NOT NULL,
     currency VARCHAR NOT NULL CHECK (LENGTH(currency) < 6),
+    date_introduced TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
     naughty VARCHAR(256) NULL
 );
 ALTER TABLE toy ADD CONSTRAINT pk_toy PRIMARY KEY (id);
