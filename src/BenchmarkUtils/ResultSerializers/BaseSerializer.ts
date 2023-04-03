@@ -1,5 +1,8 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { TestValidationResult } from 'BenchmarkUtils/BenchmarkRunner/BenchmarkSuite'
+import {
+  TestType,
+  TestValidationResult,
+} from 'BenchmarkUtils/BenchmarkRunner/BenchmarkSuite'
 
 export abstract class BaseSerializer {
   public async openSerializer() {}
@@ -9,7 +12,7 @@ export abstract class BaseSerializer {
     suiteName: string,
     testName: string,
     packageName: string,
-    testType: 'Latency' | 'Throughput',
+    testType: TestType,
     testResult: TestValidationResult
   ): void
 

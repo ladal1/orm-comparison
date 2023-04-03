@@ -168,7 +168,7 @@
         suiteHeader.innerText = testSuite;
         suiteContainer.appendChild(suiteHeader);
 
-        ["Latency", "Throughput"].map(testType => {
+        ["Validity", "Latency"].map(testType => {
           const testTypeContainer = document.createElement('div')
           testTypeContainer.id = `testTypeContainer-${database}-${testSuite}-${testType}`
           testTypeContainer.classList.add('testTypeContainer')

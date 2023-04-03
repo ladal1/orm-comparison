@@ -31,7 +31,7 @@ ALTER TABLE color_hex ADD CONSTRAINT pk_color_hex PRIMARY KEY (id);
 
 CREATE TABLE house (
     id SERIAL NOT NULL,
-    house_address VARCHAR(256),
+    house_address VARCHAR,
     has_dog BOOLEAN NULL
 );
 ALTER TABLE house ADD CONSTRAINT pk_house PRIMARY KEY (id);

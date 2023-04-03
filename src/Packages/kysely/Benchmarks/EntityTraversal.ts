@@ -9,7 +9,7 @@ const EntityTraversal: EntityTraversalBenchmark = {
       .innerJoin('cat_color', 'cat.cat_color_id', 'cat_color.id')
       .innerJoin('color_hex', 'color_hex.id', 'cat_color.id')
       .select('color_hex.hex_code')
-      .where('cat.id', '=', id)
+      .where('cat.id', '=', BigInt(id))
       .executeTakeFirst()
       .then(data => data?.hex_code ?? '')
   },

@@ -20,9 +20,9 @@ export const MvpBench = new BenchmarkSuite<sampleTest>(
         assert.deepEqual(data, true)
       },
       call: implementationFn => () => implementationFn(),
+      testValidity: true,
       testLatency: true,
-      testThroughput: true,
-      throughputIterations: 1000,
+      latencyIterations: 1000,
     },
     secondTest: {
       testName: 'MvpBench 2',
@@ -30,9 +30,9 @@ export const MvpBench = new BenchmarkSuite<sampleTest>(
         assert.deepEqual(data, true)
       },
       call: implementationFn => () => implementationFn(),
+      testValidity: true,
       testLatency: true,
-      testThroughput: true,
-      throughputIterations: 1000,
+      latencyIterations: 1000,
     },
     throwTest: {
       testName: 'MvpBench 3 - throw',
@@ -40,7 +40,7 @@ export const MvpBench = new BenchmarkSuite<sampleTest>(
         assert.deepEqual(data, true)
       },
       call: implementationFn => () => implementationFn(),
-      testLatency: true,
+      testValidity: true,
     },
     assertionFailTest: {
       testName: 'MvpBench 4 - assertion fail',
@@ -48,7 +48,7 @@ export const MvpBench = new BenchmarkSuite<sampleTest>(
         assert.deepEqual(data, false)
       },
       call: implementationFn => () => implementationFn(),
-      testLatency: true,
+      testValidity: true,
     },
     skippedTest: {
       testName: 'MvpBench 5 - skipped',
@@ -56,7 +56,7 @@ export const MvpBench = new BenchmarkSuite<sampleTest>(
         assert.deepEqual(data, true)
       },
       call: implementationFn => () => implementationFn(),
-      testLatency: true,
+      testValidity: true,
     },
   }
 )

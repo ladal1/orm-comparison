@@ -22,9 +22,9 @@ export const EntityTraversal = new BenchmarkSuite<EntityTraversalBenchmark>(
       },
       call: (implementation: EntityTraversalBenchmark['getCatColor']) => () =>
         implementation(1),
+      testValidity: true,
       testLatency: true,
-      testThroughput: true,
-      throughputIterations: 1000,
+      latencyIterations: 1000,
     },
     countCatsByColor: {
       testName: 'Count all cats by color hex',
@@ -34,9 +34,9 @@ export const EntityTraversal = new BenchmarkSuite<EntityTraversalBenchmark>(
       call:
         (implementation: EntityTraversalBenchmark['countCatsByColor']) => () =>
           implementation('#ff8b28'),
+      testValidity: true,
       testLatency: true,
-      testThroughput: true,
-      throughputIterations: 1000,
+      latencyIterations: 1000,
     },
     getToysAvailableToCat: {
       testName: 'Get all toys available to a cat',
@@ -47,9 +47,9 @@ export const EntityTraversal = new BenchmarkSuite<EntityTraversalBenchmark>(
         (implementation: EntityTraversalBenchmark['getToysAvailableToCat']) =>
         () =>
           implementation(1),
+      testValidity: true,
       testLatency: true,
-      testThroughput: true,
-      throughputIterations: 1000,
+      latencyIterations: 1000,
     },
   }
 )

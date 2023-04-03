@@ -4,19 +4,24 @@ import { sum } from 'lodash'
 import { Skipped } from '.'
 import { BaseSerializer } from 'BenchmarkUtils/ResultSerializers/BaseSerializer'
 
+export enum TestType {
+  LATENCY = 'Latency',
+  VALIDITY = 'Validity',
+}
+
 type TestOptions = {
   testName: string
   call: (implementation: ImplementationFn) => () => Promise<any>
   referenceCheck: (data?: any) => Promise<void>
-} & (ThroughputTest | TestLatency)
+} & (LatencyTest | TestValidity)
 
-interface ThroughputTest {
-  testThroughput: true
-  throughputIterations: number
+interface LatencyTest {
+  testLatency: true
+  latencyIterations: number
 }
 
-interface TestLatency {
-  testLatency: true
+interface TestValidity {
+  testValidity: true
 }
 
 type ImplementationFn = (...args: any[]) => Promise<any>
@@ -34,7 +39,7 @@ export enum TestResult {
 
 export interface TestValidationResult {
   result: TestResult
-  testType?: 'Latency' | 'Throughput'
+  testType?: TestType
   time?: number
   error?: Error
   runtimes?: number[]
@@ -81,7 +86,7 @@ export class BenchmarkSuite<T extends TestTemplate> {
     return { result: TestResult.ERROR, testType }
   }
 
-  public async runLatencyImplementation(
+  public async runValidityImplementation(
     implementationFn: () => Promise<any>,
     validationFn: (data?: any) => Promise<void>
   ): Promise<TestValidationResult> {
@@ -92,11 +97,11 @@ export class BenchmarkSuite<T extends TestTemplate> {
       await validationFn(data)
       return { result: TestResult.PASS, time: finishTime - startTime }
     } catch (e) {
-      return this.errorHandler(e, 'Latency')
+      return this.errorHandler(e, TestType.VALIDITY)
     }
   }
 
-  public async runThroughputImplementation(
+  public async runLatencyImplementation(
     implementationFn: () => Promise<any>,
     validationFn: (data?: any) => Promise<void>,
     iterations: number
@@ -108,7 +113,7 @@ export class BenchmarkSuite<T extends TestTemplate> {
         const data = await implementationFn()
         await validationFn(data)
       } catch (e) {
-        return this.errorHandler(e, 'Throughput')
+        return this.errorHandler(e, TestType.LATENCY)
       }
     }
     for (let i = 0; i < iterations; i++) {
@@ -117,10 +122,49 @@ export class BenchmarkSuite<T extends TestTemplate> {
         await implementationFn()
         runtimes.push(performance.now() - startTime)
       } catch (e) {
-        return this.errorHandler(e, 'Throughput')
+        return this.errorHandler(e, TestType.LATENCY)
       }
     }
     return { result: TestResult.PASS, time: sum(runtimes), runtimes }
+  }
+
+  public async runTestValidity(
+    implementation: T,
+    implementationName: string,
+    reporters: BaseSerializer[]
+  ) {
+    for (const [testName, test] of Object.entries(this.tests)) {
+      if (!('testLatency' in test)) {
+        continue
+      }
+      if (!implementation?.[testName]) {
+        for (const reporter of reporters) {
+          reporter.serializeTest(
+            this.database.name,
+            this.name,
+            testName,
+            implementationName,
+            TestType.VALIDITY,
+            { result: TestResult.NOT_IMPLEMENTED }
+          )
+        }
+        continue
+      }
+      const result = await this.runValidityImplementation(
+        test.call(implementation[testName]),
+        test.referenceCheck
+      )
+      for (const reporter of reporters) {
+        reporter.serializeTest(
+          this.database.name,
+          this.name,
+          testName,
+          implementationName,
+          TestType.VALIDITY,
+          result
+        )
+      }
+    }
   }
 
   public async runTestLatency(
@@ -139,7 +183,7 @@ export class BenchmarkSuite<T extends TestTemplate> {
             this.name,
             testName,
             implementationName,
-            'Latency',
+            TestType.LATENCY,
             { result: TestResult.NOT_IMPLEMENTED }
           )
         }
@@ -147,47 +191,8 @@ export class BenchmarkSuite<T extends TestTemplate> {
       }
       const result = await this.runLatencyImplementation(
         test.call(implementation[testName]),
-        test.referenceCheck
-      )
-      for (const reporter of reporters) {
-        reporter.serializeTest(
-          this.database.name,
-          this.name,
-          testName,
-          implementationName,
-          'Latency',
-          result
-        )
-      }
-    }
-  }
-
-  public async runTestThroughput(
-    implementation: T,
-    implementationName: string,
-    reporters: BaseSerializer[]
-  ) {
-    for (const [testName, test] of Object.entries(this.tests)) {
-      if (!('testThroughput' in test)) {
-        continue
-      }
-      if (!implementation?.[testName]) {
-        for (const reporter of reporters) {
-          reporter.serializeTest(
-            this.database.name,
-            this.name,
-            testName,
-            implementationName,
-            'Throughput',
-            { result: TestResult.NOT_IMPLEMENTED }
-          )
-        }
-        continue
-      }
-      const result = await this.runThroughputImplementation(
-        test.call(implementation[testName]),
         test.referenceCheck,
-        test.throughputIterations
+        test.latencyIterations
       )
       for (const reporter of reporters) {
         reporter.serializeTest(
@@ -195,7 +200,7 @@ export class BenchmarkSuite<T extends TestTemplate> {
           this.name,
           testName,
           implementationName,
-          'Throughput',
+          TestType.LATENCY,
           result
         )
       }
@@ -207,10 +212,10 @@ export class BenchmarkSuite<T extends TestTemplate> {
     implementationName: string,
     reporters: BaseSerializer[]
   ) {
-    await this.runTestLatency(implementation, implementationName, reporters)
+    await this.runTestValidity(implementation, implementationName, reporters)
     for (const reporter of reporters) {
       reporter.separateTestType()
     }
-    await this.runTestThroughput(implementation, implementationName, reporters)
+    await this.runTestLatency(implementation, implementationName, reporters)
   }
 }
