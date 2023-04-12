@@ -1,5 +1,4 @@
 /* @name getCatColorById */
-
 SELECT
   hex_code
 FROM
@@ -10,7 +9,6 @@ WHERE
     cat.id = :catId;
 
 /* @name countCatsByColor */
-
 SELECT
   COUNT(*)
 FROM
@@ -30,4 +28,3 @@ FROM
   JOIN house_cat ON house_cat.house_id = house.id
 WHERE
   house_cat.cat_id = :catId;
-  

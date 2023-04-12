@@ -11,7 +11,7 @@ const EntityTraversal: EntityTraversalBenchmark = {
         FROM cat
         INNER JOIN cat_color AS cc ON cat.cat_color_id=cc.id
         INNER JOIN color_hex ON color_hex.id=cc.id
-        WHERE ${dbTables.cat(db).conditionToSql({ id }, 'cat')}`
+        WHERE ${dbTables.cat(db).conditionToSql({ id: BigInt(id) }, 'cat')}`
       )
       .then(r => r[0].hex_code)
   },
@@ -41,7 +41,7 @@ const EntityTraversal: EntityTraversalBenchmark = {
     JOIN toy_house ON toy_house.toy_id = toy.id
     JOIN house ON house.id = toy_house.house_id
     JOIN house_cat ON house_cat.house_id = house.id
-    WHERE ${dbTables.house_cat(db).conditionToSql({ cat_id: id })}`
+    WHERE ${dbTables.house_cat(db).conditionToSql({ cat_id: BigInt(id) })}`
       )
       .then(r => r.map(d => d.toy_name))
   },

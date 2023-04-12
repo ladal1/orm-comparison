@@ -3,6 +3,7 @@ import Database from 'BenchmarkUtils/interfaces/DatabaseUtils'
 import { sum } from 'lodash'
 import { Skipped } from '.'
 import { BaseSerializer } from 'BenchmarkUtils/ResultSerializers/BaseSerializer'
+import { Client } from 'pg'
 
 export enum TestType {
   LATENCY = 'Latency',
@@ -12,6 +13,7 @@ export enum TestType {
 type TestOptions = {
   testName: string
   call: (implementation: ImplementationFn) => () => Promise<any>
+  reset?: (pg: Client) => Promise<void>
   referenceCheck: (data?: any) => Promise<void>
 } & (LatencyTest | TestValidity)
 
@@ -88,13 +90,15 @@ export class BenchmarkSuite<T extends TestTemplate> {
 
   public async runValidityImplementation(
     implementationFn: () => Promise<any>,
-    validationFn: (data?: any) => Promise<void>
+    validationFn: (data?: any) => Promise<void>,
+    resetFn: () => Promise<void>
   ): Promise<TestValidationResult> {
     try {
       const startTime = performance.now()
       const data = await implementationFn()
       const finishTime = performance.now()
       await validationFn(data)
+      await resetFn()
       return { result: TestResult.PASS, time: finishTime - startTime }
     } catch (e) {
       return this.errorHandler(e, TestType.VALIDITY)
@@ -104,6 +108,7 @@ export class BenchmarkSuite<T extends TestTemplate> {
   public async runLatencyImplementation(
     implementationFn: () => Promise<any>,
     validationFn: (data?: any) => Promise<void>,
+    resetFn: () => Promise<void>,
     iterations: number
   ): Promise<TestValidationResult> {
     const runtimes = []
@@ -121,6 +126,7 @@ export class BenchmarkSuite<T extends TestTemplate> {
         const startTime = performance.now()
         await implementationFn()
         runtimes.push(performance.now() - startTime)
+        await resetFn()
       } catch (e) {
         return this.errorHandler(e, TestType.LATENCY)
       }
@@ -131,10 +137,11 @@ export class BenchmarkSuite<T extends TestTemplate> {
   public async runTestValidity(
     implementation: T,
     implementationName: string,
-    reporters: BaseSerializer[]
+    reporters: BaseSerializer[],
+    utilityConnection: Client
   ) {
     for (const [testName, test] of Object.entries(this.tests)) {
-      if (!('testLatency' in test)) {
+      if (!('testValidity' in test)) {
         continue
       }
       if (!implementation?.[testName]) {
@@ -152,7 +159,13 @@ export class BenchmarkSuite<T extends TestTemplate> {
       }
       const result = await this.runValidityImplementation(
         test.call(implementation[testName]),
-        test.referenceCheck
+        test.referenceCheck,
+        () => {
+          if (test.reset) {
+            return test.reset(utilityConnection)
+          }
+          return Promise.resolve()
+        }
       )
       for (const reporter of reporters) {
         reporter.serializeTest(
@@ -170,7 +183,8 @@ export class BenchmarkSuite<T extends TestTemplate> {
   public async runTestLatency(
     implementation: T,
     implementationName: string,
-    reporters: BaseSerializer[]
+    reporters: BaseSerializer[],
+    utilityConnection: Client
   ) {
     for (const [testName, test] of Object.entries(this.tests)) {
       if (!('testLatency' in test)) {
@@ -192,6 +206,12 @@ export class BenchmarkSuite<T extends TestTemplate> {
       const result = await this.runLatencyImplementation(
         test.call(implementation[testName]),
         test.referenceCheck,
+        () => {
+          if (test.reset) {
+            return test.reset(utilityConnection)
+          }
+          return Promise.resolve()
+        },
         test.latencyIterations
       )
       for (const reporter of reporters) {
@@ -210,12 +230,33 @@ export class BenchmarkSuite<T extends TestTemplate> {
   public async runSuite(
     implementation: T,
     implementationName: string,
-    reporters: BaseSerializer[]
+    reporters: BaseSerializer[],
+    utilityConnection: Client
   ) {
-    await this.runTestValidity(implementation, implementationName, reporters)
+    for (const reporter of reporters) {
+      reporter.serializeSuite(
+        this.database.name,
+        this.getName(),
+        implementationName
+      )
+    }
+    await this.runTestValidity(
+      implementation,
+      implementationName,
+      reporters,
+      utilityConnection
+    )
     for (const reporter of reporters) {
       reporter.separateTestType()
     }
-    await this.runTestLatency(implementation, implementationName, reporters)
+    await this.runTestLatency(
+      implementation,
+      implementationName,
+      reporters,
+      utilityConnection
+    )
+    for (const reporter of reporters) {
+      reporter.closeSuite()
+    }
   }
 }

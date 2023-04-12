@@ -4,6 +4,8 @@ import { HtmlSerializer } from 'BenchmarkUtils/ResultSerializers/HtmlSerializer'
 import { BenchmarkRunner } from './BenchmarkUtils/BenchmarkRunner'
 import { MvpBench } from './Benchmarks/SampleBenchmark'
 import { EntityTraversal } from 'Benchmarks/EntityTraversal'
+import { SpecialSQLActions } from 'Benchmarks/SpecialSQLActions'
+
 import { KnexPackage } from './Packages/knex'
 import { KyselyPackage } from './Packages/kysely'
 import { MikroORMPackage } from './Packages/mikro-orm'
@@ -28,7 +30,11 @@ const br = new BenchmarkRunner(
     TypeORMPackage,
     ZapatosPackage,
   ],
-  [EntityTraversal],
+  [
+    // MvpBench,
+    //  EntityTraversal,
+    SpecialSQLActions,
+  ],
   [new ConsoleSerializer(), new HtmlSerializer()]
 )
 

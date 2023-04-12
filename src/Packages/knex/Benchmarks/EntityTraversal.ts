@@ -24,7 +24,7 @@ const EntityTraversal: EntityTraversalBenchmark = {
   },
   getToysAvailableToCat: async (id: number) => {
     return knexInstance
-      .select('toy.toy_name')
+      .select<Array<{ toy_name: string }>>('toy.toy_name')
       .from('toy')
       .join('toy_house', 'toy_house.toy_id', 'toy.id')
       .join('house_cat', 'house_cat.house_id', 'toy_house.house_id')

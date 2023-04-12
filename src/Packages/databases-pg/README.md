@@ -2,6 +2,6 @@
 
 create types files
 ```shell
-npx @databases/pg-schema-cli --database postgresql://benchmark:benchmark_pwd@localhost:5432/benchmark --directory ./Databases/<Database name>/__generated__
+npx @databases/pg-schema-cli --database postgresql://benchmark:benchmark_pwd@localhost:5432/benchmark --config ./config.json --directory ./Databases/<Database name>
 ```
 

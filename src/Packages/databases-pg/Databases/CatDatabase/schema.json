@@ -103,8 +103,8 @@
         "name": "cat_id",
         "isNullable": false,
         "hasDefault": false,
-        "typeId": 23,
-        "typeName": "INTEGER"
+        "typeId": 20,
+        "typeName": "BIGINT"
       },
       {
         "name": "house_id",

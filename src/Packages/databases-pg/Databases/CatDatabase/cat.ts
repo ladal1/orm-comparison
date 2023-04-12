@@ -17,7 +17,7 @@ interface Cat {
   /**
    * @default nextval('cat_id_seq'::regclass)
    */
-  id: number & { readonly __brand?: 'cat_id' }
+  id: bigint & { readonly __brand?: 'cat_id' }
 }
 export default Cat
 

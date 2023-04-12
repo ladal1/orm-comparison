@@ -6319,7 +6319,7 @@ insert into house_cat (house_id, cat_id) values (1, 1);
 insert into toys_producer (id, hq_location, stock_info) values (1, '["21 Orange St. Lake Charles, LA 70605"]', '{"ticker": "OH.NO"}');
 insert into toys_producer (id, hq_location, stock_info) values (2, '["70 San Carlos Street Jupiter, FL 33458", "9792 Hillside Ave. Pottstown, PA 19464"]', '{"ticker": "PRG.AI"}');
 insert into toys_producer (id, hq_location, stock_info) values (3, '["9674 Fairview Court Watertown, MA 02472","157 Deerfield Ave. Birmingham, AL 35209"]', '{"ticker": "CVUT.IT"}');
-insert into toys_producer (id, hq_location, stock_info) values (4, '[]', '{"ticker": "VAG.NER"}');
+insert into toys_producer (id, hq_location, stock_info) values (4, '[]', '{"ticker": "VAG.NER", "price": 999.99, "CEO": "L. Vagner"}');
 insert into toys_producer (id, hq_location, stock_info) values (5, '["43 Thompson St. Hillsborough, NJ 08844", "89 Creek St. Fleming Island, FL 32003"]', '{"ticker": "AAG.TI"}');
 insert into toys_producer (id, hq_location, stock_info) values (6, '["694 Sherwood Drive Sulphur, LA 70663"]', '{"ticker": "BI.DBS"}');
 insert into toys_producer (id, hq_location, stock_info) values (7, '["92 South Creekside Ave. Monroeville, PA 15146"]', '{"ticker": "NI.PDB"}');
@@ -6414,6 +6414,7 @@ insert into toy (id, barcode, price, currency, toy_name, toys_producer_id, naugh
 insert into toy (id, barcode, price, currency, toy_name, toys_producer_id, naughty) values (72, '100000000000', 100.0, 'USD', 'Ball', 1, '1/0');
 insert into toy (id, barcode, price, currency, toy_name, toys_producer_id, naughty) values (73, '100000000001', 100.0, 'USD', 'Mouse', 1, '1/0');
 
+insert into toy_house (house_id, toy_id, amount) values (1, 73, 8);
 insert into toy_house (house_id, toy_id, amount) values (1, 72, 5);
 insert into toy_house (house_id, toy_id, amount) values (413, 73, 1);
 insert into toy_house (house_id, toy_id, amount) values (143, 41, 5);

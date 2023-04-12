@@ -4,6 +4,7 @@ import config from 'config'
 import tables from '@databases/pg-typed'
 import DatabaseSchema from './Databases/CatDatabase'
 import EntityTraversal from './Benchmarks/EntityTraversal'
+import SpecialSQLActions from './Benchmarks/SpecialSQLActions'
 import DatabaseSchemaJson from './Databases/CatDatabase/schema.json'
 
 let dbPool: ConnectionPool
@@ -12,7 +13,7 @@ let dbTables: ReturnType<typeof tables<DatabaseSchema>>
 const initialize = async (database: string) => {
   dbPool = createConnectionPool({
     connectionString: config.database.url,
-    bigIntMode: 'string',
+    bigIntMode: 'bigint',
   })
   dbTables = tables<DatabaseSchema>({
     databaseSchema: DatabaseSchemaJson,
@@ -29,6 +30,7 @@ export const DatabasesPackage: IORMPackage = {
   destroy,
   implementations: {
     EntityTraversal,
+    SpecialSQLActions,
   },
 }
 

@@ -61,21 +61,12 @@ export class BenchmarkRunner {
       for (const testedPackage of this.testedPackages) {
         await testedPackage.initialize(database.name)
         for (const suite of suites) {
-          for (const reporter of mergedReporters) {
-            reporter.serializeSuite(
-              suite.database.name,
-              suite.getName(),
-              testedPackage.name
-            )
-          }
           await suite.runSuite(
             testedPackage.implementations[suite.getName()],
             testedPackage.name,
-            mergedReporters
+            mergedReporters,
+            this.utilConnection
           )
-          for (const reporter of mergedReporters) {
-            reporter.closeSuite()
-          }
         }
         await testedPackage.destroy(database.name)
       }

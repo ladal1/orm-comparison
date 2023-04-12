@@ -1,9 +1,9 @@
-/** Types generated for queries found in "src/Benchmarks/EntityTraversal/EntityTraversal.sql" */
+/** Types generated for queries found in "Benchmarks/EntityTraversal/EntityTraversal.sql" */
 import { PreparedQuery } from '@pgtyped/runtime'
 
 /** 'GetCatColorById' parameters type */
 export interface IGetCatColorByIdParams {
-  catId?: number | null | void
+  catId?: string | null | void
 }
 
 /** 'GetCatColorById' return type */
@@ -99,7 +99,7 @@ export const countCatsByColor = new PreparedQuery<
 
 /** 'GetToysAvailableToCat' parameters type */
 export interface IGetToysAvailableToCatParams {
-  catId?: number | null | void
+  catId?: string | null | void
 }
 
 /** 'GetToysAvailableToCat' return type */

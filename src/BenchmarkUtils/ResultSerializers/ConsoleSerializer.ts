@@ -93,7 +93,7 @@ class ConsoleSerializer extends BaseSerializer {
     packageName: string
   ): void {
     console.log('\n')
-    console.log(`  ${databaseName} - ${suiteName}`)
+    console.log(`  ${databaseName} - ${suiteName} (${packageName})`)
     this.tableBorder()
     this.tableHeader()
     this.tableBorder()
@@ -107,7 +107,7 @@ class ConsoleSerializer extends BaseSerializer {
         chalk.red(
           `   ${testName} ${testType ? '(' + testType + ') ' : ''}- ${
             (error?.name ?? '') + ': '
-          } ${message.replace(/\n/g, '')}`
+          } ${message}`
         )
       )
     }

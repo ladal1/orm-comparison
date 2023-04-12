@@ -1,5 +1,6 @@
 import { Client } from 'pg'
 import EntityTraversal from './Benchmarks/EntityTraversal'
+import SpecialSQLActions from './Benchmarks/SpecialSQLActions'
 import IORMPackage from 'BenchmarkUtils/interfaces/PackageUtils'
 import config from 'config'
 
@@ -24,6 +25,7 @@ const PgTypedPackage: IORMPackage = {
   destroy,
   implementations: {
     EntityTraversal,
+    SpecialSQLActions,
   },
 }
 
