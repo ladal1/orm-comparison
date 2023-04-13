@@ -5,6 +5,7 @@ import { BenchmarkRunner } from './BenchmarkUtils/BenchmarkRunner'
 import { MvpBench } from './Benchmarks/SampleBenchmark'
 import { EntityTraversal } from 'Benchmarks/EntityTraversal'
 import { SpecialSQLActions } from 'Benchmarks/SpecialSQLActions'
+import { EdgeCases } from 'Benchmarks/EdgeCases'
 
 import { KnexPackage } from './Packages/knex'
 import { KyselyPackage } from './Packages/kysely'
@@ -32,8 +33,9 @@ const br = new BenchmarkRunner(
   ],
   [
     // MvpBench,
-    //  EntityTraversal,
+    // EntityTraversal,
     SpecialSQLActions,
+    EdgeCases,
   ],
   [new ConsoleSerializer(), new HtmlSerializer()]
 )

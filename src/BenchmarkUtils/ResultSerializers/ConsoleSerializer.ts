@@ -79,12 +79,15 @@ class ConsoleSerializer extends BaseSerializer {
     )
   }
 
-  public separateTestType(): void {
-    this.tableBorder()
-    console.log('\n')
+  public startTestType(): void {
     this.tableBorder()
     this.tableHeader()
     this.tableBorder()
+  }
+
+  public closeTestType(): void {
+    this.tableBorder()
+    console.log('\n')
   }
 
   public serializeSuite(
@@ -92,16 +95,10 @@ class ConsoleSerializer extends BaseSerializer {
     databaseName: string,
     packageName: string
   ): void {
-    console.log('\n')
     console.log(`  ${databaseName} - ${suiteName} (${packageName})`)
-    this.tableBorder()
-    this.tableHeader()
-    this.tableBorder()
   }
 
   public async closeSuite(): Promise<void> {
-    this.tableBorder()
-    console.log('\n')
     for (const { testName, message, error, testType } of this.errorBuffer) {
       console.log(
         chalk.red(
@@ -112,7 +109,6 @@ class ConsoleSerializer extends BaseSerializer {
       )
     }
     this.errorBuffer.length = 0
-    console.log('\n')
   }
 }
 

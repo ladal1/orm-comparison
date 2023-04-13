@@ -15,15 +15,20 @@ type TestOptions = {
   call: (implementation: ImplementationFn) => () => Promise<any>
   reset?: (pg: Client) => Promise<void>
   referenceCheck: (data?: any) => Promise<void>
-} & (LatencyTest | TestValidity)
+} & LatencyTest &
+  TestValidity
 
-interface LatencyTest {
-  testLatency: true
-  latencyIterations: number
-}
+type LatencyTest =
+  | {
+      testLatency: true
+      latencyIterations: number
+    }
+  | {
+      testLatency?: false
+    }
 
 interface TestValidity {
-  testValidity: true
+  testValidity?: boolean
 }
 
 type ImplementationFn = (...args: any[]) => Promise<any>
@@ -49,6 +54,8 @@ export interface TestValidationResult {
 
 export class BenchmarkSuite<T extends TestTemplate> {
   tests: Record<string | symbol | number, TestOptions> = {}
+  _hasValidityTests = false
+  _hasLatencyTests = false
   constructor(
     private readonly name: string,
     public readonly database: Database,
@@ -63,6 +70,8 @@ export class BenchmarkSuite<T extends TestTemplate> {
 
   public addTest(testId: keyof T, TestOptions: TestOptions) {
     this.tests[testId] = TestOptions
+    if (TestOptions.testLatency) this._hasLatencyTests = true
+    if (TestOptions.testValidity) this._hasValidityTests = true
   }
 
   public addTests(tests: Partial<{ [k in keyof T]: TestOptions }>) {
@@ -187,7 +196,7 @@ export class BenchmarkSuite<T extends TestTemplate> {
     utilityConnection: Client
   ) {
     for (const [testName, test] of Object.entries(this.tests)) {
-      if (!('testLatency' in test)) {
+      if (!('testLatency' in test) || !('latencyIterations' in test)) {
         continue
       }
       if (!implementation?.[testName]) {
@@ -240,21 +249,34 @@ export class BenchmarkSuite<T extends TestTemplate> {
         implementationName
       )
     }
-    await this.runTestValidity(
-      implementation,
-      implementationName,
-      reporters,
-      utilityConnection
-    )
-    for (const reporter of reporters) {
-      reporter.separateTestType()
+    if (this._hasValidityTests) {
+      for (const reporter of reporters) {
+        reporter.startTestType(TestType.VALIDITY)
+      }
+      await this.runTestValidity(
+        implementation,
+        implementationName,
+        reporters,
+        utilityConnection
+      )
+      for (const reporter of reporters) {
+        reporter.closeTestType()
+      }
     }
-    await this.runTestLatency(
-      implementation,
-      implementationName,
-      reporters,
-      utilityConnection
-    )
+    if (this._hasLatencyTests) {
+      for (const reporter of reporters) {
+        reporter.startTestType(TestType.LATENCY)
+      }
+      await this.runTestLatency(
+        implementation,
+        implementationName,
+        reporters,
+        utilityConnection
+      )
+      for (const reporter of reporters) {
+        reporter.closeTestType()
+      }
+    }
     for (const reporter of reporters) {
       reporter.closeSuite()
     }

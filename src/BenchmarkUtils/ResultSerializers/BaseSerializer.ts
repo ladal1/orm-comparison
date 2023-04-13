@@ -22,7 +22,9 @@ export abstract class BaseSerializer {
     packageName: string
   ): void
 
-  public separateTestType() {}
+  public startTestType(testType: TestType) {}
+
+  public closeTestType() {}
 
   public async closeSerializer() {}
 
