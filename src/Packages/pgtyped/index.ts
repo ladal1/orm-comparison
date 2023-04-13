@@ -1,8 +1,9 @@
 import { Client } from 'pg'
+import config from 'config'
 import EntityTraversal from './Benchmarks/EntityTraversal'
 import SpecialSQLActions from './Benchmarks/SpecialSQLActions'
 import IORMPackage from 'BenchmarkUtils/interfaces/PackageUtils'
-import config from 'config'
+import EdgeCases from './Benchmarks/EdgeCases'
 
 let _client: Client
 
@@ -26,6 +27,7 @@ const PgTypedPackage: IORMPackage = {
   implementations: {
     EntityTraversal,
     SpecialSQLActions,
+    EdgeCases,
   },
 }
 

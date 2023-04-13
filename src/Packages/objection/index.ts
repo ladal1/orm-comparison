@@ -1,8 +1,10 @@
 import { Model, knexSnakeCaseMappers } from 'objection'
 import knex from 'knex'
+import config from 'config'
 import IORMPackage from 'BenchmarkUtils/interfaces/PackageUtils'
 import EntityTraversal from './Benchmarks/EntityTraversal'
-import config from 'config'
+import EdgeCases from './Benchmarks/EdgeCases'
+import SpecialSQLActions from './Benchmarks/SpecialSQLActions'
 
 const initialize = async () => {
   const _knex = knex({
@@ -24,5 +26,7 @@ export const ObjectionPackage: IORMPackage = {
   destroy,
   implementations: {
     EntityTraversal,
+    EdgeCases,
+    SpecialSQLActions,
   },
 }

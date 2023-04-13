@@ -17,7 +17,7 @@ export class ToyHouse extends Model {
   static get jsonSchema() {
     return {
       type: 'object',
-      required: ['name'],
+      required: ['houseId', 'toyId'],
 
       properties: {
         toyId: { type: 'integer' },
