@@ -6,6 +6,7 @@ import DatabaseSchema from './Databases/CatDatabase'
 import EntityTraversal from './Benchmarks/EntityTraversal'
 import SpecialSQLActions from './Benchmarks/SpecialSQLActions'
 import DatabaseSchemaJson from './Databases/CatDatabase/schema.json'
+import EdgeCases from './Benchmarks/EdgeCases'
 
 let dbPool: ConnectionPool
 let dbTables: ReturnType<typeof tables<DatabaseSchema>>
@@ -31,6 +32,7 @@ export const DatabasesPackage: IORMPackage = {
   implementations: {
     EntityTraversal,
     SpecialSQLActions,
+    EdgeCases,
   },
 }
 

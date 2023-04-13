@@ -84,7 +84,9 @@ export class HtmlSerializer extends BaseSerializer {
       await writeFile(
         this.outputPath,
         this.template({
-          data: JSON.stringify(this.data),
+          data: JSON.stringify(this.data, (_, v) =>
+            typeof v === 'bigint' ? v.toString() : v
+          ),
           css: styleFile.css,
         })
       )

@@ -1,10 +1,12 @@
 import { Pool } from 'pg'
 import { Kysely, PostgresDialect } from 'kysely'
 import config from 'config'
+import { omit } from 'lodash'
 import CatDatabase from './Database/CatDatabase'
 import IORMPackage from 'BenchmarkUtils/interfaces/PackageUtils'
 import EntityTraversal from './Benchmarks/EntityTraversal'
-import { omit } from 'lodash'
+import SpecialSQLActions from './Benchmarks/SpecialSQLActions'
+import EdgeCases from './Benchmarks/EdgeCases'
 
 export let kyselyInstance: Kysely<CatDatabase>
 
@@ -26,5 +28,7 @@ export const KyselyPackage: IORMPackage = {
   destroy,
   implementations: {
     EntityTraversal,
+    SpecialSQLActions,
+    EdgeCases,
   },
 }

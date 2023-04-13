@@ -6414,7 +6414,7 @@ insert into toy (id, barcode, price, currency, toy_name, toys_producer_id, naugh
 insert into toy (id, barcode, price, currency, toy_name, toys_producer_id, naughty) values (72, '100000000000', 100.0, 'USD', 'Ball', 1, '1/0');
 insert into toy (id, barcode, price, currency, toy_name, toys_producer_id, naughty) values (73, '100000000001', 100.0, 'USD', 'Mouse', 1, '1/0');
 
-insert into toy_house (house_id, toy_id, amount) values (1, 73, 8);
+insert into toy_house (house_id, toy_id, amount) values (2, 73, 8);
 insert into toy_house (house_id, toy_id, amount) values (1, 72, 5);
 insert into toy_house (house_id, toy_id, amount) values (413, 73, 1);
 insert into toy_house (house_id, toy_id, amount) values (143, 41, 5);

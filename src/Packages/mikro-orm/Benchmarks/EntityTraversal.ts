@@ -6,7 +6,11 @@ import { Toy } from '../Databases/CatDatabase/Toy'
 const EntityTraversal: EntityTraversalBenchmark = {
   getCatColor: async id => {
     return getEntityManager('EntityTraversal')
-      .findOneOrFail(Cat, id, { populate: ['catColor.colorHex'] })
+      .findOneOrFail(
+        Cat,
+        { id: id.toString() },
+        { populate: ['catColor.colorHex'] }
+      )
       .then(cat => cat.catColor?.colorHex?.hexCode ?? '')
   },
   countCatsByColor: async (hexColor: string) => {
@@ -16,7 +20,7 @@ const EntityTraversal: EntityTraversalBenchmark = {
   },
   getToysAvailableToCat: async (id: number) => {
     return getEntityManager('EntityTraversal')
-      .find(Toy, { houseToys: { house: { cats: { id } } } })
+      .find(Toy, { houseToys: { house: { cats: { id: id.toString() } } } })
       .then(toys => toys.map(toy => toy.toyName))
   },
 }

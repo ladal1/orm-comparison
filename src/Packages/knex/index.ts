@@ -1,9 +1,10 @@
 import knex, { Knex } from 'knex'
 import config from './knexfile'
+import IORMPackage from 'BenchmarkUtils/interfaces/PackageUtils'
 import MvpBench from './Benchmarks/SampleBenchmark'
 import EntityTraversal from './Benchmarks/EntityTraversal'
 import SpecialSQLActions from './Benchmarks/SpecialSQLActions'
-import IORMPackage from 'BenchmarkUtils/interfaces/PackageUtils'
+import EdgeCases from './Benchmarks/EdgeCases'
 
 let _knex: Knex
 
@@ -25,6 +26,7 @@ export const KnexPackage: IORMPackage = {
     MvpBench,
     EntityTraversal,
     SpecialSQLActions,
+    EdgeCases,
   },
 }
 

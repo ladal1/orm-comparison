@@ -8,4 +8,11 @@ class Skipped extends Error {
   }
 }
 
-export { BenchmarkRunner, BenchmarkSuite, Skipped }
+class NotSupported extends Error {
+  constructor(message?: string) {
+    super(message)
+    this.name = 'The operation is not supported'
+  }
+}
+
+export { BenchmarkRunner, BenchmarkSuite, Skipped, NotSupported }

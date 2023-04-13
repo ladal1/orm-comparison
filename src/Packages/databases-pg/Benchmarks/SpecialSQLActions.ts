@@ -1,7 +1,7 @@
 import { SpecialSQLActionsBenchmark } from 'Benchmarks/SpecialSQLActions'
 import { db, dbTables } from '..'
 import { sql } from '@databases/pg'
-import { Skipped } from 'BenchmarkUtils/BenchmarkRunner'
+import { jsonPath } from '@databases/pg-typed'
 
 const SpecialSQLActions: SpecialSQLActionsBenchmark = {
   upsertToysToHouse: async ({ houseId, toyId, amount }) => {
@@ -22,16 +22,34 @@ const SpecialSQLActions: SpecialSQLActionsBenchmark = {
       .then(r => r?.id ?? BigInt(0))
   },
   JSONColumn: async id => {
-    throw new Skipped()
+    return dbTables
+      .toys_producer(db)
+      .find({ id })
+      .one()
+      .then(r => r?.stock_info ?? {})
   },
   JSONWhere: async ticker => {
-    throw new Skipped()
+    return dbTables
+      .toys_producer(db)
+      .find({ stock_info: jsonPath(['ticker'], ticker) })
+      .one()
+      .then(r => r?.stock_info ?? {})
   },
   likeQuery: async query => {
-    throw new Skipped()
+    return db
+      .query(
+        sql`
+      SELECT id FROM house WHERE house_address LIKE ${'%' + query + '%'};`
+      )
+      .then(r => r.map(d => d.id))
   },
   transactionalOperations: async (producer, toy) => {
-    throw new Skipped()
+    await db.tx(async t => {
+      await dbTables.toys_producer(t).insert(producer)
+      await dbTables.toy(t).insert({ ...toy, price: toy.price.toString() })
+      await t.query(sql`ROLLBACK;`)
+    })
+    return dbTables.toys_producer(db).count()
   },
 }
 

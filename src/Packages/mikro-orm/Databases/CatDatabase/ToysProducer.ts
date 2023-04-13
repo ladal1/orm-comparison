@@ -12,7 +12,7 @@ export class ToysProducer {
   @PrimaryKey()
   id!: number
 
-  @Property({ columnType: 'jsonb' })
+  @Property({ columnType: 'json' })
   stockInfo!: any
 
   @Property({ columnType: 'json' })

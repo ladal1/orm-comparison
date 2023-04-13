@@ -11,8 +11,8 @@ import { House } from './House'
 
 @Entity()
 export class Cat {
-  @PrimaryKey()
-  id!: number
+  @PrimaryKey({ columnType: 'int8' })
+  id!: string
 
   @ManyToOne({ entity: () => CatColor, onDelete: 'cascade', nullable: true })
   catColor?: CatColor

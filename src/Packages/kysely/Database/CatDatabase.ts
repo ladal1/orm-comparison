@@ -1,7 +1,7 @@
 import { Generated } from 'kysely'
 
 interface CatTable {
-  id: Generated<bigint>
+  id: Generated<string>
   cat_name: string
   cat_color_id: number
   date_of_birth: Date
@@ -31,11 +31,11 @@ interface HouseCatTable {
 interface ToyTable {
   id: Generated<number>
   toy_name: string
-  toy_producer_id: number
+  toys_producer_id: number
   barcode: string
   price: number
   currency: string
-  naughty: string
+  naughty: string | null
 }
 
 interface ToyHouseTable {
@@ -44,7 +44,7 @@ interface ToyHouseTable {
   amount: number
 }
 
-interface ToyProducerTable {
+interface ToysProducerTable {
   id: Generated<number>
   stock_info: Record<string, any>
   hq_location: Record<string, any>
@@ -58,7 +58,7 @@ interface CatDatabase {
   house_cat: HouseCatTable
   toy: ToyTable
   toy_house: ToyHouseTable
-  toy_producer: ToyProducerTable
+  toys_producer: ToysProducerTable
 }
 
 export default CatDatabase

@@ -47,7 +47,7 @@ const SpecialSQLActions: SpecialSQLActionsBenchmark = {
   },
   likeQuery: async (query: string) => {
     return likeQuery
-      .run({ query }, getClient())
+      .run({ query: `%${query}%` }, getClient())
       .then(data => data.map(d => d.id))
   },
 }

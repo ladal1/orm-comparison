@@ -4,7 +4,7 @@ import { CatDatabase } from 'Databases/CatDatabase/CatDatabase'
 import assert from 'node:assert/strict'
 
 export interface EdgeCasesBenchmark extends TestTemplate {
-  sqlInjection: (query: string) => Promise<void>
+  sqlInjection: (query: string) => Promise<number>
 }
 
 export const EdgeCases = new BenchmarkSuite<EdgeCasesBenchmark>(

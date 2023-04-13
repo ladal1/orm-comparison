@@ -56,11 +56,11 @@ export const SpecialSQLActions = new BenchmarkSuite<SpecialSQLActionsBenchmark>(
       call:
         (implementation: SpecialSQLActionsBenchmark['upsertToysToHouse']) =>
         () =>
-          implementation({ houseId: 1, toyId: 73, amount: 12 }),
+          implementation({ houseId: 2, toyId: 73, amount: 12 }),
       testValidity: true,
       reset: async (pg: Client) => {
         await pg.query(
-          'UPDATE toy_house SET amount=8 WHERE house_id=1 AND toy_id=73;'
+          'UPDATE toy_house SET amount=8 WHERE house_id=2 AND toy_id=73;'
         )
       },
     },
@@ -137,7 +137,7 @@ export const SpecialSQLActions = new BenchmarkSuite<SpecialSQLActionsBenchmark>(
         assert.deepEqual(data, [8, 450, 873])
       },
       call: (implementation: SpecialSQLActionsBenchmark['likeQuery']) => () =>
-        implementation('%Union%'),
+        implementation('Union'),
       testValidity: true,
     },
   }

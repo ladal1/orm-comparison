@@ -14,7 +14,7 @@ export class House {
   @PrimaryKey()
   id!: number
 
-  @Property({ length: 256, nullable: true })
+  @Property({ nullable: true })
   houseAddress?: string
 
   @Property({ nullable: true })

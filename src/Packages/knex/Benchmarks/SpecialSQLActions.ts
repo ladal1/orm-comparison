@@ -56,7 +56,7 @@ const SpecialSQLActions: SpecialSQLActionsBenchmark = {
     return knexInstance
       .select('id')
       .from('house')
-      .whereLike('house_address', query)
+      .whereLike('house_address', `%${query}%`)
       .then(data => data.map(d => d.id))
   },
 }

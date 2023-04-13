@@ -1,7 +1,7 @@
 import { AssertionError } from 'assert'
 import Database from 'BenchmarkUtils/interfaces/DatabaseUtils'
 import { sum } from 'lodash'
-import { Skipped } from '.'
+import { NotSupported, Skipped } from '.'
 import { BaseSerializer } from 'BenchmarkUtils/ResultSerializers/BaseSerializer'
 import { Client } from 'pg'
 
@@ -41,6 +41,7 @@ export enum TestResult {
   FAIL = 'FAIL',
   ERROR = 'ERROR',
   SKIPPED = 'SKIPPED',
+  NOT_SUPPORTED = 'NOT_SUPPORTED',
   NOT_IMPLEMENTED = 'NOT_IMPLEMENTED',
 }
 
@@ -90,6 +91,9 @@ export class BenchmarkSuite<T extends TestTemplate> {
     }
     if (error instanceof Skipped) {
       return { result: TestResult.SKIPPED, testType }
+    }
+    if (error instanceof NotSupported) {
+      return { result: TestResult.NOT_SUPPORTED, testType }
     }
     if (error instanceof Error) {
       return { result: TestResult.ERROR, error, testType }

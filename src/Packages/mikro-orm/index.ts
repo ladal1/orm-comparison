@@ -1,9 +1,11 @@
 import { MikroORM, ReflectMetadataProvider } from '@mikro-orm/core'
 import type { PostgreSqlDriver, SqlEntityManager } from '@mikro-orm/postgresql'
-import EntityTraversal from './Benchmarks/EntityTraversal'
 import IORMPackage from 'BenchmarkUtils/interfaces/PackageUtils'
 import 'reflect-metadata'
 import config from 'config'
+import SpecialSQLActions from './Benchmarks/SpecialSQLActions'
+import EntityTraversal from './Benchmarks/EntityTraversal'
+import EdgeCases from './Benchmarks/EdgeCases'
 
 let mikroORM: MikroORM<PostgreSqlDriver>
 const contextMap = new Map()
@@ -23,6 +25,11 @@ const initialize = async () => {
       bidirectionalRelations: true,
     },
   })
+  // const generator = mikroORM.getEntityGenerator();
+  // await generator.generate({
+  //   save: true,
+  //   baseDir: process.cwd() + '/src/Packages/mikro-orm/Databases/CatDatabase',
+  // })
 }
 
 const destroy = async () => {
@@ -44,5 +51,7 @@ export const MikroORMPackage: IORMPackage = {
   destroy,
   implementations: {
     EntityTraversal,
+    SpecialSQLActions,
+    EdgeCases,
   },
 }
