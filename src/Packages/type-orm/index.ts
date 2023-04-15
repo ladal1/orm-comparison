@@ -3,6 +3,8 @@ import path from 'path'
 import { DataSource } from 'typeorm'
 import EntityTraversal from './Benchmarks/EntityTraversal'
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies'
+import EdgeCases from './Benchmarks/EdgeCases'
+import SpecialSQLActions from './Benchmarks/SpecialSQLActions'
 
 export let BenchDataSource: DataSource
 
@@ -32,5 +34,7 @@ export const TypeORMPackage: IORMPackage = {
   destroy,
   implementations: {
     EntityTraversal,
+    SpecialSQLActions,
+    EdgeCases,
   },
 }

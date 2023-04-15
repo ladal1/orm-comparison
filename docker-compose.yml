@@ -10,6 +10,7 @@ services:
       POSTGRESQL_REPLICATION_PASSWORD: benchmark_replica_pwd
       POSTGRESQL_REPLICATION_MODE: master
       POSTGRESQL_DATABASE: benchmark
+      POSTGRESQL_PGAUDIT_LOG: 'read, ddl'
     ports:
       - 5432:5432
   postgres-replica:

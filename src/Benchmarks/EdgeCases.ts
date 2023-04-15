@@ -15,7 +15,7 @@ export const EdgeCases = new BenchmarkSuite<EdgeCasesBenchmark>(
     sqlInjection: {
       testName: 'SQL injection condition',
       referenceCheck: async (data: string) => {
-        assert.equal(data, 0)
+        assert.equal(data, 1)
       },
       call: (implementation: EdgeCasesBenchmark['sqlInjection']) => () =>
         implementation("a ' or true --"),

@@ -3207,6 +3207,8 @@ insert into cat (id, cat_color_id, cat_name, date_of_birth) values (2998, 8, 'Cr
 insert into cat (id, cat_color_id, cat_name, date_of_birth) values (2999, 13, 'Kallisté', '11/4/2013');
 insert into cat (id, cat_color_id, cat_name, date_of_birth) values (3000, 89, 'Marie-noël', '1/9/2015');
 insert into cat (id, cat_color_id, cat_name, date_of_birth) values (9223372036854775800, 10, 'Johnny Bignumber', '0001-12-24');
+-- Little bobby tables
+insert into cat (id, cat_color_id, cat_name, date_of_birth) values (3001, 17, 'a '' or true --', '2021-12-21');
 
 -- insert houses
 

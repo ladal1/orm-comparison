@@ -1,9 +1,9 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm'
 import { Toy } from './Toy'
 
 @Entity()
 export class ToysProducer {
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn()
   declare id: number
 
   @Column({ type: 'jsonb' })

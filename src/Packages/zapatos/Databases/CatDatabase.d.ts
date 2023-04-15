@@ -726,10 +726,10 @@ declare module 'zapatos/schema' {
       house_id: number
       /**
        * **house_cat.cat_id**
-       * - `int4` in database
+       * - `int8` in database
        * - `NOT NULL`, no default
        */
-      cat_id: number
+      cat_id: db.Int8String
     }
     export interface JSONSelectable {
       /**
@@ -740,7 +740,7 @@ declare module 'zapatos/schema' {
       house_id: number
       /**
        * **house_cat.cat_id**
-       * - `int4` in database
+       * - `int8` in database
        * - `NOT NULL`, no default
        */
       cat_id: number
@@ -762,17 +762,20 @@ declare module 'zapatos/schema' {
           >
       /**
        * **house_cat.cat_id**
-       * - `int4` in database
+       * - `int8` in database
        * - `NOT NULL`, no default
        */
       cat_id?:
-        | number
-        | db.Parameter<number>
+        | (number | db.Int8String)
+        | db.Parameter<number | db.Int8String>
         | db.SQLFragment
         | db.ParentColumn
         | db.SQLFragment<
             any,
-            number | db.Parameter<number> | db.SQLFragment | db.ParentColumn
+            | (number | db.Int8String)
+            | db.Parameter<number | db.Int8String>
+            | db.SQLFragment
+            | db.ParentColumn
           >
     }
     export interface Insertable {
@@ -784,10 +787,13 @@ declare module 'zapatos/schema' {
       house_id: number | db.Parameter<number> | db.SQLFragment
       /**
        * **house_cat.cat_id**
-       * - `int4` in database
+       * - `int8` in database
        * - `NOT NULL`, no default
        */
-      cat_id: number | db.Parameter<number> | db.SQLFragment
+      cat_id:
+        | (number | db.Int8String)
+        | db.Parameter<number | db.Int8String>
+        | db.SQLFragment
     }
     export interface Updatable {
       /**
@@ -802,14 +808,19 @@ declare module 'zapatos/schema' {
         | db.SQLFragment<any, number | db.Parameter<number> | db.SQLFragment>
       /**
        * **house_cat.cat_id**
-       * - `int4` in database
+       * - `int8` in database
        * - `NOT NULL`, no default
        */
       cat_id?:
-        | number
-        | db.Parameter<number>
+        | (number | db.Int8String)
+        | db.Parameter<number | db.Int8String>
         | db.SQLFragment
-        | db.SQLFragment<any, number | db.Parameter<number> | db.SQLFragment>
+        | db.SQLFragment<
+            any,
+            | (number | db.Int8String)
+            | db.Parameter<number | db.Int8String>
+            | db.SQLFragment
+          >
     }
     export type UniqueIndex = 'pk_house_cat'
     export type Column = keyof Selectable

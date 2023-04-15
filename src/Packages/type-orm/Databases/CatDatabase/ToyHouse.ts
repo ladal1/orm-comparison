@@ -1,11 +1,14 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm'
+import { Entity, Column, ManyToOne, PrimaryColumn } from 'typeorm'
 import { Toy } from './Toy'
 import { House } from './House'
 
 @Entity()
 export class ToyHouse {
-  @PrimaryGeneratedColumn()
-  declare id: number
+  @PrimaryColumn()
+  declare toyId: number
+
+  @PrimaryColumn()
+  declare houseId: number
 
   @Column()
   declare amount: number

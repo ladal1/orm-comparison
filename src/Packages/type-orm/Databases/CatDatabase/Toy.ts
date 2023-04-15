@@ -1,16 +1,10 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  OneToMany,
-  ManyToOne,
-} from 'typeorm'
+import { Entity, Column, PrimaryColumn, OneToMany, ManyToOne } from 'typeorm'
 import { ToyHouse } from './ToyHouse'
 import { ToysProducer } from './ToysProducer'
 
 @Entity()
 export class Toy {
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn()
   declare id: number
 
   @Column()

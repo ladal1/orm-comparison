@@ -1,8 +1,10 @@
 import IORMPackage from 'BenchmarkUtils/interfaces/PackageUtils'
 import path from 'path'
+import config from 'config'
 import { Sequelize } from 'sequelize-typescript'
 import EntityTraversal from './Benchmarks/EntityTraversal'
-import config from 'config'
+import SpecialSQLActions from './Benchmarks/SpecialSQLActions'
+import EdgeCases from './Benchmarks/EdgeCases'
 
 let _sequelize: Sequelize | null = null
 
@@ -20,6 +22,13 @@ const initialize = async (database: string) => {
   await _sequelize.authenticate()
 }
 
+const getSequelize = () => {
+  if (_sequelize === null) {
+    throw new Error('Sequelize is not initialized')
+  }
+  return _sequelize
+}
+
 const destroy = async () => {
   if (_sequelize !== null) {
     await _sequelize.close()
@@ -32,7 +41,9 @@ export const SequelizePackage: IORMPackage = {
   destroy,
   implementations: {
     EntityTraversal,
+    SpecialSQLActions,
+    EdgeCases,
   },
 }
 
-export { _sequelize as sequelizeInstance }
+export { getSequelize }

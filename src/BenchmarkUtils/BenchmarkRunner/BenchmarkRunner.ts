@@ -40,6 +40,7 @@ export class BenchmarkRunner {
   }
 
   public async prepareDatabase(database: Database, client: Client) {
+    console.log('Preparing database', database.name)
     await database.setupDatabase(client)
     await database.seedDatabase(client)
   }

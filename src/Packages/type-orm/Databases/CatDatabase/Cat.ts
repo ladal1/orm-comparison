@@ -10,7 +10,7 @@ import { House } from './House'
 
 @Entity()
 export class Cat {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   declare id: number
 
   @Column()

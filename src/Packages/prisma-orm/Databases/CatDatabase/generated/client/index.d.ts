@@ -17,7 +17,7 @@ type UnwrapTuple<Tuple extends readonly unknown[]> = {
  *
  */
 export type cat = {
-  id: number
+  id: bigint
   cat_color_id: number | null
   cat_name: string | null
   date_of_birth: Date | null
@@ -57,7 +57,7 @@ export type house = {
  */
 export type house_cat = {
   house_id: number
-  cat_id: number
+  cat_id: bigint
 }
 
 /**
@@ -72,6 +72,7 @@ export type toy = {
   price: Prisma.Decimal
   currency: string
   naughty: string | null
+  date_introduced: Date
 }
 
 /**
@@ -1256,19 +1257,19 @@ export namespace Prisma {
   }
 
   export type CatSumAggregateOutputType = {
-    id: number | null
+    id: bigint | null
     cat_color_id: number | null
   }
 
   export type CatMinAggregateOutputType = {
-    id: number | null
+    id: bigint | null
     cat_color_id: number | null
     cat_name: string | null
     date_of_birth: Date | null
   }
 
   export type CatMaxAggregateOutputType = {
-    id: number | null
+    id: bigint | null
     cat_color_id: number | null
     cat_name: string | null
     date_of_birth: Date | null
@@ -1398,7 +1399,7 @@ export namespace Prisma {
   }
 
   export type CatGroupByOutputType = {
-    id: number
+    id: bigint
     cat_color_id: number | null
     cat_name: string | null
     date_of_birth: Date | null
@@ -5373,17 +5374,17 @@ export namespace Prisma {
 
   export type House_catSumAggregateOutputType = {
     house_id: number | null
-    cat_id: number | null
+    cat_id: bigint | null
   }
 
   export type House_catMinAggregateOutputType = {
     house_id: number | null
-    cat_id: number | null
+    cat_id: bigint | null
   }
 
   export type House_catMaxAggregateOutputType = {
     house_id: number | null
-    cat_id: number | null
+    cat_id: bigint | null
   }
 
   export type House_catCountAggregateOutputType = {
@@ -5503,7 +5504,7 @@ export namespace Prisma {
 
   export type House_catGroupByOutputType = {
     house_id: number
-    cat_id: number
+    cat_id: bigint
     _count: House_catCountAggregateOutputType | null
     _avg: House_catAvgAggregateOutputType | null
     _sum: House_catSumAggregateOutputType | null
@@ -6394,6 +6395,7 @@ export namespace Prisma {
     price: Decimal | null
     currency: string | null
     naughty: string | null
+    date_introduced: Date | null
   }
 
   export type ToyMaxAggregateOutputType = {
@@ -6404,6 +6406,7 @@ export namespace Prisma {
     price: Decimal | null
     currency: string | null
     naughty: string | null
+    date_introduced: Date | null
   }
 
   export type ToyCountAggregateOutputType = {
@@ -6414,6 +6417,7 @@ export namespace Prisma {
     price: number
     currency: number
     naughty: number
+    date_introduced: number
     _all: number
   }
 
@@ -6437,6 +6441,7 @@ export namespace Prisma {
     price?: true
     currency?: true
     naughty?: true
+    date_introduced?: true
   }
 
   export type ToyMaxAggregateInputType = {
@@ -6447,6 +6452,7 @@ export namespace Prisma {
     price?: true
     currency?: true
     naughty?: true
+    date_introduced?: true
   }
 
   export type ToyCountAggregateInputType = {
@@ -6457,6 +6463,7 @@ export namespace Prisma {
     price?: true
     currency?: true
     naughty?: true
+    date_introduced?: true
     _all?: true
   }
 
@@ -6551,6 +6558,7 @@ export namespace Prisma {
     price: Decimal
     currency: string
     naughty: string | null
+    date_introduced: Date
     _count: ToyCountAggregateOutputType | null
     _avg: ToyAvgAggregateOutputType | null
     _sum: ToySumAggregateOutputType | null
@@ -6578,6 +6586,7 @@ export namespace Prisma {
     price?: boolean
     currency?: boolean
     naughty?: boolean
+    date_introduced?: boolean
     toys_producer?: boolean | toys_producerArgs
     toy_house?: boolean | toy$toy_houseArgs
     _count?: boolean | ToyCountOutputTypeArgs
@@ -9570,6 +9579,7 @@ export namespace Prisma {
     price: 'price'
     currency: 'currency'
     naughty: 'naughty'
+    date_introduced: 'date_introduced'
   }
 
   export type ToyScalarFieldEnum =
@@ -9611,7 +9621,7 @@ export namespace Prisma {
     AND?: Enumerable<catWhereInput>
     OR?: Enumerable<catWhereInput>
     NOT?: Enumerable<catWhereInput>
-    id?: IntFilter | number
+    id?: BigIntFilter | bigint | number
     cat_color_id?: IntNullableFilter | number | null
     cat_name?: StringNullableFilter | string | null
     date_of_birth?: DateTimeNullableFilter | Date | string | null
@@ -9629,7 +9639,7 @@ export namespace Prisma {
   }
 
   export type catWhereUniqueInput = {
-    id?: number
+    id?: bigint | number
   }
 
   export type catOrderByWithAggregationInput = {
@@ -9648,7 +9658,7 @@ export namespace Prisma {
     AND?: Enumerable<catScalarWhereWithAggregatesInput>
     OR?: Enumerable<catScalarWhereWithAggregatesInput>
     NOT?: Enumerable<catScalarWhereWithAggregatesInput>
-    id?: IntWithAggregatesFilter | number
+    id?: BigIntWithAggregatesFilter | bigint | number
     cat_color_id?: IntNullableWithAggregatesFilter | number | null
     cat_name?: StringNullableWithAggregatesFilter | string | null
     date_of_birth?: DateTimeNullableWithAggregatesFilter | Date | string | null
@@ -9778,7 +9788,7 @@ export namespace Prisma {
     OR?: Enumerable<house_catWhereInput>
     NOT?: Enumerable<house_catWhereInput>
     house_id?: IntFilter | number
-    cat_id?: IntFilter | number
+    cat_id?: BigIntFilter | bigint | number
     cat?: XOR<CatRelationFilter, catWhereInput>
     house?: XOR<HouseRelationFilter, houseWhereInput>
   }
@@ -9809,7 +9819,7 @@ export namespace Prisma {
     OR?: Enumerable<house_catScalarWhereWithAggregatesInput>
     NOT?: Enumerable<house_catScalarWhereWithAggregatesInput>
     house_id?: IntWithAggregatesFilter | number
-    cat_id?: IntWithAggregatesFilter | number
+    cat_id?: BigIntWithAggregatesFilter | bigint | number
   }
 
   export type toyWhereInput = {
@@ -9823,6 +9833,7 @@ export namespace Prisma {
     price?: DecimalFilter | Decimal | DecimalJsLike | number | string
     currency?: StringFilter | string
     naughty?: StringNullableFilter | string | null
+    date_introduced?: DateTimeFilter | Date | string
     toys_producer?: XOR<
       Toys_producerRelationFilter,
       toys_producerWhereInput
@@ -9838,6 +9849,7 @@ export namespace Prisma {
     price?: SortOrder
     currency?: SortOrder
     naughty?: SortOrder
+    date_introduced?: SortOrder
     toys_producer?: toys_producerOrderByWithRelationInput
     toy_house?: toy_houseOrderByRelationAggregateInput
   }
@@ -9855,6 +9867,7 @@ export namespace Prisma {
     price?: SortOrder
     currency?: SortOrder
     naughty?: SortOrder
+    date_introduced?: SortOrder
     _count?: toyCountOrderByAggregateInput
     _avg?: toyAvgOrderByAggregateInput
     _max?: toyMaxOrderByAggregateInput
@@ -9878,6 +9891,7 @@ export namespace Prisma {
       | string
     currency?: StringWithAggregatesFilter | string
     naughty?: StringNullableWithAggregatesFilter | string | null
+    date_introduced?: DateTimeWithAggregatesFilter | Date | string
   }
 
   export type toy_houseWhereInput = {
@@ -9965,6 +9979,7 @@ export namespace Prisma {
   }
 
   export type catCreateInput = {
+    id?: bigint | number
     cat_name?: string | null
     date_of_birth?: Date | string | null
     cat_color?: cat_colorCreateNestedOneWithoutCatInput
@@ -9972,7 +9987,7 @@ export namespace Prisma {
   }
 
   export type catUncheckedCreateInput = {
-    id?: number
+    id?: bigint | number
     cat_color_id?: number | null
     cat_name?: string | null
     date_of_birth?: Date | string | null
@@ -9980,6 +9995,7 @@ export namespace Prisma {
   }
 
   export type catUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
     cat_name?: NullableStringFieldUpdateOperationsInput | string | null
     date_of_birth?:
       | NullableDateTimeFieldUpdateOperationsInput
@@ -9991,7 +10007,7 @@ export namespace Prisma {
   }
 
   export type catUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
     cat_color_id?: NullableIntFieldUpdateOperationsInput | number | null
     cat_name?: NullableStringFieldUpdateOperationsInput | string | null
     date_of_birth?:
@@ -10003,13 +10019,14 @@ export namespace Prisma {
   }
 
   export type catCreateManyInput = {
-    id?: number
+    id?: bigint | number
     cat_color_id?: number | null
     cat_name?: string | null
     date_of_birth?: Date | string | null
   }
 
   export type catUpdateManyMutationInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
     cat_name?: NullableStringFieldUpdateOperationsInput | string | null
     date_of_birth?:
       | NullableDateTimeFieldUpdateOperationsInput
@@ -10019,7 +10036,7 @@ export namespace Prisma {
   }
 
   export type catUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
     cat_color_id?: NullableIntFieldUpdateOperationsInput | number | null
     cat_name?: NullableStringFieldUpdateOperationsInput | string | null
     date_of_birth?:
@@ -10157,7 +10174,7 @@ export namespace Prisma {
 
   export type house_catUncheckedCreateInput = {
     house_id: number
-    cat_id: number
+    cat_id: bigint | number
   }
 
   export type house_catUpdateInput = {
@@ -10167,19 +10184,19 @@ export namespace Prisma {
 
   export type house_catUncheckedUpdateInput = {
     house_id?: IntFieldUpdateOperationsInput | number
-    cat_id?: IntFieldUpdateOperationsInput | number
+    cat_id?: BigIntFieldUpdateOperationsInput | bigint | number
   }
 
   export type house_catCreateManyInput = {
     house_id: number
-    cat_id: number
+    cat_id: bigint | number
   }
 
   export type house_catUpdateManyMutationInput = {}
 
   export type house_catUncheckedUpdateManyInput = {
     house_id?: IntFieldUpdateOperationsInput | number
-    cat_id?: IntFieldUpdateOperationsInput | number
+    cat_id?: BigIntFieldUpdateOperationsInput | bigint | number
   }
 
   export type toyCreateInput = {
@@ -10188,6 +10205,7 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     currency: string
     naughty?: string | null
+    date_introduced: Date | string
     toys_producer?: toys_producerCreateNestedOneWithoutToyInput
     toy_house?: toy_houseCreateNestedManyWithoutToyInput
   }
@@ -10200,6 +10218,7 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     currency: string
     naughty?: string | null
+    date_introduced: Date | string
     toy_house?: toy_houseUncheckedCreateNestedManyWithoutToyInput
   }
 
@@ -10214,6 +10233,7 @@ export namespace Prisma {
       | string
     currency?: StringFieldUpdateOperationsInput | string
     naughty?: NullableStringFieldUpdateOperationsInput | string | null
+    date_introduced?: DateTimeFieldUpdateOperationsInput | Date | string
     toys_producer?: toys_producerUpdateOneWithoutToyNestedInput
     toy_house?: toy_houseUpdateManyWithoutToyNestedInput
   }
@@ -10231,6 +10251,7 @@ export namespace Prisma {
       | string
     currency?: StringFieldUpdateOperationsInput | string
     naughty?: NullableStringFieldUpdateOperationsInput | string | null
+    date_introduced?: DateTimeFieldUpdateOperationsInput | Date | string
     toy_house?: toy_houseUncheckedUpdateManyWithoutToyNestedInput
   }
 
@@ -10242,6 +10263,7 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     currency: string
     naughty?: string | null
+    date_introduced: Date | string
   }
 
   export type toyUpdateManyMutationInput = {
@@ -10255,6 +10277,7 @@ export namespace Prisma {
       | string
     currency?: StringFieldUpdateOperationsInput | string
     naughty?: NullableStringFieldUpdateOperationsInput | string | null
+    date_introduced?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type toyUncheckedUpdateManyInput = {
@@ -10270,6 +10293,7 @@ export namespace Prisma {
       | string
     currency?: StringFieldUpdateOperationsInput | string
     naughty?: NullableStringFieldUpdateOperationsInput | string | null
+    date_introduced?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type toy_houseCreateInput = {
@@ -10355,15 +10379,15 @@ export namespace Prisma {
     hq_location?: JsonNullValueInput | InputJsonValue
   }
 
-  export type IntFilter = {
-    equals?: number
-    in?: Enumerable<number>
-    notIn?: Enumerable<number>
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
-    not?: NestedIntFilter | number
+  export type BigIntFilter = {
+    equals?: bigint | number
+    in?: Enumerable<bigint> | Enumerable<number>
+    notIn?: Enumerable<bigint> | Enumerable<number>
+    lt?: bigint | number
+    lte?: bigint | number
+    gt?: bigint | number
+    gte?: bigint | number
+    not?: NestedBigIntFilter | bigint | number
   }
 
   export type IntNullableFilter = {
@@ -10449,20 +10473,20 @@ export namespace Prisma {
     cat_color_id?: SortOrder
   }
 
-  export type IntWithAggregatesFilter = {
-    equals?: number
-    in?: Enumerable<number>
-    notIn?: Enumerable<number>
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
-    not?: NestedIntWithAggregatesFilter | number
+  export type BigIntWithAggregatesFilter = {
+    equals?: bigint | number
+    in?: Enumerable<bigint> | Enumerable<number>
+    notIn?: Enumerable<bigint> | Enumerable<number>
+    lt?: bigint | number
+    lte?: bigint | number
+    gt?: bigint | number
+    gte?: bigint | number
+    not?: NestedBigIntWithAggregatesFilter | bigint | number
     _count?: NestedIntFilter
     _avg?: NestedFloatFilter
-    _sum?: NestedIntFilter
-    _min?: NestedIntFilter
-    _max?: NestedIntFilter
+    _sum?: NestedBigIntFilter
+    _min?: NestedBigIntFilter
+    _max?: NestedBigIntFilter
   }
 
   export type IntNullableWithAggregatesFilter = {
@@ -10511,6 +10535,17 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter
     _min?: NestedDateTimeNullableFilter
     _max?: NestedDateTimeNullableFilter
+  }
+
+  export type IntFilter = {
+    equals?: number
+    in?: Enumerable<number>
+    notIn?: Enumerable<number>
+    lt?: number
+    lte?: number
+    gt?: number
+    gte?: number
+    not?: NestedIntFilter | number
   }
 
   export type StringFilter = {
@@ -10564,6 +10599,22 @@ export namespace Prisma {
 
   export type cat_colorSumOrderByAggregateInput = {
     id?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter = {
+    equals?: number
+    in?: Enumerable<number>
+    notIn?: Enumerable<number>
+    lt?: number
+    lte?: number
+    gt?: number
+    gte?: number
+    not?: NestedIntWithAggregatesFilter | number
+    _count?: NestedIntFilter
+    _avg?: NestedFloatFilter
+    _sum?: NestedIntFilter
+    _min?: NestedIntFilter
+    _max?: NestedIntFilter
   }
 
   export type StringWithAggregatesFilter = {
@@ -10668,7 +10719,7 @@ export namespace Prisma {
 
   export type house_catHouse_idCat_idCompoundUniqueInput = {
     house_id: number
-    cat_id: number
+    cat_id: bigint | number
   }
 
   export type house_catCountOrderByAggregateInput = {
@@ -10715,6 +10766,17 @@ export namespace Prisma {
     not?: NestedDecimalFilter | Decimal | DecimalJsLike | number | string
   }
 
+  export type DateTimeFilter = {
+    equals?: Date | string
+    in?: Enumerable<Date> | Enumerable<string>
+    notIn?: Enumerable<Date> | Enumerable<string>
+    lt?: Date | string
+    lte?: Date | string
+    gt?: Date | string
+    gte?: Date | string
+    not?: NestedDateTimeFilter | Date | string
+  }
+
   export type Toys_producerRelationFilter = {
     is?: toys_producerWhereInput | null
     isNot?: toys_producerWhereInput | null
@@ -10728,6 +10790,7 @@ export namespace Prisma {
     price?: SortOrder
     currency?: SortOrder
     naughty?: SortOrder
+    date_introduced?: SortOrder
   }
 
   export type toyAvgOrderByAggregateInput = {
@@ -10744,6 +10807,7 @@ export namespace Prisma {
     price?: SortOrder
     currency?: SortOrder
     naughty?: SortOrder
+    date_introduced?: SortOrder
   }
 
   export type toyMinOrderByAggregateInput = {
@@ -10754,6 +10818,7 @@ export namespace Prisma {
     price?: SortOrder
     currency?: SortOrder
     naughty?: SortOrder
+    date_introduced?: SortOrder
   }
 
   export type toySumOrderByAggregateInput = {
@@ -10789,6 +10854,20 @@ export namespace Prisma {
     _sum?: NestedDecimalFilter
     _min?: NestedDecimalFilter
     _max?: NestedDecimalFilter
+  }
+
+  export type DateTimeWithAggregatesFilter = {
+    equals?: Date | string
+    in?: Enumerable<Date> | Enumerable<string>
+    notIn?: Enumerable<Date> | Enumerable<string>
+    lt?: Date | string
+    lte?: Date | string
+    gt?: Date | string
+    gte?: Date | string
+    not?: NestedDateTimeWithAggregatesFilter | Date | string
+    _count?: NestedIntFilter
+    _min?: NestedDateTimeFilter
+    _max?: NestedDateTimeFilter
   }
 
   export type ToyRelationFilter = {
@@ -10945,6 +11024,14 @@ export namespace Prisma {
     connect?: Enumerable<house_catWhereUniqueInput>
   }
 
+  export type BigIntFieldUpdateOperationsInput = {
+    set?: bigint | number
+    increment?: bigint | number
+    decrement?: bigint | number
+    multiply?: bigint | number
+    divide?: bigint | number
+  }
+
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
   }
@@ -10984,14 +11071,6 @@ export namespace Prisma {
     update?: Enumerable<house_catUpdateWithWhereUniqueWithoutCatInput>
     updateMany?: Enumerable<house_catUpdateManyWithWhereWithoutCatInput>
     deleteMany?: Enumerable<house_catScalarWhereInput>
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -11092,6 +11171,14 @@ export namespace Prisma {
       color_hexUpdateWithoutCat_colorInput,
       color_hexUncheckedUpdateWithoutCat_colorInput
     >
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type catUncheckedUpdateManyWithoutCat_colorNestedInput = {
@@ -11345,6 +11432,10 @@ export namespace Prisma {
     divide?: Decimal | DecimalJsLike | number | string
   }
 
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
   export type toys_producerUpdateOneWithoutToyNestedInput = {
     create?: XOR<
       toys_producerCreateWithoutToyInput,
@@ -11495,15 +11586,15 @@ export namespace Prisma {
     deleteMany?: Enumerable<toyScalarWhereInput>
   }
 
-  export type NestedIntFilter = {
-    equals?: number
-    in?: Enumerable<number>
-    notIn?: Enumerable<number>
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
-    not?: NestedIntFilter | number
+  export type NestedBigIntFilter = {
+    equals?: bigint | number
+    in?: Enumerable<bigint> | Enumerable<number>
+    notIn?: Enumerable<bigint> | Enumerable<number>
+    lt?: bigint | number
+    lte?: bigint | number
+    gt?: bigint | number
+    gte?: bigint | number
+    not?: NestedBigIntFilter | bigint | number
   }
 
   export type NestedIntNullableFilter = {
@@ -11542,7 +11633,23 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter | Date | string | null
   }
 
-  export type NestedIntWithAggregatesFilter = {
+  export type NestedBigIntWithAggregatesFilter = {
+    equals?: bigint | number
+    in?: Enumerable<bigint> | Enumerable<number>
+    notIn?: Enumerable<bigint> | Enumerable<number>
+    lt?: bigint | number
+    lte?: bigint | number
+    gt?: bigint | number
+    gte?: bigint | number
+    not?: NestedBigIntWithAggregatesFilter | bigint | number
+    _count?: NestedIntFilter
+    _avg?: NestedFloatFilter
+    _sum?: NestedBigIntFilter
+    _min?: NestedBigIntFilter
+    _max?: NestedBigIntFilter
+  }
+
+  export type NestedIntFilter = {
     equals?: number
     in?: Enumerable<number>
     notIn?: Enumerable<number>
@@ -11550,12 +11657,7 @@ export namespace Prisma {
     lte?: number
     gt?: number
     gte?: number
-    not?: NestedIntWithAggregatesFilter | number
-    _count?: NestedIntFilter
-    _avg?: NestedFloatFilter
-    _sum?: NestedIntFilter
-    _min?: NestedIntFilter
-    _max?: NestedIntFilter
+    not?: NestedIntFilter | number
   }
 
   export type NestedFloatFilter = {
@@ -11641,6 +11743,22 @@ export namespace Prisma {
     not?: NestedStringFilter | string
   }
 
+  export type NestedIntWithAggregatesFilter = {
+    equals?: number
+    in?: Enumerable<number>
+    notIn?: Enumerable<number>
+    lt?: number
+    lte?: number
+    gt?: number
+    gte?: number
+    not?: NestedIntWithAggregatesFilter | number
+    _count?: NestedIntFilter
+    _avg?: NestedFloatFilter
+    _sum?: NestedIntFilter
+    _min?: NestedIntFilter
+    _max?: NestedIntFilter
+  }
+
   export type NestedStringWithAggregatesFilter = {
     equals?: string
     in?: Enumerable<string>
@@ -11690,6 +11808,17 @@ export namespace Prisma {
     not?: NestedDecimalFilter | Decimal | DecimalJsLike | number | string
   }
 
+  export type NestedDateTimeFilter = {
+    equals?: Date | string
+    in?: Enumerable<Date> | Enumerable<string>
+    notIn?: Enumerable<Date> | Enumerable<string>
+    lt?: Date | string
+    lte?: Date | string
+    gt?: Date | string
+    gte?: Date | string
+    not?: NestedDateTimeFilter | Date | string
+  }
+
   export type NestedDecimalWithAggregatesFilter = {
     equals?: Decimal | DecimalJsLike | number | string
     in?:
@@ -11717,6 +11846,20 @@ export namespace Prisma {
     _sum?: NestedDecimalFilter
     _min?: NestedDecimalFilter
     _max?: NestedDecimalFilter
+  }
+
+  export type NestedDateTimeWithAggregatesFilter = {
+    equals?: Date | string
+    in?: Enumerable<Date> | Enumerable<string>
+    notIn?: Enumerable<Date> | Enumerable<string>
+    lt?: Date | string
+    lte?: Date | string
+    gt?: Date | string
+    gte?: Date | string
+    not?: NestedDateTimeWithAggregatesFilter | Date | string
+    _count?: NestedIntFilter
+    _min?: NestedDateTimeFilter
+    _max?: NestedDateTimeFilter
   }
   export type NestedJsonFilter =
     | PatchUndefined<
@@ -11839,17 +11982,18 @@ export namespace Prisma {
     OR?: Enumerable<house_catScalarWhereInput>
     NOT?: Enumerable<house_catScalarWhereInput>
     house_id?: IntFilter | number
-    cat_id?: IntFilter | number
+    cat_id?: BigIntFilter | bigint | number
   }
 
   export type catCreateWithoutCat_colorInput = {
+    id?: bigint | number
     cat_name?: string | null
     date_of_birth?: Date | string | null
     house_cat?: house_catCreateNestedManyWithoutCatInput
   }
 
   export type catUncheckedCreateWithoutCat_colorInput = {
-    id?: number
+    id?: bigint | number
     cat_name?: string | null
     date_of_birth?: Date | string | null
     house_cat?: house_catUncheckedCreateNestedManyWithoutCatInput
@@ -11913,7 +12057,7 @@ export namespace Prisma {
     AND?: Enumerable<catScalarWhereInput>
     OR?: Enumerable<catScalarWhereInput>
     NOT?: Enumerable<catScalarWhereInput>
-    id?: IntFilter | number
+    id?: BigIntFilter | bigint | number
     cat_color_id?: IntNullableFilter | number | null
     cat_name?: StringNullableFilter | string | null
     date_of_birth?: DateTimeNullableFilter | Date | string | null
@@ -11984,7 +12128,7 @@ export namespace Prisma {
   }
 
   export type house_catUncheckedCreateWithoutHouseInput = {
-    cat_id: number
+    cat_id: bigint | number
   }
 
   export type house_catCreateOrConnectWithoutHouseInput = {
@@ -12089,13 +12233,14 @@ export namespace Prisma {
   }
 
   export type catCreateWithoutHouse_catInput = {
+    id?: bigint | number
     cat_name?: string | null
     date_of_birth?: Date | string | null
     cat_color?: cat_colorCreateNestedOneWithoutCatInput
   }
 
   export type catUncheckedCreateWithoutHouse_catInput = {
-    id?: number
+    id?: bigint | number
     cat_color_id?: number | null
     cat_name?: string | null
     date_of_birth?: Date | string | null
@@ -12142,6 +12287,7 @@ export namespace Prisma {
   }
 
   export type catUpdateWithoutHouse_catInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
     cat_name?: NullableStringFieldUpdateOperationsInput | string | null
     date_of_birth?:
       | NullableDateTimeFieldUpdateOperationsInput
@@ -12152,7 +12298,7 @@ export namespace Prisma {
   }
 
   export type catUncheckedUpdateWithoutHouse_catInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
     cat_color_id?: NullableIntFieldUpdateOperationsInput | number | null
     cat_name?: NullableStringFieldUpdateOperationsInput | string | null
     date_of_birth?:
@@ -12305,6 +12451,7 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     currency: string
     naughty?: string | null
+    date_introduced: Date | string
     toys_producer?: toys_producerCreateNestedOneWithoutToyInput
   }
 
@@ -12316,6 +12463,7 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     currency: string
     naughty?: string | null
+    date_introduced: Date | string
   }
 
   export type toyCreateOrConnectWithoutToy_houseInput = {
@@ -12372,6 +12520,7 @@ export namespace Prisma {
       | string
     currency?: StringFieldUpdateOperationsInput | string
     naughty?: NullableStringFieldUpdateOperationsInput | string | null
+    date_introduced?: DateTimeFieldUpdateOperationsInput | Date | string
     toys_producer?: toys_producerUpdateOneWithoutToyNestedInput
   }
 
@@ -12388,6 +12537,7 @@ export namespace Prisma {
       | string
     currency?: StringFieldUpdateOperationsInput | string
     naughty?: NullableStringFieldUpdateOperationsInput | string | null
+    date_introduced?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type toyCreateWithoutToys_producerInput = {
@@ -12396,6 +12546,7 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     currency: string
     naughty?: string | null
+    date_introduced: Date | string
     toy_house?: toy_houseCreateNestedManyWithoutToyInput
   }
 
@@ -12406,6 +12557,7 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     currency: string
     naughty?: string | null
+    date_introduced: Date | string
     toy_house?: toy_houseUncheckedCreateNestedManyWithoutToyInput
   }
 
@@ -12458,6 +12610,7 @@ export namespace Prisma {
     price?: DecimalFilter | Decimal | DecimalJsLike | number | string
     currency?: StringFilter | string
     naughty?: StringNullableFilter | string | null
+    date_introduced?: DateTimeFilter | Date | string
   }
 
   export type house_catCreateManyCatInput = {
@@ -12477,12 +12630,13 @@ export namespace Prisma {
   }
 
   export type catCreateManyCat_colorInput = {
-    id?: number
+    id?: bigint | number
     cat_name?: string | null
     date_of_birth?: Date | string | null
   }
 
   export type catUpdateWithoutCat_colorInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
     cat_name?: NullableStringFieldUpdateOperationsInput | string | null
     date_of_birth?:
       | NullableDateTimeFieldUpdateOperationsInput
@@ -12493,7 +12647,7 @@ export namespace Prisma {
   }
 
   export type catUncheckedUpdateWithoutCat_colorInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
     cat_name?: NullableStringFieldUpdateOperationsInput | string | null
     date_of_birth?:
       | NullableDateTimeFieldUpdateOperationsInput
@@ -12504,7 +12658,7 @@ export namespace Prisma {
   }
 
   export type catUncheckedUpdateManyWithoutCatInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
     cat_name?: NullableStringFieldUpdateOperationsInput | string | null
     date_of_birth?:
       | NullableDateTimeFieldUpdateOperationsInput
@@ -12514,7 +12668,7 @@ export namespace Prisma {
   }
 
   export type house_catCreateManyHouseInput = {
-    cat_id: number
+    cat_id: bigint | number
   }
 
   export type toy_houseCreateManyHouseInput = {
@@ -12527,7 +12681,7 @@ export namespace Prisma {
   }
 
   export type house_catUncheckedUpdateWithoutHouseInput = {
-    cat_id?: IntFieldUpdateOperationsInput | number
+    cat_id?: BigIntFieldUpdateOperationsInput | bigint | number
   }
 
   export type toy_houseUpdateWithoutHouseInput = {
@@ -12567,6 +12721,7 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     currency: string
     naughty?: string | null
+    date_introduced: Date | string
   }
 
   export type toyUpdateWithoutToys_producerInput = {
@@ -12580,6 +12735,7 @@ export namespace Prisma {
       | string
     currency?: StringFieldUpdateOperationsInput | string
     naughty?: NullableStringFieldUpdateOperationsInput | string | null
+    date_introduced?: DateTimeFieldUpdateOperationsInput | Date | string
     toy_house?: toy_houseUpdateManyWithoutToyNestedInput
   }
 
@@ -12595,6 +12751,7 @@ export namespace Prisma {
       | string
     currency?: StringFieldUpdateOperationsInput | string
     naughty?: NullableStringFieldUpdateOperationsInput | string | null
+    date_introduced?: DateTimeFieldUpdateOperationsInput | Date | string
     toy_house?: toy_houseUncheckedUpdateManyWithoutToyNestedInput
   }
 
@@ -12610,6 +12767,7 @@ export namespace Prisma {
       | string
     currency?: StringFieldUpdateOperationsInput | string
     naughty?: NullableStringFieldUpdateOperationsInput | string | null
+    date_introduced?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   /**

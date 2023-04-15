@@ -1,6 +1,8 @@
 import config from 'config'
 import pg from 'pg'
 import EntityTraversal from './Benchmarks/EntityTraversal'
+import EdgeCases from './Benchmarks/EdgeCases'
+import SpecialSQLActions from './Benchmarks/SpecialSQLActions'
 
 export let pgPool: pg.Pool
 
@@ -18,5 +20,7 @@ export const ZapatosPackage = {
   destroy,
   implementations: {
     EntityTraversal,
+    SpecialSQLActions,
+    EdgeCases,
   },
 }

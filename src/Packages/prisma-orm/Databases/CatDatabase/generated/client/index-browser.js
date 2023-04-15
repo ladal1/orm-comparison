@@ -144,7 +144,8 @@ exports.Prisma.ToyScalarFieldEnum = makeEnum({
   barcode: 'barcode',
   price: 'price',
   currency: 'currency',
-  naughty: 'naughty'
+  naughty: 'naughty',
+  date_introduced: 'date_introduced'
 });
 
 exports.Prisma.Toy_houseScalarFieldEnum = makeEnum({
