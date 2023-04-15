@@ -11,6 +11,15 @@ const EdgeCases: EdgeCasesBenchmark = {
       },
     })
   },
+  bigIntColumn: async (name: string) => {
+    return clients.CatDatabase.cat
+      .findFirst({
+        where: {
+          cat_name: name,
+        },
+      })
+      .then(data => data?.id ?? BigInt(0))
+  },
 }
 
 export default EdgeCases

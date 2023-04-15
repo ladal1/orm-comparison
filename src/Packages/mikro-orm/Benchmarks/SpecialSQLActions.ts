@@ -1,7 +1,6 @@
 import { SpecialSQLActionsBenchmark } from 'Benchmarks/SpecialSQLActions'
 import { getEntityManager } from '..'
 import { ToyHouse } from '../Databases/CatDatabase/ToyHouse'
-import { Cat } from '../Databases/CatDatabase/Cat'
 import { ToysProducer } from '../Databases/CatDatabase/ToysProducer'
 import { Toy } from '../Databases/CatDatabase/Toy'
 import { House } from '../Databases/CatDatabase/House'
@@ -19,11 +18,6 @@ const SpecialSQLActions: SpecialSQLActionsBenchmark = {
       .getKnexQuery()
       .returning('amount')
       .then(data => data[0].amount)
-  },
-  bigIntColumn: async name => {
-    return getEntityManager('SpecialSQLActions')
-      .findOneOrFail(Cat, { catName: name })
-      .then(data => BigInt(data.id))
   },
   JSONColumn: async id => {
     return getEntityManager('SpecialSQLActions')

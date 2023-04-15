@@ -1,6 +1,6 @@
 import { sql } from '@databases/pg'
 import { EdgeCasesBenchmark } from 'Benchmarks/EdgeCases'
-import { db } from '..'
+import { db, dbTables } from '..'
 
 const EdgeCases: EdgeCasesBenchmark = {
   sqlInjection: async query => {
@@ -11,6 +11,13 @@ const EdgeCases: EdgeCasesBenchmark = {
         }`
       )
       .then(r => Number(r[0].count))
+  },
+  bigIntColumn: async catName => {
+    return dbTables
+      .cat(db)
+      .find({ cat_name: catName })
+      .one()
+      .then(r => r?.id ?? BigInt(0))
   },
 }
 

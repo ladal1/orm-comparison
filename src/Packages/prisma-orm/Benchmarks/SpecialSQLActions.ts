@@ -24,15 +24,6 @@ const SpecialSQLActions: SpecialSQLActionsBenchmark = {
       })
       .then(data => data.amount)
   },
-  bigIntColumn: async (name: string) => {
-    return clients.CatDatabase.cat
-      .findFirst({
-        where: {
-          cat_name: name,
-        },
-      })
-      .then(data => data?.id ?? BigInt(0))
-  },
   JSONColumn: async (id: number) => {
     return clients.CatDatabase.toys_producer
       .findFirst({

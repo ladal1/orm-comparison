@@ -13,14 +13,6 @@ const SpecialSQLActions: SpecialSQLActionsBenchmark = {
       .returning<Array<{ amount: number }>>('amount')
       .then(data => data[0].amount)
   },
-  bigIntColumn: async (name: string) => {
-    return knexInstance
-      .select('id')
-      .from('cat')
-      .where('cat_name', '=', name)
-      .first()
-      .then(data => BigInt(data?.id) ?? BigInt(0))
-  },
   JSONColumn: async (id: number) => {
     return knexInstance
       .select('stock_info')

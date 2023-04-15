@@ -9,6 +9,13 @@ const EdgeCases: EdgeCasesBenchmark = {
       .first()
       .then((result: any) => Number(result.count))
   },
+  bigIntColumn: async (name: string) => {
+    return Cat.query()
+      .select('id')
+      .where('cat_name', '=', name)
+      .first()
+      .then(data => BigInt(data?.id ?? 0))
+  },
 }
 
 export default EdgeCases

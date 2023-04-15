@@ -3,11 +3,6 @@ INSERT INTO toy_house (toy_id, house_id, amount)
 VALUES (:toyId, :houseId, :amount) ON CONFLICT (toy_id, house_id) DO
 UPDATE SET amount = :amount + toy_house.amount RETURNING amount;
 
-/* @name bigIntColumn */
-SELECT id
-FROM cat
-WHERE cat_name = :name;
-
 /* @name JSONColumn */
 SELECT stock_info
 FROM toys_producer

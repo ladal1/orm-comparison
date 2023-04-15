@@ -2,7 +2,6 @@ import * as db from 'zapatos/db'
 import type * as schema from 'zapatos/schema'
 import { pgPool } from '..'
 import { SpecialSQLActionsBenchmark } from 'Benchmarks/SpecialSQLActions'
-import { NotSupported } from 'BenchmarkUtils/BenchmarkRunner'
 
 const SpecialSQLActions: SpecialSQLActionsBenchmark = {
   upsertToysToHouse: async ({ houseId, toyId, amount }) => {
@@ -25,15 +24,7 @@ const SpecialSQLActions: SpecialSQLActionsBenchmark = {
       .run(pgPool)
       .then(data => data.amount)
   },
-  bigIntColumn: async (name: string) => {
-    throw new NotSupported(
-      'Bigint loses precision when converted to Number by zapatos'
-    )
-    // return db
-    //   .selectExactlyOne('cat', { cat_name: name }, { columns: ['id'] })
-    //   .run(pgPool)
-    //   .then(data => BigInt(data?.id ?? 0))
-  },
+
   JSONColumn: async (id: number) => {
     return db
       .selectOne('toys_producer', { id }, { columns: ['stock_info'] })

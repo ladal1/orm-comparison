@@ -16,14 +16,6 @@ const SpecialSQLActions: SpecialSQLActionsBenchmark = {
       .executeTakeFirst()
       .then(data => data?.amount ?? -1)
   },
-  bigIntColumn: async (name: string) => {
-    return kyselyInstance
-      .selectFrom('cat')
-      .select('id')
-      .where('cat_name', '=', name)
-      .executeTakeFirst()
-      .then(data => BigInt(data?.id ?? 0))
-  },
   JSONColumn: async (id: number) => {
     return kyselyInstance
       .selectFrom('toys_producer')

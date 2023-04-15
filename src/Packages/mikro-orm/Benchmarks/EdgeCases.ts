@@ -8,6 +8,11 @@ const EdgeCases: EdgeCasesBenchmark = {
       catName: { $like: `%${query}%` },
     })
   },
+  bigIntColumn: async name => {
+    return getEntityManager('SpecialSQLActions')
+      .findOneOrFail(Cat, { catName: name })
+      .then(data => BigInt(data.id))
+  },
 }
 
 export default EdgeCases

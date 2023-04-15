@@ -1,5 +1,4 @@
 import { SpecialSQLActionsBenchmark } from 'Benchmarks/SpecialSQLActions'
-import { Cat } from '../Databases/CatDatabase/Cat'
 import { ToysProducer } from '../Databases/CatDatabase/ToysProducer'
 import { Op, QueryTypes, literal, where } from 'sequelize'
 import { House } from '../Databases/CatDatabase/House'
@@ -21,13 +20,6 @@ const SpecialSQLActions: SpecialSQLActionsBenchmark = {
         }
       )
       .then(data => Number(data[0].amount))
-  },
-  bigIntColumn: async (name: string) => {
-    return Cat.findOne({
-      where: {
-        cat_name: name,
-      },
-    }).then(data => BigInt(data?.id ?? 0))
   },
   JSONColumn: async (id: number) => {
     return ToysProducer.findOne({

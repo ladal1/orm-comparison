@@ -1,6 +1,5 @@
 import { SpecialSQLActionsBenchmark } from 'Benchmarks/SpecialSQLActions'
 import {
-  bigIntColumn,
   jsonColumn,
   jsonWhere,
   likeQuery,
@@ -16,11 +15,6 @@ const SpecialSQLActions: SpecialSQLActionsBenchmark = {
     return upsertToysToHouse
       .run({ houseId, toyId, amount }, getClient())
       .then(data => data[0].amount)
-  },
-  bigIntColumn: async (name: string) => {
-    return bigIntColumn
-      .run({ name }, getClient())
-      .then(data => BigInt(data[0].id) ?? BigInt(0))
   },
   JSONColumn: async (id: number) => {
     return jsonColumn

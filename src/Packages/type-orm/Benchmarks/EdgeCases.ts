@@ -9,6 +9,13 @@ const EdgeCases: EdgeCasesBenchmark = {
       catName: Like(`%${query}%`),
     })
   },
+  bigIntColumn: async (catName: string) => {
+    return BenchDataSource.getRepository(Cat)
+      .findOne({
+        where: { catName },
+      })
+      .then(cat => BigInt(cat?.id ?? 0))
+  },
 }
 
 export default EdgeCases

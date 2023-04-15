@@ -14,13 +14,7 @@ const SpecialSQLActions: SpecialSQLActionsBenchmark = {
       )
       .then(r => r[0].amount)
   },
-  bigIntColumn: async catName => {
-    return dbTables
-      .cat(db)
-      .find({ cat_name: catName })
-      .one()
-      .then(r => r?.id ?? BigInt(0))
-  },
+
   JSONColumn: async id => {
     return dbTables
       .toys_producer(db)

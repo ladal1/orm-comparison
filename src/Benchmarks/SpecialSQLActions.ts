@@ -12,7 +12,6 @@ export interface SpecialSQLActionsBenchmark extends TestTemplate {
     toyId: number
     amount: number
   }) => Promise<number>
-  bigIntColumn: (name: string) => Promise<bigint>
   JSONColumn: (id: number) => Promise<{ [key: string]: string }>
   JSONWhere: (ticker: string) => Promise<{ [key: string]: string }>
   transactionalOperations: (
@@ -63,17 +62,6 @@ export const SpecialSQLActions = new BenchmarkSuite<SpecialSQLActionsBenchmark>(
           'UPDATE toy_house SET amount=8 WHERE house_id=2 AND toy_id=73;'
         )
       },
-    },
-    // Get the big int column from the table, for type handling
-    bigIntColumn: {
-      testName: 'BigInt Parsing',
-      referenceCheck: async (data: number) => {
-        assert.equal(data, BigInt('9223372036854775800'))
-      },
-      call:
-        (implementation: SpecialSQLActionsBenchmark['bigIntColumn']) => () =>
-          implementation('Johnny Bignumber'),
-      testValidity: true,
     },
     // Get ticker, price and CEO of company which is all stored in an JSON with id 3
     JSONColumn: {

@@ -1,7 +1,6 @@
 import { Model, raw } from 'objection'
 import { ToyHouse } from '../Databases/CatDatabase/ToyHouse'
 import { SpecialSQLActionsBenchmark } from 'Benchmarks/SpecialSQLActions'
-import { Cat } from '../Databases/CatDatabase/Cat'
 import { ToysProducer } from '../Databases/CatDatabase/ToysProducer'
 import { House } from '../Databases/CatDatabase/House'
 
@@ -14,13 +13,6 @@ const SpecialSQLActions: SpecialSQLActionsBenchmark = {
       .returning('amount')
       .first()
       .then(data => data.amount)
-  },
-  bigIntColumn: async (name: string) => {
-    return Cat.query()
-      .select('id')
-      .where('cat_name', '=', name)
-      .first()
-      .then(data => BigInt(data?.id ?? 0))
   },
   JSONColumn: async (id: number) => {
     return ToysProducer.query()

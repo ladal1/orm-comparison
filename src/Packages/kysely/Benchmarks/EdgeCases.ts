@@ -10,6 +10,14 @@ const EdgeCases: EdgeCasesBenchmark = {
       .executeTakeFirst()
       .then(data => Number(data?.cat_count ?? -1))
   },
+  bigIntColumn: async (name: string) => {
+    return kyselyInstance
+      .selectFrom('cat')
+      .select('id')
+      .where('cat_name', '=', name)
+      .executeTakeFirst()
+      .then(data => BigInt(data?.id ?? 0))
+  },
 }
 
 export default EdgeCases

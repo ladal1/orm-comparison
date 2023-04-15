@@ -5,6 +5,7 @@ import assert from 'node:assert/strict'
 
 export interface EdgeCasesBenchmark extends TestTemplate {
   sqlInjection: (query: string) => Promise<number>
+  bigIntColumn: (name: string) => Promise<bigint>
 }
 
 export const EdgeCases = new BenchmarkSuite<EdgeCasesBenchmark>(
@@ -19,6 +20,16 @@ export const EdgeCases = new BenchmarkSuite<EdgeCasesBenchmark>(
       },
       call: (implementation: EdgeCasesBenchmark['sqlInjection']) => () =>
         implementation("a ' or true --"),
+      testValidity: true,
+    },
+    // Get the big int column from the table, for type handling
+    bigIntColumn: {
+      testName: 'BigInt Parsing',
+      referenceCheck: async (data: number) => {
+        assert.equal(data, BigInt('9223372036854775800'))
+      },
+      call: (implementation: EdgeCasesBenchmark['bigIntColumn']) => () =>
+        implementation('Johnny Bignumber'),
       testValidity: true,
     },
   }

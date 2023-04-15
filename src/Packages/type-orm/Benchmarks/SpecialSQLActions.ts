@@ -1,7 +1,6 @@
 import { NotSupported } from 'BenchmarkUtils/BenchmarkRunner'
 import { SpecialSQLActionsBenchmark } from 'Benchmarks/SpecialSQLActions'
 import { BenchDataSource } from '..'
-import { Cat } from '../Databases/CatDatabase/Cat'
 import { ToysProducer } from '../Databases/CatDatabase/ToysProducer'
 import { JsonContains, Like } from 'typeorm'
 import { Toy } from '../Databases/CatDatabase/Toy'
@@ -19,13 +18,6 @@ const SpecialSQLActions: SpecialSQLActionsBenchmark = {
     // .execute()
     // .then(data => data.generatedMaps[0].amount),
     throw new NotSupported()
-  },
-  bigIntColumn: async (catName: string) => {
-    return BenchDataSource.getRepository(Cat)
-      .findOne({
-        where: { catName },
-      })
-      .then(cat => BigInt(cat?.id ?? 0))
   },
   JSONColumn: async (id: number) => {
     return BenchDataSource.getRepository(ToysProducer)

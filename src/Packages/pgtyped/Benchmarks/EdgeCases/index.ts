@@ -1,5 +1,5 @@
 import { getClient } from 'Packages/pgtyped'
-import { sqlInjection } from './EdgeCases.queries'
+import { bigIntColumn, sqlInjection } from './EdgeCases.queries'
 import { EdgeCasesBenchmark } from 'Benchmarks/EdgeCases'
 
 const EdgeCases: EdgeCasesBenchmark = {
@@ -7,6 +7,11 @@ const EdgeCases: EdgeCasesBenchmark = {
     return sqlInjection
       .run({ query: `%${query}%` }, getClient())
       .then(result => Number(result[0].count))
+  },
+  bigIntColumn: async (name: string) => {
+    return bigIntColumn
+      .run({ name }, getClient())
+      .then(data => BigInt(data[0].id) ?? BigInt(0))
   },
 }
 
