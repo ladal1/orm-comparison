@@ -2,206 +2,296 @@
 <html lang="en">
 
 <head>
-  <meta charset='utf-8' />
-  <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no' />
-  <title>ORM Benchmark Results</title>
-  <!-- Latest compiled and minified CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-  <script type='text/javascript'>
-    const data = JSON.parse('{{{data}}}');
-    const colorsByPackage = {
-      "@Databases/Pg": 'rgba(127, 255, 212, 0.4)',
-      "Knex": 'rgba(255, 99, 132, 0.4)',
-      "Kysely": 'rgba(10, 250, 10, 0.4)',
-      "MikroORM": 'rgba(54, 162, 235, 0.4)',
-      "Objection.js": 'rgba(255, 205, 86, 0.4)',
-      "PgTyped": 'rgba(75, 192, 192, 0.4)',
-      "PrismaORM": 'rgba(153, 102, 255, 0.4)',
-      "Sequelize": 'rgba(255, 159, 64, 0.4)',
-      "TypeORM": 'rgba(72, 61, 139, 0.4)',
-      "Zapatos": 'rgba(92, 184, 92, 0.4)'
-    }
-  </script>
-  <style>
-    {{{css}}}
-  </style>
+    <meta charset='utf-8'/>
+    <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'/>
+    <title>ORM Benchmark Results</title>
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script type='text/javascript'>
+        const data = JSON.parse('{{{data}}}');
+        const colorsByPackage = {
+            "@Databases/Pg": 'rgba(127, 255, 212, 0.4)',
+            "Knex": 'rgba(255, 99, 132, 0.4)',
+            "Kysely": 'rgba(10, 250, 10, 0.4)',
+            "MikroORM": 'rgba(54, 162, 235, 0.4)',
+            "Objection.js": 'rgba(255, 205, 86, 0.4)',
+            "PgTyped": 'rgba(75, 192, 192, 0.4)',
+            "PrismaORM": 'rgba(153, 102, 255, 0.4)',
+            "Sequelize": 'rgba(255, 159, 64, 0.4)',
+            "TypeORM": 'rgba(72, 61, 139, 0.4)',
+            "Zapatos": 'rgba(92, 184, 92, 0.4)'
+        }
+    </script>
+    <style>
+            {{{css}}}
+    </style>
 </head>
-
 <body>
-  <nav class="navbar navbar-expand-lg bg-light">
+<div>
+<nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled">Disabled</a>
+                </li>
             </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled">Disabled</a>
-          </li>
-        </ul>
-      </div>
+        </div>
     </div>
-  </nav>
+</nav>
+<div id="validityTableContainer" class="containter-fluid"></div>
+<div id="topDatabaseContainer" class="container-fluid tableOffset"></div>
+</div>
 
-  <div id="topDatabaseContainer" class="container-fluid">
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
-    integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script>
-  <script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script>
+<script>
     Chart.register(Chart.Colors)
 
     const testResultToGraph = (testName, testResult, canvas, chartContainer) => {
-      // Map test cases
-      const errors = []
-      const successes = []
+      console.log(testName)
+        // Map test cases
+        const errors = []
+        const successes = []
 
-      for (const [package, result] of Object.entries(testResult)) {
-        if (result?.time) {
-          successes.push({ package: package, time: result.time })
-        } else {
-          errors.push({ package, result })
+        for (const [package, result] of Object.entries(testResult)) {
+            if (result?.time) {
+                successes.push({package: package, time: result.time})
+            } else {
+                errors.push({package, result})
+            }
         }
-      }
 
-      errors.forEach(error => {
-        const errorText = document.createElement('p')
-        errorText.classList.add('errorText')
-        errorText.innerHTML = (`<b>${error.package}:</b> ${error.result.result.charAt(0) + error.result.result.replace('_', ' ').substring(1).toLowerCase()}`)
-        chartContainer.appendChild(errorText)
-      })
+        errors.forEach(error => {
+            const errorText = document.createElement('p')
+            errorText.classList.add('errorText')
+            errorText.innerHTML = (`<b>${error.package}:</b> ${error.result.result.charAt(0) + error.result.result.replace('_', ' ').substring(1).toLowerCase()}`)
+            chartContainer.appendChild(errorText)
+        })
 
-      const colors = successes.map(success => colorsByPackage[success.package])
+        const colors = successes.map(success => colorsByPackage[success.package])
 
-      const chart = new Chart(canvas, {
-        type: 'bar',
-        data: {
-          labels: successes.map(success => success.package),
-          datasets: [{
-            data: successes.map(success => success.time),
-            borderWidth: 1,
-            backgroundColor: colors,
-            borderColor: colors.map(color => color.replace(/, 0.4\)/, ', 1.0)'))
-          }]
-        },
-        options: {
-          plugins: {
-            title: {
-              display: true,
-              text: testName
+        const chart = new Chart(canvas, {
+            type: 'bar',
+            data: {
+                labels: successes.map(success => success.package),
+                datasets: [{
+                    data: successes.map(success => success.time),
+                    borderWidth: 1,
+                    backgroundColor: colors,
+                    borderColor: colors.map(color => color.replace(/, 0.4\)/, ', 1.0)'))
+                }]
             },
-            legend: {
-              display: false
-            },
-            tooltip: {
-              callbacks: {
-                label: (context) => {
-                  let label = context.dataset.label || ''
-                  return `${label}: ${context.parsed.y} ms`
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: testName
+                    },
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: (context) => {
+                                let label = context.dataset.label || ''
+                                return `${label}: ${context.parsed.y} ms`
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
                 }
-              }
             }
-          },
-          scales: {
-            y: {
-              beginAtZero: true
-            }
-          }
-        }
-      });
+        });
     }
 
+    const resolveTestResult = (result) => {
+      switch (result) {
+        case "PASS":
+          return '✅'
+        case "FAIL":
+          return '❌'
+        case "ERROR":
+          return '❗'
+        case "SKIPPED":
+          return '⏭️'
+        case "NOT_SUPPORTED":
+          return '🚫'
+        case "NOT_IMPLEMENTED":
+          return '❔'
+      }
+    }
+
+    // Create validity test table
+    const validityTestTable = document.createElement('table')
+    validityTestTable.id = 'validityTestTable'
+    document.getElementById('validityTableContainer').appendChild(validityTestTable)
+    // Add headers
+    const validityTestTableDatabaseHeader = document.createElement('tr')
+    validityTestTable.appendChild(validityTestTableDatabaseHeader)
+    const validityTestTableSuiteHeader = document.createElement('tr')
+    validityTestTable.appendChild(validityTestTableSuiteHeader)
+    const validityTestTableTestHeader = document.createElement('tr')
+    validityTestTable.appendChild(validityTestTableTestHeader)
+    //Add spacers
+    const spacerDatabase = document.createElement('td')
+    spacerDatabase.classList.add('spacer')
+    validityTestTableDatabaseHeader.appendChild(spacerDatabase)
+    const spacerSuiters = document.createElement('td')
+    spacerSuiters.classList.add('spacer')
+    validityTestTableSuiteHeader.appendChild(spacerSuiters)
+    const spacerTests = document.createElement('td')
+    spacerTests.classList.add('lastSpacer')
+    validityTestTableTestHeader.appendChild(spacerTests)
+
+    // Get all package names
+    const packageRows = Object.keys(data).reduce((acc, database) => {
+        Object.keys(data[database]).forEach(suite => {
+            Object.keys(data[database][suite]['Validity']).forEach(test => {
+                Object.keys(data[database][suite]['Validity'][test]).forEach(package => {
+                    if (!(package in acc)) {
+                      acc[package] = validityTestTable.insertRow()
+                      const packageNameCell = acc[package].insertCell()
+                      packageNameCell.classList.add('packageHeader')
+                      packageNameCell.appendChild(document.createTextNode(package))
+                    }
+                })
+            })
+        })
+        return acc
+    }, {})
+
+
+    // Add content to headers
     Object.keys(data).forEach(database => {
-      // Create container for suite results of database
+        const colSpans = Object.keys(data[database]).reduce((acc, suite) => {
+            let firstPackage = true
+            if (!'Validity' in data[database][suite]) return acc
+            Object.keys(data[database][suite]['Validity']).forEach(testCase => {
+                const testCaseHeader = document.createElement('td')
+                testCaseHeader.innerText = testCase
+                testCaseHeader.classList.add(firstPackage ? 'firstTestHeader' : 'testHeader')
+                validityTestTableTestHeader.appendChild(testCaseHeader)
+                firstPackage = false
+            })
+            acc.push({ suiteName: suite, span: Object.keys(data[database][suite]['Validity']).length})
+            return acc
+        }, [])
+        const databaseHeader = document.createElement('th')
+        databaseHeader.innerText = database
+        databaseHeader.colSpan = colSpans.reduce((acc, colSpan) => acc + colSpan.span, 0)
+        validityTestTableDatabaseHeader.appendChild(databaseHeader)
+        colSpans.forEach(suite => {
+            const suiteHeader = document.createElement('th')
+            suiteHeader.innerText = suite.suiteName
+            suiteHeader.colSpan = suite.span
+            validityTestTableSuiteHeader.appendChild(suiteHeader)
+            Object.keys(data[database][suite.suiteName]['Validity']).forEach(testCase => {
+                Object.keys(data[database][suite.suiteName]['Validity'][testCase]).forEach(package => {
+                    const packageCell = packageRows[package].insertCell()
+                    packageCell.classList.add('testResult')
+                    packageCell.appendChild(document.createTextNode(resolveTestResult(data[database][suite.suiteName]['Validity'][testCase][package].result)))
+                })
+            })
+        })
+    })
+
+
+
+    Object.keys(data).forEach(database => {
+      let databaseHeader = false
       const databaseContainer = document.createElement('div');
-      databaseContainer.id = `databaseContainer-${database}`;
-      databaseContainer.classList.add('databaseContainer');
-      databaseContainer.classList.add('container-fluid')
-      databaseContainer.classList.add('mx-1')
-      document.getElementById('topDatabaseContainer').appendChild(databaseContainer);
-
-      // Create header for database
-      const databaseHeader = document.createElement('h2');
-      databaseHeader.innerText = database;
-      databaseContainer.appendChild(databaseHeader);
-
       // Map suites
       Object.keys(data[database]).forEach(testSuite => {
-        // Create container for suite results
-        const suiteContainer = document.createElement('div');
-        suiteContainer.id = `suiteContainer-${database}-${testSuite}`;
-        suiteContainer.classList.add('suiteContainer');
-        suiteContainer.classList.add('mx-2')
-        databaseContainer.appendChild(suiteContainer);
+        if ('Latency' in data[database][testSuite]) {
+          console.log(testSuite, 'Latency')
+          if (!databaseHeader) {
+            // Create container for suite results of database
+            databaseContainer.id = `databaseContainer-${database}`;
+            databaseContainer.classList.add('databaseContainer');
+            databaseContainer.classList.add('container-fluid')
+            databaseContainer.classList.add('mx-1')
+            document.getElementById('topDatabaseContainer').appendChild(databaseContainer);
 
-        // Create header for suite
-        const suiteHeader = document.createElement('h3');
-        suiteHeader.innerText = testSuite;
-        suiteContainer.appendChild(suiteHeader);
+            // Create header for database
+            const databaseHeaderText = document.createElement('h2');
+            databaseHeaderText.innerText = database;
+            databaseContainer.appendChild(databaseHeaderText)
+            databaseHeader = true
+          }
 
-        ["Validity", "Latency"].map(testType => {
-          const testTypeContainer = document.createElement('div')
-          testTypeContainer.id = `testTypeContainer-${database}-${testSuite}-${testType}`
-          testTypeContainer.classList.add('testTypeContainer')
-          testTypeContainer.classList.add('row')
-          testTypeContainer.classList.add('mx-1')
-          suiteContainer.appendChild(testTypeContainer)
+          // Create container for suite results
+          const suiteContainer = document.createElement('div');
+          suiteContainer.id = `suiteContainer-${database}-${testSuite}`;
+          suiteContainer.classList.add('testTypeContainer')
+          suiteContainer.classList.add('row')
+          suiteContainer.classList.add('mx-1')
+          suiteContainer.classList.add('suiteContainer');
+          databaseContainer.appendChild(suiteContainer);
 
-          const testTypeHeader = document.createElement('h4')
-          testTypeHeader.innerText = testType
-          testTypeContainer.appendChild(testTypeHeader)
+          const testSuiteHeader = document.createElement('h4')
+          testSuiteHeader.innerText = testSuite
+          suiteContainer.appendChild(testSuiteHeader)
 
-          Object.keys(data[database][testSuite]).forEach(testCase => {
-            if(!data[database][testSuite][testCase][testType]) return
-            if(!Object.values(data[database][testSuite][testCase][testType]).some(result => result?.time)) return
-            // Add graphs for test suites
-            const chartContainer = document.createElement('div');
-            chartContainer.id = `chartContainer-${database}-${testSuite}-${testType}-${testCase}`;
-            chartContainer.classList.add('chartContainer');
-            chartContainer.classList.add('col-4')
-            chartContainer.classList.add('mb-5')
-            testTypeContainer.appendChild(chartContainer);
+          Object.keys(data[database][testSuite]["Latency"]).forEach(testCase => {
+              if (!data[database][testSuite]["Latency"][testCase]) return
+              if (!Object.values(data[database][testSuite]["Latency"][testCase]).some(result => result?.time)) return
+              // Add graphs for test suites
+              const chartContainer = document.createElement('div');
+              chartContainer.id = `chartContainer-${database}-${testSuite}`;
+              chartContainer.classList.add('chartContainer');
+              chartContainer.classList.add('col-4')
+              chartContainer.classList.add('mb-5')
+              suiteContainer.appendChild(chartContainer);
 
-            const chartCanvas = document.createElement('canvas');
-            chartCanvas.id = `chartCanvas-${database}-${testSuite}-${testType}-${testCase}`;
-            chartContainer.appendChild(chartCanvas);
+              const chartCanvas = document.createElement('canvas');
+              chartCanvas.id = `chartCanvas-${database}-${testSuite}-${testCase}`;
+              chartContainer.appendChild(chartCanvas);
 
-            testResultToGraph(`${testCase} ${testType}`, data[database][testSuite][testCase][testType], chartCanvas, chartContainer)
+              testResultToGraph(`${testCase} Latency`, data[database][testSuite]["Latency"][testCase], chartCanvas, chartContainer)
           })
-        })
+        }
       })
     })
-  </script>
+</script>
 </body>
 
 </html>

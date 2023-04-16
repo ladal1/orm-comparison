@@ -12,11 +12,11 @@ export class ToysProducer {
   @PrimaryKey()
   id!: number
 
-  @Property({ columnType: 'json' })
-  stockInfo!: any
+  @Property({ type: 'jsonb' })
+  stockInfo: any
 
-  @Property({ columnType: 'json' })
-  hqLocation!: any
+  @Property({ type: 'json' })
+  hqLocation: any
 
   @OneToMany({ entity: () => Toy, mappedBy: 'toysProducer' })
   toysProduced = new Collection<Toy>(this)

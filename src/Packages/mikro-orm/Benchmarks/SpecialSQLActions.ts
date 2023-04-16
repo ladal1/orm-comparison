@@ -4,7 +4,6 @@ import { ToyHouse } from '../Databases/CatDatabase/ToyHouse'
 import { ToysProducer } from '../Databases/CatDatabase/ToysProducer'
 import { Toy } from '../Databases/CatDatabase/Toy'
 import { House } from '../Databases/CatDatabase/House'
-import { NotSupported } from 'BenchmarkUtils/BenchmarkRunner'
 
 const SpecialSQLActions: SpecialSQLActionsBenchmark = {
   upsertToysToHouse: async ({ houseId, toyId, amount }) => {
@@ -25,12 +24,17 @@ const SpecialSQLActions: SpecialSQLActionsBenchmark = {
       .then(data => data.stockInfo)
   },
   JSONWhere: async ticker => {
+    return getEntityManager('SpecialSQLActions')
+      .findOneOrFail(ToysProducer, {
+        stockInfo: { ticker },
+      })
+      .then(data => data?.stockInfo ?? {})
+
     // return getEntityManager('SpecialSQLActions')
     //   .findOneOrFail(ToysProducer, {
-    //     stockInfo: { ticker }
+    //     stockInfo: { $contains: { ticker } }
     //   })
     //   .then(data => data?.stockInfo ?? {})
-    throw new NotSupported()
   },
   transactionalOperations: async (producer, toy) => {
     await getEntityManager('SpecialSQLActions').transactional(async em => {

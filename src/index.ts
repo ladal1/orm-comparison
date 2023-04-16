@@ -33,7 +33,7 @@ const br = new BenchmarkRunner(
   ],
   [
     // MvpBench,
-    // EntityTraversal,
+    EntityTraversal,
     SpecialSQLActions,
     EdgeCases,
   ],

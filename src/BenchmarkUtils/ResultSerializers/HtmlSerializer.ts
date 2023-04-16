@@ -13,8 +13,8 @@ export class HtmlSerializer extends BaseSerializer {
   private data: {
     [databaseName: string]: {
       [suiteName: string]: {
-        [testName: string]: {
-          [testType: string]: {
+        [testType: string]: {
+          [testName: string]: {
             [packageName: string]: TestValidationResult
           }
         }
@@ -46,13 +46,13 @@ export class HtmlSerializer extends BaseSerializer {
   ): void {
     const data = this.data[databaseName][suiteName]
     if (data) {
-      if (!data[testName]) {
-        data[testName] = {}
+      if (!data[testType]) {
+        data[testType] = {}
       }
-      if (!data[testName][testType]) {
-        data[testName][testType] = {}
+      if (!data[testType][testName]) {
+        data[testType][testName] = {}
       }
-      data[testName][testType][packageName] = testResult
+      data[testType][testName][packageName] = testResult
     }
   }
 

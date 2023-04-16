@@ -75,6 +75,8 @@ export const SpecialSQLActions = new BenchmarkSuite<SpecialSQLActionsBenchmark>(
       call: (implementation: SpecialSQLActionsBenchmark['JSONColumn']) => () =>
         implementation(4),
       testValidity: true,
+      testLatency: true,
+      latencyIterations: 1000,
     },
     // Get json column based on where clause (ticker)
     JSONWhere: {
@@ -88,6 +90,8 @@ export const SpecialSQLActions = new BenchmarkSuite<SpecialSQLActionsBenchmark>(
       call: (implementation: SpecialSQLActionsBenchmark['JSONWhere']) => () =>
         implementation('VAG.NER'),
       testValidity: true,
+      testLatency: true,
+      latencyIterations: 1000,
     },
     // Create toy producer, then create toy made by that company - in one transaction, then rollback and return count of toy producers
     transactionalOperations: {
@@ -117,6 +121,8 @@ export const SpecialSQLActions = new BenchmarkSuite<SpecialSQLActionsBenchmark>(
             }
           ),
       testValidity: true,
+      testLatency: true,
+      latencyIterations: 100,
     },
     // All ids of houses whose address includes Union
     likeQuery: {
@@ -127,6 +133,8 @@ export const SpecialSQLActions = new BenchmarkSuite<SpecialSQLActionsBenchmark>(
       call: (implementation: SpecialSQLActionsBenchmark['likeQuery']) => () =>
         implementation('Union'),
       testValidity: true,
+      testLatency: true,
+      latencyIterations: 1000,
     },
   }
 )

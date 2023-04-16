@@ -1,3 +1,43 @@
 .errorText {
-    margin-bottom: 0;
+  margin-bottom: 0;
+}
+
+table,
+th {
+  border: 2px solid black;
+  border-collapse: collapse;
+}
+
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 8px;
+  text-align: center;
+}
+
+.testHeader {
+    border-bottom: 2px solid black;
+}
+
+.firstTestHeader {
+    @extend .testHeader;
+    border-left: 2px solid black;
+}
+
+.packageHeader {
+    border-right: 2px solid black;
+}
+
+.spacer {
+    border: 0px;
+}
+
+.lastSpacer {
+    @extend .spacer;
+    border-bottom: 2px solid black;
+}
+
+#validityTestTable {
+    margin-left: 10px;
+    margin-right: 10px;
 }
