@@ -6,23 +6,29 @@ import { EntityTraversalBenchmark } from 'Benchmarks/EntityTraversal'
 const EntityTraversal: EntityTraversalBenchmark = {
   getCatColor: async id => {
     return db
-      .selectOne('cat', db.all, {
-        lateral: {
-          cat_color: db.selectExactlyOne(
-            'cat_color',
-            {
-              id: db.parent('cat_color_id'),
-            },
-            {
-              lateral: {
-                color_hex: db.selectExactlyOne('color_hex', {
-                  id: db.parent('id'),
-                }),
-              },
-            }
-          ),
+      .selectOne(
+        'cat',
+        {
+          id,
         },
-      })
+        {
+          lateral: {
+            cat_color: db.selectExactlyOne(
+              'cat_color',
+              {
+                id: db.parent('cat_color_id'),
+              },
+              {
+                lateral: {
+                  color_hex: db.selectExactlyOne('color_hex', {
+                    id: db.parent('id'),
+                  }),
+                },
+              }
+            ),
+          },
+        }
+      )
       .run(pgPool)
       .then(cat => cat?.cat_color.color_hex.hex_code ?? '')
   },
