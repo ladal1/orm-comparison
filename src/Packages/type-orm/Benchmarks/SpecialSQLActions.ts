@@ -1,4 +1,3 @@
-import { NotSupported } from 'BenchmarkUtils/BenchmarkRunner'
 import { SpecialSQLActionsBenchmark } from 'Benchmarks/SpecialSQLActions'
 import { BenchDataSource } from '..'
 import { ToysProducer } from '../Databases/CatDatabase/ToysProducer'
@@ -8,6 +7,10 @@ import { House } from '../Databases/CatDatabase/House'
 
 const SpecialSQLActions: SpecialSQLActionsBenchmark = {
   upsertToysToHouse: async ({ houseId, toyId, amount }) => {
+    return BenchDataSource.query(
+      'INSERT INTO toy_house (house_id, toy_id, amount) VALUES ($1, $2, $3) ON CONFLICT (house_id, toy_id) DO UPDATE SET amount = toy_house.amount + $4 RETURNING amount;',
+      [houseId, toyId, amount, amount]
+    ).then(data => Number(data[0].amount))
     // BenchDataSource.getRepository(ToyHouse)
     // .createQueryBuilder()
     // .insert()
@@ -17,7 +20,6 @@ const SpecialSQLActions: SpecialSQLActionsBenchmark = {
     // .returning('*')
     // .execute()
     // .then(data => data.generatedMaps[0].amount),
-    throw new NotSupported()
   },
   JSONColumn: async (id: number) => {
     return BenchDataSource.getRepository(ToysProducer)
