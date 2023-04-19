@@ -51,7 +51,6 @@
     Chart.register(Chart.Colors)
 
     const testResultToGraph = (testName, testResult, canvas, chartContainer) => {
-      console.log(testName)
         // Map test cases
         const errors = []
         const successes = []
@@ -63,6 +62,7 @@
                 errors.push({package, result})
             }
         }
+        console.log(testName, JSON.stringify(successes))
 
         errors.forEach(error => {
             const errorText = document.createElement('p')
@@ -210,7 +210,6 @@
       // Map suites
       Object.keys(data[database]).forEach(testSuite => {
         if ('Latency' in data[database][testSuite]) {
-          console.log(testSuite, 'Latency')
           if (!databaseHeader) {
             // Create container for suite results of database
             databaseContainer.id = `databaseContainer-${database}`;
