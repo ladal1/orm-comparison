@@ -7,7 +7,7 @@ const EntityTraversal: EntityTraversalBenchmark = {
   getCatColor: async id => {
     return BenchDataSource.getRepository(Cat)
       .findOne({
-        where: { id },
+        where: { id: id.toString() },
         relations: {
           catColor: {
             colorHex: true,
@@ -34,7 +34,7 @@ const EntityTraversal: EntityTraversalBenchmark = {
           toyHouses: {
             house: {
               cats: {
-                id,
+                id: id.toString(),
               },
             },
           },

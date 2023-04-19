@@ -11,7 +11,7 @@ import { House } from './House'
 @Entity()
 export class Cat {
   @PrimaryGeneratedColumn({ type: 'bigint' })
-  declare id: bigint
+  declare id: string
 
   @Column()
   declare catName: string
