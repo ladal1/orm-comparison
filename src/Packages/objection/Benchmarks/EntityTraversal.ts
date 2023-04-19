@@ -4,12 +4,15 @@ import { Toy } from '../Databases/CatDatabase/Toy'
 
 const EntityTraversal: EntityTraversalBenchmark = {
   getCatColor: async id => {
-    return Cat.query()
-      .findById(id)
-      .withGraphFetched('catColor.colorHex')
-      .then(cat => {
-        return cat?.catColor?.colorHex?.hexCode ?? ''
-      })
+    return (
+      Cat.query()
+        .findById(id)
+        //    .joinRelated('catColor.colorHex')
+        .withGraphFetched('catColor.colorHex')
+        .then(cat => {
+          return cat?.catColor?.colorHex?.hexCode ?? ''
+        })
+    )
   },
   countCatsByColor: async (hexColor: string) => {
     return Cat.query()

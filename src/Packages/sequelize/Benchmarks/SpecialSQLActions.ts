@@ -29,6 +29,11 @@ const SpecialSQLActions: SpecialSQLActionsBenchmark = {
     }).then(data => (data?.stockInfo as { [key: string]: string }) ?? {})
   },
   JSONWhere: async (ticker: string) => {
+    // where: {
+    //   'stockInfo.ticker': {
+    //     [Op.eq]: ticker,
+    //   },
+    // },
     return ToysProducer.findOne({
       where: where(literal("stock_info->>'ticker'"), ticker),
     }).then(data => (data?.stockInfo as { [key: string]: string }) ?? {})
