@@ -3,6 +3,7 @@ import { Client } from 'pg'
 import { BenchmarkSuite } from './BenchmarkSuite'
 import { BaseSerializer } from 'BenchmarkUtils/ResultSerializers/BaseSerializer'
 import Database from 'BenchmarkUtils/interfaces/DatabaseUtils'
+import config from 'config'
 
 interface DatabaseSuites {
   database: Database
@@ -19,9 +20,9 @@ export class BenchmarkRunner {
     private readonly reporters: BaseSerializer[] = []
   ) {
     this.utilConnection = new Client({
-      user: 'benchmark',
-      host: 'localhost',
-      password: 'benchmark_pwd',
+      user: config.database.user,
+      host: config.database.host,
+      password: config.database.password,
       application_name: 'BenchmarkRunner',
     })
     for (const benchmark of benchmarkSuites) {
