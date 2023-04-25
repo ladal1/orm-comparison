@@ -23,9 +23,26 @@ export class HtmlSerializer extends BaseSerializer {
   } = {}
 
   constructor(
-    private readonly outputPath: string = path.join('out', 'results.html')
+    private readonly outputPath: string = path.join(
+      'out',
+      `${HtmlSerializer.dateToNumberString()}-results.html`
+    )
   ) {
     super()
+  }
+
+  static dateToNumberString(): string {
+    const temp = new Date()
+    const pad = (i: number) => (i < 10 ? '0' + i.toString() : '' + i.toString())
+
+    return (
+      temp.getFullYear().toString() +
+      pad(1 + temp.getMonth()).toString() +
+      pad(temp.getDate()) +
+      pad(temp.getHours()) +
+      pad(temp.getMinutes()) +
+      pad(temp.getSeconds())
+    )
   }
 
   public override async openSerializer(): Promise<void> {
