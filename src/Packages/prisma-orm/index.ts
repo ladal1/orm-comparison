@@ -5,6 +5,7 @@ import config from 'config'
 import EntityTraversal from './Benchmarks/EntityTraversal'
 import EdgeCases from './Benchmarks/EdgeCases'
 import SpecialSQLActions from './Benchmarks/SpecialSQLActions'
+import BulkOperations from './Benchmarks/BulkOperations'
 
 const dynamicDatasource = {
   datasources: { db: { url: config.database.url } },
@@ -30,6 +31,7 @@ const PrismaPackage: IORMPackage = {
     EntityTraversal,
     EdgeCases,
     SpecialSQLActions,
+    BulkOperations,
   },
 }
 

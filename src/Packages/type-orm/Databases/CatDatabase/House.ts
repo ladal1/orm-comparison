@@ -1,6 +1,6 @@
 import {
   Entity,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
   Column,
   ManyToMany,
   JoinTable,
@@ -11,7 +11,7 @@ import { ToyHouse } from './ToyHouse'
 
 @Entity()
 export class House {
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn()
   declare id: number
 
   @Column()

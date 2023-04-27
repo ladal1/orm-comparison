@@ -24,11 +24,11 @@ export const BulkOperations = new BenchmarkSuite<BulkOperationsBenchmark>(
     bulkInsert: {
       testName: 'Bulk Insert',
       referenceCheck: async (data: number) => {
-        assert.equal(data, 6000)
+        assert.equal(data, 31000)
       },
       call: (implementation: BulkOperationsBenchmark['bulkInsert']) => () =>
         implementation(
-          Array.from({ length: 5000 }, (_, i) => ({
+          Array.from({ length: 30000 }, (_, i) => ({
             id: 10000 + i,
             houseAddress: `House ${i}`,
             hasDog: i % 2 === 0,
@@ -49,9 +49,9 @@ export const BulkOperations = new BenchmarkSuite<BulkOperationsBenchmark>(
         assert.equal(data, 0)
       },
       reset: async pg => {
-        await pg.query(`insert into toy (id, toys_producer_id, toy_name, barcode, price, currency) values (300, 1, 'Catnip', '667322379012', 5.99, 'USD');
-                insert into toy (id, barcode, price, currency, toy_name, toys_producer_id, naughty) values (301, '100003200000', 100.0, 'USD', 'Catnip', 2, '1/0');
-                insert into toy (id, barcode, price, currency, toy_name, toys_producer_id, naughty) values (302, '100420000001', 100.0, 'USD', 'Catnip', 5, '1/0');`)
+        await pg.query(`insert into toy (id, toys_producer_id, toy_name, barcode, price, currency) values (300, 1, 'Catnip', '667322379012', 5.99, 'USD') ON CONFLICT DO NOTHING;
+                insert into toy (id, barcode, price, currency, toy_name, toys_producer_id, naughty) values (301, '100003200000', 100.0, 'USD', 'Catnip', 2, '1/0') ON CONFLICT DO NOTHING;
+                insert into toy (id, barcode, price, currency, toy_name, toys_producer_id, naughty) values (302, '100420000001', 100.0, 'USD', 'Catnip', 5, '1/0') ON CONFLICT DO NOTHING;`)
       },
       testValidity: true,
       testLatency: true,

@@ -6,6 +6,7 @@ import config from 'config'
 import SpecialSQLActions from './Benchmarks/SpecialSQLActions'
 import EntityTraversal from './Benchmarks/EntityTraversal'
 import EdgeCases from './Benchmarks/EdgeCases'
+import BulkOperations from './Benchmarks/BulkOperation'
 
 let mikroORM: MikroORM<PostgreSqlDriver>
 const contextMap = new Map()
@@ -53,5 +54,6 @@ export const MikroORMPackage: IORMPackage = {
     EntityTraversal,
     SpecialSQLActions,
     EdgeCases,
+    BulkOperations,
   },
 }

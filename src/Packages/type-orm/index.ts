@@ -5,6 +5,7 @@ import EntityTraversal from './Benchmarks/EntityTraversal'
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies'
 import EdgeCases from './Benchmarks/EdgeCases'
 import SpecialSQLActions from './Benchmarks/SpecialSQLActions'
+import BulkOperations from './Benchmarks/BulkOperations'
 
 export let BenchDataSource: DataSource
 
@@ -36,5 +37,6 @@ export const TypeORMPackage: IORMPackage = {
     EntityTraversal,
     SpecialSQLActions,
     EdgeCases,
+    BulkOperations,
   },
 }

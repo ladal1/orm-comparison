@@ -1,19 +1,21 @@
-import { map } from 'lodash'
+import { chunk, map } from 'lodash'
 import { kyselyInstance } from '..'
 import { BulkOperationsBenchmark } from 'Benchmarks/BulkOperations'
 
 const BulkOperations: BulkOperationsBenchmark = {
   bulkInsert: async data => {
-    await kyselyInstance
-      .insertInto('house')
-      .values(
-        map(data, ({ id, houseAddress, hasDog }) => ({
-          id,
-          house_address: houseAddress,
-          has_dog: hasDog,
-        }))
-      )
-      .execute()
+    for (const ch of chunk(data, 1000)) {
+      await kyselyInstance
+        .insertInto('house')
+        .values(
+          map(ch, ({ id, houseAddress, hasDog }) => ({
+            id,
+            house_address: houseAddress,
+            has_dog: hasDog,
+          }))
+        )
+        .execute()
+    }
     return kyselyInstance
       .selectFrom('house')
       .select(kyselyInstance.fn.count('id').as('count'))

@@ -5,6 +5,7 @@ import IORMPackage from 'BenchmarkUtils/interfaces/PackageUtils'
 import EntityTraversal from './Benchmarks/EntityTraversal'
 import EdgeCases from './Benchmarks/EdgeCases'
 import SpecialSQLActions from './Benchmarks/SpecialSQLActions'
+import BulkOperations from './Benchmarks/BulkOperations'
 
 const initialize = async () => {
   const _knex = knex({
@@ -28,5 +29,6 @@ export const ObjectionPackage: IORMPackage = {
     EntityTraversal,
     EdgeCases,
     SpecialSQLActions,
+    BulkOperations,
   },
 }

@@ -35,7 +35,7 @@ export class Toy extends Model {
         price: { type: 'integer' },
         naugthy: { type: 'string' },
         barcode: { type: 'string' },
-        date_introduced: { type: 'date' },
+        date_introduced: { type: 'string' },
       },
     }
   }

@@ -3,6 +3,7 @@ import pg from 'pg'
 import EntityTraversal from './Benchmarks/EntityTraversal'
 import EdgeCases from './Benchmarks/EdgeCases'
 import SpecialSQLActions from './Benchmarks/SpecialSQLActions'
+import BulkOperations from './Benchmarks/BulkOperations'
 
 export let pgPool: pg.Pool
 
@@ -22,5 +23,6 @@ export const ZapatosPackage = {
     EntityTraversal,
     SpecialSQLActions,
     EdgeCases,
+    BulkOperations,
   },
 }

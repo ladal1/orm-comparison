@@ -5,6 +5,7 @@ import { Sequelize } from 'sequelize-typescript'
 import EntityTraversal from './Benchmarks/EntityTraversal'
 import SpecialSQLActions from './Benchmarks/SpecialSQLActions'
 import EdgeCases from './Benchmarks/EdgeCases'
+import BulkOperations from './Benchmarks/BulkOperations'
 
 let _sequelize: Sequelize | null = null
 
@@ -43,6 +44,7 @@ export const SequelizePackage: IORMPackage = {
     EntityTraversal,
     SpecialSQLActions,
     EdgeCases,
+    BulkOperations,
   },
 }
 

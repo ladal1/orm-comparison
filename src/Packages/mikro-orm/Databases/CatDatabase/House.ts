@@ -30,4 +30,20 @@ export class House {
 
   @OneToMany({ entity: () => ToyHouse, mappedBy: 'house' })
   toysHouse = new Collection<ToyHouse>(this)
+
+  constructor({
+    id,
+    houseAddress,
+    hasDog,
+  }: {
+    id?: number
+    houseAddress?: string
+    hasDog?: boolean
+  }) {
+    if (id) {
+      this.id = id
+    }
+    this.houseAddress = houseAddress
+    this.hasDog = hasDog
+  }
 }

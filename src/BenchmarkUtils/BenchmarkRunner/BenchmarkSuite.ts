@@ -114,6 +114,7 @@ export class BenchmarkSuite<T extends TestTemplate> {
       await resetFn()
       return { result: TestResult.PASS, time: finishTime - startTime }
     } catch (e) {
+      await resetFn()
       return this.errorHandler(e, TestType.VALIDITY)
     }
   }
@@ -132,6 +133,7 @@ export class BenchmarkSuite<T extends TestTemplate> {
         await validationFn(data)
         await resetFn()
       } catch (e) {
+        await resetFn()
         return this.errorHandler(e, TestType.LATENCY)
       }
     }
