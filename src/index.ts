@@ -17,25 +17,27 @@ import { TypeORMPackage } from './Packages/type-orm'
 import { SequelizePackage } from './Packages/sequelize'
 import { ZapatosPackage } from './Packages/zapatos'
 import { DatabasesPackage } from './Packages/databases-pg'
+import { BulkOperations } from 'Benchmarks/BulkOperations'
 
 const br = new BenchmarkRunner(
   [
-    DatabasesPackage,
-    KnexPackage,
+    // DatabasesPackage,
+    // KnexPackage,
     KyselyPackage,
-    MikroORMPackage,
-    ObjectionPackage,
-    PgTypedPackage,
-    PrismaPackage,
-    SequelizePackage,
-    TypeORMPackage,
-    ZapatosPackage,
+    // MikroORMPackage,
+    // ObjectionPackage,
+    // PgTypedPackage,
+    // PrismaPackage,
+    // SequelizePackage,
+    // TypeORMPackage,
+    // ZapatosPackage,
   ],
   [
     // MvpBench,
-    EntityTraversal,
-    SpecialSQLActions,
-    EdgeCases,
+    // EntityTraversal,
+    // SpecialSQLActions,
+    // EdgeCases,
+    BulkOperations,
   ],
   [new ConsoleSerializer(), new HtmlSerializer()]
 )

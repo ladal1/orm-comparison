@@ -7,6 +7,7 @@
     "license": "MIT",
     "dependencies": {
         "@databases/pg": "^5.4.1",
+        "@databases/pg-bulk": "^1.2.0",
         "@databases/pg-schema-cli": "^4.3.1",
         "@databases/pg-typed": "^4.4.0"
     }

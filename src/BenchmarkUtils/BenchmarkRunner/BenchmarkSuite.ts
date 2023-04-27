@@ -130,6 +130,7 @@ export class BenchmarkSuite<T extends TestTemplate> {
       try {
         const data = await implementationFn()
         await validationFn(data)
+        await resetFn()
       } catch (e) {
         return this.errorHandler(e, TestType.LATENCY)
       }

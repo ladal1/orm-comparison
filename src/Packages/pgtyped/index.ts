@@ -1,9 +1,10 @@
 import { Client } from 'pg'
 import config from 'config'
+import IORMPackage from 'BenchmarkUtils/interfaces/PackageUtils'
 import EntityTraversal from './Benchmarks/EntityTraversal'
 import SpecialSQLActions from './Benchmarks/SpecialSQLActions'
-import IORMPackage from 'BenchmarkUtils/interfaces/PackageUtils'
 import EdgeCases from './Benchmarks/EdgeCases'
+import BulkOperations from './Benchmarks/BulkOperations'
 
 let _client: Client
 
@@ -28,6 +29,7 @@ const PgTypedPackage: IORMPackage = {
     EntityTraversal,
     SpecialSQLActions,
     EdgeCases,
+    BulkOperations,
   },
 }
 

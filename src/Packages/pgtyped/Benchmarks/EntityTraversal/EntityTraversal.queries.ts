@@ -3,7 +3,7 @@ import { PreparedQuery } from '@pgtyped/runtime'
 
 /** 'GetCatColorById' parameters type */
 export interface IGetCatColorByIdParams {
-  catId?: string | null | void
+  catId?: number | string | null | void
 }
 
 /** 'GetCatColorById' return type */
@@ -99,7 +99,7 @@ export const countCatsByColor = new PreparedQuery<
 
 /** 'GetToysAvailableToCat' parameters type */
 export interface IGetToysAvailableToCatParams {
-  catId?: string | null | void
+  catId?: number | string | null | void
 }
 
 /** 'GetToysAvailableToCat' return type */
@@ -120,11 +120,11 @@ const getToysAvailableToCatIR: any = {
       name: 'catId',
       required: false,
       transform: { type: 'scalar' },
-      locs: [{ a: 202, b: 207 }],
+      locs: [{ a: 166, b: 171 }],
     },
   ],
   statement:
-    'SELECT\n  toy.toy_name\nFROM\n  toy\n  JOIN toy_house ON toy_house.toy_id = toy.id\n  JOIN house ON house.id = toy_house.house_id\n  JOIN house_cat ON house_cat.house_id = house.id\nWHERE\n  house_cat.cat_id = :catId',
+    'SELECT\n  toy.toy_name\nFROM\n  toy\n  JOIN toy_house ON toy_house.toy_id = toy.id\n  JOIN house_cat ON house_cat.house_id = toy_house.house_id\nWHERE\n  house_cat.cat_id = :catId',
 }
 
 /**
@@ -135,8 +135,7 @@ const getToysAvailableToCatIR: any = {
  * FROM
  *   toy
  *   JOIN toy_house ON toy_house.toy_id = toy.id
- *   JOIN house ON house.id = toy_house.house_id
- *   JOIN house_cat ON house_cat.house_id = house.id
+ *   JOIN house_cat ON house_cat.house_id = toy_house.house_id
  * WHERE
  *   house_cat.cat_id = :catId
  * ```

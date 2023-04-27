@@ -7,6 +7,7 @@ import IORMPackage from 'BenchmarkUtils/interfaces/PackageUtils'
 import EntityTraversal from './Benchmarks/EntityTraversal'
 import SpecialSQLActions from './Benchmarks/SpecialSQLActions'
 import EdgeCases from './Benchmarks/EdgeCases'
+import BulkOperations from './Benchmarks/BulkOperations'
 
 export let kyselyInstance: Kysely<CatDatabase>
 
@@ -30,5 +31,6 @@ export const KyselyPackage: IORMPackage = {
     EntityTraversal,
     SpecialSQLActions,
     EdgeCases,
+    BulkOperations,
   },
 }

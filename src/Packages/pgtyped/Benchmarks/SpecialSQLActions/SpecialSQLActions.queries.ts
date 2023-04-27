@@ -252,9 +252,9 @@ export const transactionalOperationsInsertProducer = new PreparedQuery<
 export interface ITransactionalOperationsInsertToyParams {
   barcode?: string | null | void
   currency?: string | null | void
-  date_introduced?: Date | null | void
+  date_introduced?: Date | string | null | void
   id?: number | null | void
-  price?: string | null | void
+  price?: number | string | null | void
   toy_name?: string | null | void
   toys_producer_id?: number | null | void
 }

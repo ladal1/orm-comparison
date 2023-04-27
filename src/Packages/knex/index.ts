@@ -5,6 +5,7 @@ import MvpBench from './Benchmarks/SampleBenchmark'
 import EntityTraversal from './Benchmarks/EntityTraversal'
 import SpecialSQLActions from './Benchmarks/SpecialSQLActions'
 import EdgeCases from './Benchmarks/EdgeCases'
+import BulkOperations from './Benchmarks/bulkOperations'
 
 let _knex: Knex
 
@@ -27,6 +28,7 @@ export const KnexPackage: IORMPackage = {
     EntityTraversal,
     SpecialSQLActions,
     EdgeCases,
+    BulkOperations,
   },
 }
 

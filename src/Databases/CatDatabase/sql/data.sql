@@ -6342,7 +6342,7 @@ insert into toys_producer (id, hq_location, stock_info) values (21, '["7 Charles
 
 -- Insert toys
 
-insert into toy (id, toys_producer_id, toy_name, barcode, price, currency) values (1, 1, 'Catnip', '667321679012', 5.99, 'USD');
+insert into toy (id, barcode, price, currency, toy_name, toys_producer_id, naughty) values (1, '473408829853', 19.75, 'XAF', 'Scratcher', 6, '1E02');
 insert into toy (id, barcode, price, currency, toy_name, toys_producer_id, naughty) values (2, '593593051966', 16.18, 'THB', 'Trencher', 2, 'הָיְתָהtestالصفحات التّحول');
 insert into toy (id, barcode, price, currency, toy_name, toys_producer_id, naughty) values (3, '780605489446', 96.78, 'UAH', 'Backhoe', null, null);
 insert into toy (id, barcode, price, currency, toy_name, toys_producer_id, naughty) values (4, '875684774524', 84.58, 'CNY', 'Bulldozer', null, null);
@@ -6397,15 +6397,15 @@ insert into toy (id, barcode, price, currency, toy_name, toys_producer_id, naugh
 insert into toy (id, barcode, price, currency, toy_name, toys_producer_id, naughty) values (53, '894662928371', 150.09, 'VEF', 'Crawler', 3, '˙ɐnbᴉlɐ ɐuƃɐɯ ǝɹolop ʇǝ ǝɹoqɐl ʇn ʇunpᴉpᴉɔuᴉ ɹodɯǝʇ poɯsnᴉǝ op pǝs ''ʇᴉlǝ ƃuᴉɔsᴉdᴉpɐ ɹnʇǝʇɔǝsuoɔ ''ʇǝɯɐ ʇᴉs ɹolop ɯnsdᴉ ɯǝɹo˥');
 insert into toy (id, barcode, price, currency, toy_name, toys_producer_id, naughty) values (54, '553704594989', 26.24, 'BRL', 'Crawler', 13, '<script>alert(''hi'')</script>');
 insert into toy (id, barcode, price, currency, toy_name, toys_producer_id, naughty) values (55, '504179785305', 185.57, 'PLN', 'Bulldozer', null, null);
-insert into toy (id, barcode, price, currency, toy_name, toys_producer_id, naughty) values (56, '832262212804', 50.11, 'RUB', 'Scraper', 18, '١٢٣');
+insert into toy (id, barcode, price, currency, toy_name, toys_producer_id, naughty) values (56, '832262212804', 50.11, 'GBP', 'Scraper', 18, '١٢٣');
 insert into toy (id, barcode, price, currency, toy_name, toys_producer_id, naughty) values (57, '348818167065', 37.95, 'MAD', 'Excavator', 19, ',。・:*:・゜’( ☻ ω ☻ )。・:*:・゜’');
 insert into toy (id, barcode, price, currency, toy_name, toys_producer_id, naughty) values (58, '949144481992', 51.01, 'ZMW', 'Dump Truck', null, null);
 insert into toy (id, barcode, price, currency, toy_name, toys_producer_id, naughty) values (59, '150757510319', 4.45, 'EUR', 'Dump Truck', 10, '˙ɐnbᴉlɐ ɐuƃɐɯ ǝɹolop ʇǝ ǝɹoqɐl ʇn ʇunpᴉpᴉɔuᴉ ɹodɯǝʇ poɯsnᴉǝ op pǝs ''ʇᴉlǝ ƃuᴉɔsᴉdᴉpɐ ɹnʇǝʇɔǝsuoɔ ''ʇǝɯɐ ʇᴉs ɹolop ɯnsdᴉ ɯǝɹo˥');
 insert into toy (id, barcode, price, currency, toy_name, toys_producer_id, naughty) values (60, '974496147594', 165.35, 'IDR', 'Grader', 2, '0.00');
 insert into toy (id, barcode, price, currency, toy_name, toys_producer_id, naughty) values (61, '862533973429', 43.52, 'VEF', 'Excavator', 3, ' ');
 insert into toy (id, barcode, price, currency, toy_name, toys_producer_id, naughty) values (62, '145191140569', 76.11, 'RUB', 'Backhoe', 18, '<>?:"{}|_+');
-insert into toy (id, barcode, price, currency, toy_name, toys_producer_id, naughty) values (63, '473408829853', 19.75, 'XAF', 'Grader', 6, '1E02');
-insert into toy (id, barcode, price, currency, toy_name, toys_producer_id, naughty) values (64, '404210808889', 39.91, 'RUB', 'Scratcher post', 10, '1E+02');
+insert into toy (id, barcode, price, currency, toy_name, toys_producer_id, naughty) values (63, '473408829854', 19.75, 'XAF', 'Grader', 6, '1E02');
+insert into toy (id, barcode, price, currency, toy_name, toys_producer_id, naughty) values (64, '404210808889', 39.91, 'GBP', 'Scratcher post', 10, '1E+02');
 insert into toy (id, barcode, price, currency, toy_name, toys_producer_id, naughty) values (65, '399150397896', 43.43, 'IDR', 'Feather', 20, 'NULL');
 insert into toy (id, barcode, price, currency, toy_name, toys_producer_id, naughty) values (66, '124598347553', 164.65, 'PHP', 'Backhoe', 8, '田中さんにあげて下さい');
 insert into toy (id, barcode, price, currency, toy_name, toys_producer_id, naughty) values (67, '574493828188', 142.1, 'CNY', 'Dump Truck', 18, '🐵 🙈 🙉 🙊');
@@ -6415,6 +6415,11 @@ insert into toy (id, barcode, price, currency, toy_name, toys_producer_id, naugh
 insert into toy (id, barcode, price, currency, toy_name, toys_producer_id, naughty) values (71, '710834978621', 75.91, 'PEN', 'Dragline', 19, '1/0');
 insert into toy (id, barcode, price, currency, toy_name, toys_producer_id, naughty) values (72, '100000000000', 100.0, 'USD', 'Ball', 1, '1/0');
 insert into toy (id, barcode, price, currency, toy_name, toys_producer_id, naughty) values (73, '100000000001', 100.0, 'USD', 'Mouse', 1, '1/0');
+
+insert into toy (id, toys_producer_id, toy_name, barcode, price, currency) values (300, 1, 'Catnip', '667322379012', 5.99, 'USD');
+insert into toy (id, barcode, price, currency, toy_name, toys_producer_id, naughty) values (301, '100003200000', 100.0, 'USD', 'Catnip', 2, '1/0');
+insert into toy (id, barcode, price, currency, toy_name, toys_producer_id, naughty) values (302, '100420000001', 100.0, 'USD', 'Catnip', 5, '1/0');
+
 
 insert into toy_house (house_id, toy_id, amount) values (2, 73, 8);
 insert into toy_house (house_id, toy_id, amount) values (1, 72, 5);

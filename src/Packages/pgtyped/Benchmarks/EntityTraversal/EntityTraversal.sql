@@ -24,7 +24,6 @@ SELECT
 FROM
   toy
   JOIN toy_house ON toy_house.toy_id = toy.id
-  JOIN house ON house.id = toy_house.house_id
-  JOIN house_cat ON house_cat.house_id = house.id
+  JOIN house_cat ON house_cat.house_id = toy_house.house_id
 WHERE
   house_cat.cat_id = :catId;
