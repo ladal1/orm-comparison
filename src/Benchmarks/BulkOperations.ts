@@ -55,7 +55,7 @@ export const BulkOperations = new BenchmarkSuite<BulkOperationsBenchmark>(
       },
       testValidity: true,
       testLatency: true,
-      latencyIterations: 10,
+      latencyIterations: 1000,
     },
     bulkUpdate: {
       testName: 'Bulk Update',
@@ -71,18 +71,18 @@ export const BulkOperations = new BenchmarkSuite<BulkOperationsBenchmark>(
       },
       testValidity: true,
       testLatency: true,
-      latencyIterations: 10,
+      latencyIterations: 500,
     },
     pagination: {
       testName: 'Pagination',
       call: (implementation: BulkOperationsBenchmark['pagination']) => () =>
-        implementation(500),
+        implementation(20),
       referenceCheck: async (data: Array<Record<any, any>>) => {
-        assert.equal(data.length, 7)
+        assert.equal(data.length, 151)
       },
       testValidity: true,
       testLatency: true,
-      latencyIterations: 10,
+      latencyIterations: 50,
     },
   }
 )

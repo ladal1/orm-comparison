@@ -6,7 +6,7 @@ import config from 'config'
 import SpecialSQLActions from './Benchmarks/SpecialSQLActions'
 import EntityTraversal from './Benchmarks/EntityTraversal'
 import EdgeCases from './Benchmarks/EdgeCases'
-import BulkOperations from './Benchmarks/BulkOperation'
+import BulkOperations from './Benchmarks/BulkOperations'
 
 let mikroORM: MikroORM<PostgreSqlDriver>
 const contextMap = new Map()

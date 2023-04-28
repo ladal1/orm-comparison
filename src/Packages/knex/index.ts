@@ -5,7 +5,7 @@ import MvpBench from './Benchmarks/SampleBenchmark'
 import EntityTraversal from './Benchmarks/EntityTraversal'
 import SpecialSQLActions from './Benchmarks/SpecialSQLActions'
 import EdgeCases from './Benchmarks/EdgeCases'
-import BulkOperations from './Benchmarks/bulkOperations'
+import BulkOperations from './Benchmarks/BulkOperations'
 
 let _knex: Knex
 
