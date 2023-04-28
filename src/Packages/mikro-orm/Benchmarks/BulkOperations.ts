@@ -6,15 +6,17 @@ import { Cat } from '../Databases/CatDatabase/Cat'
 
 const BulkOperations: BulkOperationsBenchmark = {
   bulkInsert: async data => {
-    for (const house of data) {
-      const h = new House({
-        id: house.id,
-        houseAddress: house.houseAddress,
-        hasDog: house.hasDog,
-      })
-      getEntityManager('BulkOperations').persist(h)
-    }
-    await getEntityManager('BulkOperations').flush()
+    await getEntityManager('BulkOperations').insertMany(House, data)
+    // Slow (extremely)
+    // for (const house of data) {
+    // const h = new House({
+    //   id: house.id,
+    //   houseAddress: house.houseAddress,
+    //   hasDog: house.hasDog,
+    // })
+    // getEntityManager('BulkOperations').persist(h)
+    // }
+    // await getEntityManager('BulkOperations').flush()
     return getEntityManager('BulkOperations').count(House)
   },
   bulkDelete: async toyName => {
