@@ -19,6 +19,7 @@ export interface SpecialSQLActionsBenchmark extends TestTemplate {
     toy: toy_example
   ) => Promise<number>
   likeQuery: (query: string) => Promise<number[]>
+  ilikeQuery: (query: string) => Promise<number[]>
 }
 
 interface Toy_producer_example {
@@ -132,6 +133,17 @@ export const SpecialSQLActions = new BenchmarkSuite<SpecialSQLActionsBenchmark>(
       },
       call: (implementation: SpecialSQLActionsBenchmark['likeQuery']) => () =>
         implementation('Union'),
+      testValidity: true,
+      testLatency: true,
+      latencyIterations: 1000,
+    },
+    ilikeQuery: {
+      testName: 'ILIKE Query',
+      referenceCheck: async (data: number[]) => {
+        assert.deepEqual(data, [8, 450, 873, 1000])
+      },
+      call: (implementation: SpecialSQLActionsBenchmark['likeQuery']) => () =>
+        implementation('union'),
       testValidity: true,
       testLatency: true,
       latencyIterations: 1000,

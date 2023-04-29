@@ -45,6 +45,14 @@ const SpecialSQLActions: SpecialSQLActionsBenchmark = {
     })
     return dbTables.toys_producer(db).count()
   },
+  ilikeQuery: async query => {
+    return db
+      .query(
+        sql`
+      SELECT id FROM house WHERE house_address ILIKE ${'%' + query + '%'};`
+      )
+      .then(r => r.map(d => d.id))
+  },
 }
 
 export default SpecialSQLActions

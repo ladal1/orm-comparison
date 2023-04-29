@@ -51,6 +51,13 @@ const SpecialSQLActions: SpecialSQLActionsBenchmark = {
       .whereLike('house_address', `%${query}%`)
       .then(data => data.map(d => d.id))
   },
+  ilikeQuery: async (query: string) => {
+    return knexInstance
+      .select('id')
+      .from('house')
+      .whereILike('house_address', `%${query}%`)
+      .then(data => data.map(d => d.id))
+  },
 }
 
 export default SpecialSQLActions

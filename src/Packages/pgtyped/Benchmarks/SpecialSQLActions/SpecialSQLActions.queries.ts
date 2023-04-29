@@ -176,10 +176,11 @@ const likeQueryIR: any = {
       name: 'query',
       required: false,
       transform: { type: 'scalar' },
-      locs: [{ a: 48, b: 53 }],
+      locs: [{ a: 55, b: 60 }],
     },
   ],
-  statement: 'SELECT id\n  FROM house\nWHERE house_address LIKE :query',
+  statement:
+    "SELECT id\n  FROM house\nWHERE house_address LIKE '%' || :query || '%'",
 }
 
 /**
@@ -187,12 +188,55 @@ const likeQueryIR: any = {
  * ```
  * SELECT id
  *   FROM house
- * WHERE house_address LIKE :query
+ * WHERE house_address LIKE '%' || :query || '%'
  * ```
  */
 export const likeQuery = new PreparedQuery<ILikeQueryParams, ILikeQueryResult>(
   likeQueryIR
 )
+
+/** 'ILikeQuery' parameters type */
+export interface IILikeQueryParams {
+  query?: string | null | void
+}
+
+/** 'ILikeQuery' return type */
+export interface IILikeQueryResult {
+  id: number
+}
+
+/** 'ILikeQuery' query type */
+export interface IILikeQueryQuery {
+  params: IILikeQueryParams
+  result: IILikeQueryResult
+}
+
+const iLikeQueryIR: any = {
+  usedParamSet: { query: true },
+  params: [
+    {
+      name: 'query',
+      required: false,
+      transform: { type: 'scalar' },
+      locs: [{ a: 56, b: 61 }],
+    },
+  ],
+  statement:
+    "SELECT id\n  FROM house\nWHERE house_address ILIKE '%' || :query || '%'",
+}
+
+/**
+ * Query generated from SQL:
+ * ```
+ * SELECT id
+ *   FROM house
+ * WHERE house_address ILIKE '%' || :query || '%'
+ * ```
+ */
+export const iLikeQuery = new PreparedQuery<
+  IILikeQueryParams,
+  IILikeQueryResult
+>(iLikeQueryIR)
 
 /** 'TransactionalOperationsInsertProducer' parameters type */
 export interface ITransactionalOperationsInsertProducerParams {

@@ -1,5 +1,6 @@
 import { SpecialSQLActionsBenchmark } from 'Benchmarks/SpecialSQLActions'
 import {
+  iLikeQuery,
   jsonColumn,
   jsonWhere,
   likeQuery,
@@ -41,7 +42,12 @@ const SpecialSQLActions: SpecialSQLActionsBenchmark = {
   },
   likeQuery: async (query: string) => {
     return likeQuery
-      .run({ query: `%${query}%` }, getClient())
+      .run({ query }, getClient())
+      .then(data => data.map(d => d.id))
+  },
+  ilikeQuery: async (query: string) => {
+    return iLikeQuery
+      .run({ query }, getClient())
       .then(data => data.map(d => d.id))
   },
 }

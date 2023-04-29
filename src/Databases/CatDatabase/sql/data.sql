@@ -4211,7 +4211,7 @@ insert into house (id, house_address, has_dog) values (996, '4802 Fordem Alley',
 insert into house (id, house_address, has_dog) values (997, '965 Schlimgen Street', null);
 insert into house (id, house_address, has_dog) values (998, '5274 Huxley Hill', null);
 insert into house (id, house_address, has_dog) values (999, '9 Lillian Plaza', false);
-insert into house (id, house_address, has_dog) values (1000, '907 Bowman Street', null);
+insert into house (id, house_address, has_dog) values (1000, '907 union Street', null);
 
 -- cat to houses
 

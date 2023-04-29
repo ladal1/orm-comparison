@@ -74,6 +74,15 @@ const SpecialSQLActions: SpecialSQLActionsBenchmark = {
       },
     }).then(data => data.map(d => d.id))
   },
+  ilikeQuery: async (name: string) => {
+    return House.findAll({
+      where: {
+        house_address: {
+          [Op.iLike]: '%' + name + '%',
+        },
+      },
+    }).then(data => data.map(d => d.id))
+  },
 }
 
 export default SpecialSQLActions

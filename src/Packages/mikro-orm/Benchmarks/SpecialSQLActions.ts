@@ -49,6 +49,11 @@ const SpecialSQLActions: SpecialSQLActionsBenchmark = {
       .find(House, { houseAddress: new RegExp('.*' + query + '.*') })
       .then(data => data.map(d => d.id))
   },
+  ilikeQuery: async query => {
+    return getEntityManager('SpecialSQLActions')
+      .find(House, { houseAddress: new RegExp('.*' + query + '.*', 'i') })
+      .then(data => data.map(d => d.id))
+  },
 }
 
 export default SpecialSQLActions

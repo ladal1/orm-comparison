@@ -16,7 +16,12 @@ WHERE stock_info->>'ticker' = :ticker;
 /* @name LikeQuery */
 SELECT id
   FROM house
-WHERE house_address LIKE :query;
+WHERE house_address LIKE '%' || :query || '%';
+
+/* @name ILikeQuery */
+SELECT id
+  FROM house
+WHERE house_address ILIKE '%' || :query || '%';
 
 /* @name TransactionalOperationsInsertProducer */
 INSERT INTO toys_producer (id, stock_info, hq_location)

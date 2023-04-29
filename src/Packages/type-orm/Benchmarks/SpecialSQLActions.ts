@@ -1,7 +1,7 @@
 import { SpecialSQLActionsBenchmark } from 'Benchmarks/SpecialSQLActions'
 import { BenchDataSource } from '..'
 import { ToysProducer } from '../Databases/CatDatabase/ToysProducer'
-import { JsonContains, Like } from 'typeorm'
+import { ILike, JsonContains, Like } from 'typeorm'
 import { Toy } from '../Databases/CatDatabase/Toy'
 import { House } from '../Databases/CatDatabase/House'
 
@@ -66,6 +66,15 @@ const SpecialSQLActions: SpecialSQLActionsBenchmark = {
       .find({
         where: {
           houseAddress: Like(`%${query}%`),
+        },
+      })
+      .then(houses => houses.map(house => house.id))
+  },
+  ilikeQuery: async (query: string) => {
+    return BenchDataSource.getRepository(House)
+      .find({
+        where: {
+          houseAddress: ILike(`%${query}%`),
         },
       })
       .then(houses => houses.map(house => house.id))

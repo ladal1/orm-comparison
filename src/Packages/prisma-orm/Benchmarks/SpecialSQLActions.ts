@@ -68,6 +68,18 @@ const SpecialSQLActions: SpecialSQLActionsBenchmark = {
       })
       .then(data => data.map(d => d.id))
   },
+  ilikeQuery: async (query: string) => {
+    return clients.CatDatabase.house
+      .findMany({
+        where: {
+          house_address: {
+            contains: query,
+            mode: 'insensitive',
+          },
+        },
+      })
+      .then(data => data.map(d => d.id))
+  },
 }
 
 export default SpecialSQLActions

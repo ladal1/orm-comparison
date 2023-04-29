@@ -55,6 +55,14 @@ const SpecialSQLActions: SpecialSQLActionsBenchmark = {
       .execute()
       .then(data => data.map(d => d.id))
   },
+  ilikeQuery: async (query: string) => {
+    return kyselyInstance
+      .selectFrom('house')
+      .select('id')
+      .where('house_address', 'ilike', `%${query}%`)
+      .execute()
+      .then(data => data.map(d => d.id))
+  },
 }
 
 export default SpecialSQLActions

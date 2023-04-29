@@ -58,9 +58,17 @@ const SpecialSQLActions: SpecialSQLActionsBenchmark = {
   },
   likeQuery: async (query: string) => {
     return db.sql<schema.house.SQL, schema.house.Selectable[]>`
-      SELECT * FROM ${'house'} WHERE ${'house'}.${'house_address'} LIKE ${db.param(
-      '%' + query + '%'
-    )};`
+    SELECT * FROM ${'house'} WHERE ${'house'}.${'house_address'} LIKE '%' || ${db.param(
+      query
+    )} || '%';`
+      .run(pgPool)
+      .then(data => data.map(house => house.id))
+  },
+  ilikeQuery: async (query: string) => {
+    return db.sql<schema.house.SQL, schema.house.Selectable[]>`
+      SELECT * FROM ${'house'} WHERE ${'house'}.${'house_address'} ILIKE '%' || ${db.param(
+      query
+    )} || '%';`
       .run(pgPool)
       .then(data => data.map(house => house.id))
   },

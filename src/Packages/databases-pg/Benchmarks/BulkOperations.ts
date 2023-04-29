@@ -36,6 +36,8 @@ const BulkOperations: BulkOperationsBenchmark = {
   pagination: async pageSize => {
     const pages = []
     while (true) {
+      // Does not include call for the offset
+      // dbTables.cat(db).find().orderByDesc('id').limit()
       const newPage: any[] = await db.query(
         sql`SELECT * from cat limit ${(1 + pages.length) * pageSize} offset ${
           pages.length * pageSize
