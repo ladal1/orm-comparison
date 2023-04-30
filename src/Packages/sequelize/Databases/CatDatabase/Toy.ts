@@ -8,6 +8,7 @@ import {
 } from 'sequelize-typescript'
 import { ToyHouse } from './ToyHouse'
 import { ToysProducer } from './ToysProducer'
+import { DECIMAL } from 'sequelize'
 
 @Table({ tableName: 'toy', underscored: true, timestamps: false })
 export class Toy extends Model {
@@ -17,7 +18,7 @@ export class Toy extends Model {
   @Column
   declare barcode: string
 
-  @Column
+  @Column(DECIMAL)
   declare price: number
 
   @Column

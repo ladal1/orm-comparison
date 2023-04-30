@@ -1,60 +1,27 @@
 /** Types generated for queries found in "Benchmarks/SpecialSQLActions/SpecialSQLActions.sql" */
-import { PreparedQuery } from '@pgtyped/runtime'
+import { PreparedQuery } from '@pgtyped/runtime';
 
-export type Json =
-  | null
-  | boolean
-  | number
-  | string
-  | Json[]
-  | { [key: string]: Json }
+export type Json = null | boolean | number | string | Json[] | { [key: string]: Json };
 
 /** 'UpsertToysToHouse' parameters type */
 export interface IUpsertToysToHouseParams {
-  amount?: number | null | void
-  houseId?: number | null | void
-  toyId?: number | null | void
+  amount?: number | null | void;
+  houseId?: number | null | void;
+  toyId?: number | null | void;
 }
 
 /** 'UpsertToysToHouse' return type */
 export interface IUpsertToysToHouseResult {
-  amount: number
+  amount: number;
 }
 
 /** 'UpsertToysToHouse' query type */
 export interface IUpsertToysToHouseQuery {
-  params: IUpsertToysToHouseParams
-  result: IUpsertToysToHouseResult
+  params: IUpsertToysToHouseParams;
+  result: IUpsertToysToHouseResult;
 }
 
-const upsertToysToHouseIR: any = {
-  usedParamSet: { toyId: true, houseId: true, amount: true },
-  params: [
-    {
-      name: 'toyId',
-      required: false,
-      transform: { type: 'scalar' },
-      locs: [{ a: 57, b: 62 }],
-    },
-    {
-      name: 'houseId',
-      required: false,
-      transform: { type: 'scalar' },
-      locs: [{ a: 65, b: 72 }],
-    },
-    {
-      name: 'amount',
-      required: false,
-      transform: { type: 'scalar' },
-      locs: [
-        { a: 75, b: 81 },
-        { a: 138, b: 144 },
-      ],
-    },
-  ],
-  statement:
-    'INSERT INTO toy_house (toy_id, house_id, amount)\nVALUES (:toyId, :houseId, :amount) ON CONFLICT (toy_id, house_id) DO\nUPDATE SET amount = :amount + toy_house.amount RETURNING amount',
-}
+const upsertToysToHouseIR: any = {"usedParamSet":{"toyId":true,"houseId":true,"amount":true},"params":[{"name":"toyId","required":false,"transform":{"type":"scalar"},"locs":[{"a":57,"b":62}]},{"name":"houseId","required":false,"transform":{"type":"scalar"},"locs":[{"a":65,"b":72}]},{"name":"amount","required":false,"transform":{"type":"scalar"},"locs":[{"a":75,"b":81},{"a":138,"b":144}]}],"statement":"INSERT INTO toy_house (toy_id, house_id, amount)\nVALUES (:toyId, :houseId, :amount) ON CONFLICT (toy_id, house_id) DO\nUPDATE SET amount = :amount + toy_house.amount RETURNING amount"};
 
 /**
  * Query generated from SQL:
@@ -64,39 +31,26 @@ const upsertToysToHouseIR: any = {
  * UPDATE SET amount = :amount + toy_house.amount RETURNING amount
  * ```
  */
-export const upsertToysToHouse = new PreparedQuery<
-  IUpsertToysToHouseParams,
-  IUpsertToysToHouseResult
->(upsertToysToHouseIR)
+export const upsertToysToHouse = new PreparedQuery<IUpsertToysToHouseParams,IUpsertToysToHouseResult>(upsertToysToHouseIR);
+
 
 /** 'JsonColumn' parameters type */
 export interface IJsonColumnParams {
-  id?: number | null | void
+  id?: number | null | void;
 }
 
 /** 'JsonColumn' return type */
 export interface IJsonColumnResult {
-  stock_info: Json
+  stock_info: Json;
 }
 
 /** 'JsonColumn' query type */
 export interface IJsonColumnQuery {
-  params: IJsonColumnParams
-  result: IJsonColumnResult
+  params: IJsonColumnParams;
+  result: IJsonColumnResult;
 }
 
-const jsonColumnIR: any = {
-  usedParamSet: { id: true },
-  params: [
-    {
-      name: 'id',
-      required: false,
-      transform: { type: 'scalar' },
-      locs: [{ a: 48, b: 50 }],
-    },
-  ],
-  statement: 'SELECT stock_info\nFROM toys_producer\nWHERE id = :id',
-}
+const jsonColumnIR: any = {"usedParamSet":{"id":true},"params":[{"name":"id","required":false,"transform":{"type":"scalar"},"locs":[{"a":48,"b":50}]}],"statement":"SELECT stock_info\nFROM toys_producer\nWHERE id = :id"};
 
 /**
  * Query generated from SQL:
@@ -106,40 +60,26 @@ const jsonColumnIR: any = {
  * WHERE id = :id
  * ```
  */
-export const jsonColumn = new PreparedQuery<
-  IJsonColumnParams,
-  IJsonColumnResult
->(jsonColumnIR)
+export const jsonColumn = new PreparedQuery<IJsonColumnParams,IJsonColumnResult>(jsonColumnIR);
+
 
 /** 'JsonWhere' parameters type */
 export interface IJsonWhereParams {
-  ticker?: string | null | void
+  ticker?: string | null | void;
 }
 
 /** 'JsonWhere' return type */
 export interface IJsonWhereResult {
-  stock_info: Json
+  stock_info: Json;
 }
 
 /** 'JsonWhere' query type */
 export interface IJsonWhereQuery {
-  params: IJsonWhereParams
-  result: IJsonWhereResult
+  params: IJsonWhereParams;
+  result: IJsonWhereResult;
 }
 
-const jsonWhereIR: any = {
-  usedParamSet: { ticker: true },
-  params: [
-    {
-      name: 'ticker',
-      required: false,
-      transform: { type: 'scalar' },
-      locs: [{ a: 67, b: 73 }],
-    },
-  ],
-  statement:
-    "SELECT stock_info\nFROM toys_producer\nWHERE stock_info->>'ticker' = :ticker",
-}
+const jsonWhereIR: any = {"usedParamSet":{"ticker":true},"params":[{"name":"ticker","required":false,"transform":{"type":"scalar"},"locs":[{"a":67,"b":73}]}],"statement":"SELECT stock_info\nFROM toys_producer\nWHERE stock_info->>'ticker' = :ticker"};
 
 /**
  * Query generated from SQL:
@@ -149,39 +89,26 @@ const jsonWhereIR: any = {
  * WHERE stock_info->>'ticker' = :ticker
  * ```
  */
-export const jsonWhere = new PreparedQuery<IJsonWhereParams, IJsonWhereResult>(
-  jsonWhereIR
-)
+export const jsonWhere = new PreparedQuery<IJsonWhereParams,IJsonWhereResult>(jsonWhereIR);
+
 
 /** 'LikeQuery' parameters type */
 export interface ILikeQueryParams {
-  query?: string | null | void
+  query?: string | null | void;
 }
 
 /** 'LikeQuery' return type */
 export interface ILikeQueryResult {
-  id: number
+  id: number;
 }
 
 /** 'LikeQuery' query type */
 export interface ILikeQueryQuery {
-  params: ILikeQueryParams
-  result: ILikeQueryResult
+  params: ILikeQueryParams;
+  result: ILikeQueryResult;
 }
 
-const likeQueryIR: any = {
-  usedParamSet: { query: true },
-  params: [
-    {
-      name: 'query',
-      required: false,
-      transform: { type: 'scalar' },
-      locs: [{ a: 55, b: 60 }],
-    },
-  ],
-  statement:
-    "SELECT id\n  FROM house\nWHERE house_address LIKE '%' || :query || '%'",
-}
+const likeQueryIR: any = {"usedParamSet":{"query":true},"params":[{"name":"query","required":false,"transform":{"type":"scalar"},"locs":[{"a":55,"b":60}]}],"statement":"SELECT id\n  FROM house\nWHERE house_address LIKE '%' || :query || '%'"};
 
 /**
  * Query generated from SQL:
@@ -191,39 +118,26 @@ const likeQueryIR: any = {
  * WHERE house_address LIKE '%' || :query || '%'
  * ```
  */
-export const likeQuery = new PreparedQuery<ILikeQueryParams, ILikeQueryResult>(
-  likeQueryIR
-)
+export const likeQuery = new PreparedQuery<ILikeQueryParams,ILikeQueryResult>(likeQueryIR);
+
 
 /** 'ILikeQuery' parameters type */
 export interface IILikeQueryParams {
-  query?: string | null | void
+  query?: string | null | void;
 }
 
 /** 'ILikeQuery' return type */
 export interface IILikeQueryResult {
-  id: number
+  id: number;
 }
 
 /** 'ILikeQuery' query type */
 export interface IILikeQueryQuery {
-  params: IILikeQueryParams
-  result: IILikeQueryResult
+  params: IILikeQueryParams;
+  result: IILikeQueryResult;
 }
 
-const iLikeQueryIR: any = {
-  usedParamSet: { query: true },
-  params: [
-    {
-      name: 'query',
-      required: false,
-      transform: { type: 'scalar' },
-      locs: [{ a: 56, b: 61 }],
-    },
-  ],
-  statement:
-    "SELECT id\n  FROM house\nWHERE house_address ILIKE '%' || :query || '%'",
-}
+const iLikeQueryIR: any = {"usedParamSet":{"query":true},"params":[{"name":"query","required":false,"transform":{"type":"scalar"},"locs":[{"a":56,"b":61}]}],"statement":"SELECT id\n  FROM house\nWHERE house_address ILIKE '%' || :query || '%'"};
 
 /**
  * Query generated from SQL:
@@ -233,52 +147,26 @@ const iLikeQueryIR: any = {
  * WHERE house_address ILIKE '%' || :query || '%'
  * ```
  */
-export const iLikeQuery = new PreparedQuery<
-  IILikeQueryParams,
-  IILikeQueryResult
->(iLikeQueryIR)
+export const iLikeQuery = new PreparedQuery<IILikeQueryParams,IILikeQueryResult>(iLikeQueryIR);
+
 
 /** 'TransactionalOperationsInsertProducer' parameters type */
 export interface ITransactionalOperationsInsertProducerParams {
-  hq_location?: Json | null | void
-  id?: number | null | void
-  stock_info?: Json | null | void
+  hq_location?: Json | null | void;
+  id?: number | null | void;
+  stock_info?: Json | null | void;
 }
 
 /** 'TransactionalOperationsInsertProducer' return type */
-export type ITransactionalOperationsInsertProducerResult = void
+export type ITransactionalOperationsInsertProducerResult = void;
 
 /** 'TransactionalOperationsInsertProducer' query type */
 export interface ITransactionalOperationsInsertProducerQuery {
-  params: ITransactionalOperationsInsertProducerParams
-  result: ITransactionalOperationsInsertProducerResult
+  params: ITransactionalOperationsInsertProducerParams;
+  result: ITransactionalOperationsInsertProducerResult;
 }
 
-const transactionalOperationsInsertProducerIR: any = {
-  usedParamSet: { id: true, stock_info: true, hq_location: true },
-  params: [
-    {
-      name: 'id',
-      required: false,
-      transform: { type: 'scalar' },
-      locs: [{ a: 64, b: 66 }],
-    },
-    {
-      name: 'stock_info',
-      required: false,
-      transform: { type: 'scalar' },
-      locs: [{ a: 69, b: 79 }],
-    },
-    {
-      name: 'hq_location',
-      required: false,
-      transform: { type: 'scalar' },
-      locs: [{ a: 82, b: 93 }],
-    },
-  ],
-  statement:
-    'INSERT INTO toys_producer (id, stock_info, hq_location)\nVALUES (:id, :stock_info, :hq_location)',
-}
+const transactionalOperationsInsertProducerIR: any = {"usedParamSet":{"id":true,"stock_info":true,"hq_location":true},"params":[{"name":"id","required":false,"transform":{"type":"scalar"},"locs":[{"a":64,"b":66}]},{"name":"stock_info","required":false,"transform":{"type":"scalar"},"locs":[{"a":69,"b":79}]},{"name":"hq_location","required":false,"transform":{"type":"scalar"},"locs":[{"a":82,"b":93}]}],"statement":"INSERT INTO toys_producer (id, stock_info, hq_location)\nVALUES (:id, :stock_info, :hq_location)"};
 
 /**
  * Query generated from SQL:
@@ -287,88 +175,30 @@ const transactionalOperationsInsertProducerIR: any = {
  * VALUES (:id, :stock_info, :hq_location)
  * ```
  */
-export const transactionalOperationsInsertProducer = new PreparedQuery<
-  ITransactionalOperationsInsertProducerParams,
-  ITransactionalOperationsInsertProducerResult
->(transactionalOperationsInsertProducerIR)
+export const transactionalOperationsInsertProducer = new PreparedQuery<ITransactionalOperationsInsertProducerParams,ITransactionalOperationsInsertProducerResult>(transactionalOperationsInsertProducerIR);
+
 
 /** 'TransactionalOperationsInsertToy' parameters type */
 export interface ITransactionalOperationsInsertToyParams {
-  barcode?: string | null | void
-  currency?: string | null | void
-  date_introduced?: Date | string | null | void
-  id?: number | null | void
-  price?: number | string | null | void
-  toy_name?: string | null | void
-  toys_producer_id?: number | null | void
+  barcode?: string | null | void;
+  currency?: string | null | void;
+  date_introduced?: Date | string | null | void;
+  id?: number | null | void;
+  price?: number | string | null | void;
+  toy_name?: string | null | void;
+  toys_producer_id?: number | null | void;
 }
 
 /** 'TransactionalOperationsInsertToy' return type */
-export type ITransactionalOperationsInsertToyResult = void
+export type ITransactionalOperationsInsertToyResult = void;
 
 /** 'TransactionalOperationsInsertToy' query type */
 export interface ITransactionalOperationsInsertToyQuery {
-  params: ITransactionalOperationsInsertToyParams
-  result: ITransactionalOperationsInsertToyResult
+  params: ITransactionalOperationsInsertToyParams;
+  result: ITransactionalOperationsInsertToyResult;
 }
 
-const transactionalOperationsInsertToyIR: any = {
-  usedParamSet: {
-    id: true,
-    toys_producer_id: true,
-    toy_name: true,
-    barcode: true,
-    price: true,
-    currency: true,
-    date_introduced: true,
-  },
-  params: [
-    {
-      name: 'id',
-      required: false,
-      transform: { type: 'scalar' },
-      locs: [{ a: 137, b: 139 }],
-    },
-    {
-      name: 'toys_producer_id',
-      required: false,
-      transform: { type: 'scalar' },
-      locs: [{ a: 146, b: 162 }],
-    },
-    {
-      name: 'toy_name',
-      required: false,
-      transform: { type: 'scalar' },
-      locs: [{ a: 169, b: 177 }],
-    },
-    {
-      name: 'barcode',
-      required: false,
-      transform: { type: 'scalar' },
-      locs: [{ a: 184, b: 191 }],
-    },
-    {
-      name: 'price',
-      required: false,
-      transform: { type: 'scalar' },
-      locs: [{ a: 198, b: 203 }],
-    },
-    {
-      name: 'currency',
-      required: false,
-      transform: { type: 'scalar' },
-      locs: [{ a: 210, b: 218 }],
-    },
-    {
-      name: 'date_introduced',
-      required: false,
-      transform: { type: 'scalar' },
-      locs: [{ a: 225, b: 240 }],
-    },
-  ],
-  statement:
-    'INSERT INTO toy (\n    id,\n    toys_producer_id,\n    toy_name,\n    barcode,\n    price,\n    currency,\n    date_introduced\n  )\nVALUES (\n    :id,\n    :toys_producer_id,\n    :toy_name,\n    :barcode,\n    :price,\n    :currency,\n    :date_introduced\n  )',
-}
+const transactionalOperationsInsertToyIR: any = {"usedParamSet":{"id":true,"toys_producer_id":true,"toy_name":true,"barcode":true,"price":true,"currency":true,"date_introduced":true},"params":[{"name":"id","required":false,"transform":{"type":"scalar"},"locs":[{"a":137,"b":139}]},{"name":"toys_producer_id","required":false,"transform":{"type":"scalar"},"locs":[{"a":146,"b":162}]},{"name":"toy_name","required":false,"transform":{"type":"scalar"},"locs":[{"a":169,"b":177}]},{"name":"barcode","required":false,"transform":{"type":"scalar"},"locs":[{"a":184,"b":191}]},{"name":"price","required":false,"transform":{"type":"scalar"},"locs":[{"a":198,"b":203}]},{"name":"currency","required":false,"transform":{"type":"scalar"},"locs":[{"a":210,"b":218}]},{"name":"date_introduced","required":false,"transform":{"type":"scalar"},"locs":[{"a":225,"b":240}]}],"statement":"INSERT INTO toy (\n    id,\n    toys_producer_id,\n    toy_name,\n    barcode,\n    price,\n    currency,\n    date_introduced\n  )\nVALUES (\n    :id,\n    :toys_producer_id,\n    :toy_name,\n    :barcode,\n    :price,\n    :currency,\n    :date_introduced\n  )"};
 
 /**
  * Query generated from SQL:
@@ -393,30 +223,24 @@ const transactionalOperationsInsertToyIR: any = {
  *   )
  * ```
  */
-export const transactionalOperationsInsertToy = new PreparedQuery<
-  ITransactionalOperationsInsertToyParams,
-  ITransactionalOperationsInsertToyResult
->(transactionalOperationsInsertToyIR)
+export const transactionalOperationsInsertToy = new PreparedQuery<ITransactionalOperationsInsertToyParams,ITransactionalOperationsInsertToyResult>(transactionalOperationsInsertToyIR);
+
 
 /** 'TransactionalOperationsCountProducers' parameters type */
-export type ITransactionalOperationsCountProducersParams = void
+export type ITransactionalOperationsCountProducersParams = void;
 
 /** 'TransactionalOperationsCountProducers' return type */
 export interface ITransactionalOperationsCountProducersResult {
-  count: string | null
+  count: string | null;
 }
 
 /** 'TransactionalOperationsCountProducers' query type */
 export interface ITransactionalOperationsCountProducersQuery {
-  params: ITransactionalOperationsCountProducersParams
-  result: ITransactionalOperationsCountProducersResult
+  params: ITransactionalOperationsCountProducersParams;
+  result: ITransactionalOperationsCountProducersResult;
 }
 
-const transactionalOperationsCountProducersIR: any = {
-  usedParamSet: {},
-  params: [],
-  statement: 'SELECT count(id) FROM toys_producer',
-}
+const transactionalOperationsCountProducersIR: any = {"usedParamSet":{},"params":[],"statement":"SELECT count(id) FROM toys_producer"};
 
 /**
  * Query generated from SQL:
@@ -424,7 +248,6 @@ const transactionalOperationsCountProducersIR: any = {
  * SELECT count(id) FROM toys_producer
  * ```
  */
-export const transactionalOperationsCountProducers = new PreparedQuery<
-  ITransactionalOperationsCountProducersParams,
-  ITransactionalOperationsCountProducersResult
->(transactionalOperationsCountProducersIR)
+export const transactionalOperationsCountProducers = new PreparedQuery<ITransactionalOperationsCountProducersParams,ITransactionalOperationsCountProducersResult>(transactionalOperationsCountProducersIR);
+
+

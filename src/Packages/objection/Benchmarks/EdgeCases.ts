@@ -1,5 +1,6 @@
 import { EdgeCasesBenchmark } from 'Benchmarks/EdgeCases'
 import { Cat } from '../Databases/CatDatabase/Cat'
+import { Toy } from '../Databases/CatDatabase/Toy'
 
 const EdgeCases: EdgeCasesBenchmark = {
   sqlInjection: async query => {
@@ -15,6 +16,12 @@ const EdgeCases: EdgeCasesBenchmark = {
       .where('cat_name', '=', name)
       .first()
       .then(data => BigInt(data?.id ?? 0))
+  },
+  maxQuery: async () => {
+    return Toy.query()
+      .max('price')
+      .first()
+      .then(data => Number((data as unknown as { max: number }).max ?? 0))
   },
 }
 

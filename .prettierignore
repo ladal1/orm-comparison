@@ -1,1 +1,2 @@
 src/Packages/objection/types-fix/index.d.ts
+*.queries.ts

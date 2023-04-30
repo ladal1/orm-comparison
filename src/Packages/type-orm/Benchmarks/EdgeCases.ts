@@ -2,6 +2,7 @@ import { EdgeCasesBenchmark } from 'Benchmarks/EdgeCases'
 import { BenchDataSource } from '..'
 import { Like } from 'typeorm'
 import { Cat } from '../Databases/CatDatabase/Cat'
+import { Toy } from '../Databases/CatDatabase/Toy'
 
 const EdgeCases: EdgeCasesBenchmark = {
   sqlInjection: async query => {
@@ -15,6 +16,13 @@ const EdgeCases: EdgeCasesBenchmark = {
         where: { catName },
       })
       .then(cat => BigInt(cat?.id ?? 0))
+  },
+  maxQuery: async () => {
+    return BenchDataSource.getRepository(Toy)
+      .createQueryBuilder('cat')
+      .select('MAX(cat.price)', 'max')
+      .getRawOne()
+      .then(data => Number(data.max ?? 0))
   },
 }
 

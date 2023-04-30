@@ -20,6 +20,15 @@ const EdgeCases: EdgeCasesBenchmark = {
       })
       .then(data => data?.id ?? BigInt(0))
   },
+  maxQuery: async () => {
+    return clients.CatDatabase.toy
+      .aggregate({
+        _max: {
+          price: true,
+        },
+      })
+      .then(data => Number(data._max.price ?? 0))
+  },
 }
 
 export default EdgeCases

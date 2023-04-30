@@ -142,7 +142,7 @@ export const SpecialSQLActions = new BenchmarkSuite<SpecialSQLActionsBenchmark>(
       referenceCheck: async (data: number[]) => {
         assert.deepEqual(data, [8, 450, 873, 1000])
       },
-      call: (implementation: SpecialSQLActionsBenchmark['likeQuery']) => () =>
+      call: (implementation: SpecialSQLActionsBenchmark['iLikeQuery']) => () =>
         implementation('union'),
       testValidity: true,
       testLatency: true,

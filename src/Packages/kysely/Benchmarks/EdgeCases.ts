@@ -18,6 +18,13 @@ const EdgeCases: EdgeCasesBenchmark = {
       .executeTakeFirst()
       .then(data => BigInt(data?.id ?? 0))
   },
+  maxQuery: async () => {
+    return kyselyInstance
+      .selectFrom('toy')
+      .select(kyselyInstance.fn.max('price').as('max_price'))
+      .executeTakeFirst()
+      .then(data => Number(data?.max_price) ?? 0)
+  },
 }
 
 export default EdgeCases

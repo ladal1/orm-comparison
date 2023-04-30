@@ -31,6 +31,14 @@ const EdgeCases: EdgeCasesBenchmark = {
     //   .run(pgPool)
     //   .then(data => BigInt(data?.id ?? 0))
   },
+  maxQuery: async () => {
+    return db.sql<
+      schema.toy.SQL,
+      Array<{ max: string }>
+    >`SELECT MAX(${'price'}) FROM ${'toy'}`
+      .run(pgPool)
+      .then(rows => Number(rows[0].max ?? 0))
+  },
 }
 
 export default EdgeCases

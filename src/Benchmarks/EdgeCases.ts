@@ -6,6 +6,7 @@ import assert from 'node:assert/strict'
 export interface EdgeCasesBenchmark extends TestTemplate {
   sqlInjection: (query: string) => Promise<number>
   bigIntColumn: (name: string) => Promise<bigint>
+  maxQuery: () => Promise<number>
 }
 
 export const EdgeCases = new BenchmarkSuite<EdgeCasesBenchmark>(
@@ -31,6 +32,17 @@ export const EdgeCases = new BenchmarkSuite<EdgeCasesBenchmark>(
       call: (implementation: EdgeCasesBenchmark['bigIntColumn']) => () =>
         implementation('Johnny Bignumber'),
       testValidity: true,
+    },
+    maxQuery: {
+      testName: 'Max Query',
+      referenceCheck: async (data: number) => {
+        assert.equal(data, 191.73)
+      },
+      call: (implementation: EdgeCasesBenchmark['maxQuery']) => () =>
+        implementation(),
+      testValidity: true,
+      testLatency: true,
+      latencyIterations: 1000,
     },
   }
 )

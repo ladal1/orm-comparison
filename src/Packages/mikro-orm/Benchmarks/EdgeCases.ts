@@ -13,6 +13,13 @@ const EdgeCases: EdgeCasesBenchmark = {
       .findOneOrFail(Cat, { catName: name })
       .then(data => BigInt(data.id))
   },
+  maxQuery: async () => {
+    return getEntityManager('SpecialSQLActions')
+      .getKnex()
+      .from('toy')
+      .max('price')
+      .then(data => Number(data[0].max))
+  },
 }
 
 export default EdgeCases

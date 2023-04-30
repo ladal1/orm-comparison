@@ -19,6 +19,13 @@ const EdgeCases: EdgeCasesBenchmark = {
       .first()
       .then(data => BigInt(data?.id) ?? BigInt(0))
   },
+  maxQuery: async () => {
+    return knexInstance
+      .max('price')
+      .from('toy')
+      .first()
+      .then(data => Number(data?.max) ?? 0)
+  },
 }
 
 export default EdgeCases

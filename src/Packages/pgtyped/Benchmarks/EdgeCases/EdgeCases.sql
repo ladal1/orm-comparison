@@ -5,3 +5,6 @@ SELECT COUNT(*) FROM cat WHERE cat_name like :query;
 SELECT id
 FROM cat
 WHERE cat_name = :name;
+
+/* @name maxQuery */
+SELECT MAX(price) from toy;

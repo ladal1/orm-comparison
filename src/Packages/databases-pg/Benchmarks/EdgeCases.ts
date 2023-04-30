@@ -19,6 +19,11 @@ const EdgeCases: EdgeCasesBenchmark = {
       .one()
       .then(r => r?.id ?? BigInt(0))
   },
+  maxQuery: async () => {
+    return db
+      .query(sql`SELECT MAX(price) FROM toy;`)
+      .then(r => Number(r[0].max) ?? 0)
+  },
 }
 
 export default EdgeCases
