@@ -1,6 +1,6 @@
 # Diploma thesis LL
 
-Build using
+After installing dependencies, build using
 `npm run build`
 
 Start Benchmarking using
