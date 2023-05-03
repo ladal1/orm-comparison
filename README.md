@@ -4,7 +4,7 @@ After installing dependencies, build using
 `npm run build`
 
 Start Benchmarking using
-`npm run start`
+`npm run start`, find results in HTML form in out folder here in the root directory
 
 Edit packages tested, test suites and reporters in `src/index.ts`
 
